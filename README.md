@@ -23,18 +23,21 @@ set of rules that are more appealing for their needs.
 
 ## Installation
 
-1. Install Anaconda Distribution (https://www.anaconda.com/products/individual)
+ 1. Install Anaconda Distribution (https://www.anaconda.com/products/individual)
 
-2. Create a new environment and install the necessary packages:
+ 2. Create a new environment and install the necessary packages:
 
-conda create -n rulediscovery --channel=conda-forge python=3.8 numpy pandas scikit-learn cvxpy cvxopt gurobi
+ `conda create -n rulediscovery --channel=conda-forge python=3.8 numpy pandas scikit-learn cvxpy cvxopt gurobi`
 
-3. Active the current environment:
+ 3. Active the current environment:
 
-conda acivate rulediscovery
+ `conda acivate rulediscovery`
 
-4. Check whether the installation works:
+ 4. Check whether the installation works:
 
-python RUX_RUG_tests.py
+ `python RUX_RUG_tests.py`
 
-_OPTIONAL:_ To be able to use the Gurobi solver, you need to first install it. The solver is freely available for academic use. See [Gurobi page.](https://www.gurobi.com/academia/academic-program-and-licenses/).
+_OPTIONAL:_ To be able to use the Gurobi solver, you need to first
+install it. The solver is freely available for academic use. See
+[Gurobi
+page.](https://www.gurobi.com/academia/academic-program-and-licenses/)
