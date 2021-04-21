@@ -22,7 +22,7 @@ set of rules that are more appealing for their needs.
 
 ## Installation
 
- 1. Install Anaconda Distribution (https://www.anaconda.com/products/individual)
+ 1. Install [Anaconda Distribution](https://www.anaconda.com/products/individual).
 
  2. Create a new environment and install the necessary packages:
 
