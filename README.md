@@ -46,7 +46,7 @@ RUG.
 
 **OPTIONAL:**
 
-To be able to use the Gurobi solver, you need to first install
+To use the Gurobi solver, you need to first install
 it. The solver is freely available for academic use. Check the
 [related
 page](https://www.gurobi.com/academia/academic-program-and-licenses/)
