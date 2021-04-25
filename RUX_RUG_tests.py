@@ -41,7 +41,7 @@ for problem in problems:
     RUXRF = RUXClassifier(rf=RF_fit, eps=rhsEps,
                           rule_length_cost=True,
                           false_negative_cost=False, 
-                          solver=solver,
+                          solver='glpk',
                           random_state=randomState)
     RUXRF_fit = RUXRF.fit(X_train, y_train)
     RUXRF_pred = RUXRF.predict(X_test)

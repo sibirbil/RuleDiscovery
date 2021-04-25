@@ -25,7 +25,7 @@ class RUXClassifier:
                      rule_length_cost=False, 
                      false_negative_cost=False,
                      negative_label=1.0, # For identifying false negatives
-                     solver='gurobi',
+                     solver='glpk',
                      random_state=2516):
             
             self.eps = eps
@@ -428,7 +428,7 @@ class RUGClassifier:
                      rule_length_cost=False,
                      false_negative_cost=False,
                      negative_label=1.0, # For identifying false negatives
-                     solver='gurobi',
+                     solver='glpk',
                      random_state=2516):
            
             self.eps = eps
