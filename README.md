@@ -39,7 +39,9 @@ RUG.
 
  `python RUX_RUG_tests.py`
 
-_OPTIONAL:_
+---
+
+**OPTIONAL:**
 
 To be able to use the Gurobi solver, you need to first install
 it. The solver is freely available for academic use. Check the
