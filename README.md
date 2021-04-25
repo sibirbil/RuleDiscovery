@@ -2,6 +2,7 @@
 
 **Hakan Akyüz & İlker Birbil**
 
+
 Rules embody a set of if-then statements which include one or more
 conditions to classify a subset of samples in a dataset. In various
 applications such classification rules are considered to be
@@ -19,6 +20,8 @@ attributes of the rules, such as; rule lengths, estimator weights,
 number of false negatives, and so on.  Thus, the decision makers can
 adjust these coefficients to divert the training process and obtain a
 set of rules that are more appealing for their needs.
+
+You can find the details of both algorithms in [our manuscript](https://arxiv.org/abs/2104.10751).
 
 This [notebook](RuleDiscovery.ipynb) illustrates how to use RUX and
 RUG.
