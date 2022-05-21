@@ -884,8 +884,6 @@ class RUGClassifier:
             self.fittedDTs[treeno] = copy.deepcopy(fitTree)
             self._preprocess(X, y)
             self._getInitMatrix(X, y, fitTree, treeno)
-            # TODO: Her seferinde yeni model kurmadan da olmalı aslında,
-            # aynı model gitmez mi acaba? Gurobi'ye bakmalı
             ws, vs, betas, gammas = self._solvePrimal()
             # Column generation
             for cg in range(self.maxRMPcalls):        
