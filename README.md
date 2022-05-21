@@ -36,7 +36,7 @@ RUG.
 
  3. Activate the current environment:
 
- `conda acivate rulediscovery`
+ `conda activate rulediscovery`
 
  4. Check whether the installation works:
 
