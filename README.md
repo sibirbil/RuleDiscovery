@@ -1,6 +1,6 @@
 # Rule Generation for Classification: Scalability, Interpretability, and Fairness
 
-**Adia Lumadjeng, Tabea Röber, M. Hakan Akyuz, and S. Ilker Birbil**
+**Adia Lumadjeng, Tabea Röber, M. Hakan Akyüz, and Ş. Ilker Birbil**
 
 
 We introduce a new rule-based optimization method for classification with constraints. The proposed method
