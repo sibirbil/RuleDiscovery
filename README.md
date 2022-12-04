@@ -1,30 +1,20 @@
-# Discovering Classification Rules for Interpretable Learning with Linear Programming
+# Rule Generation for Classification: Scalability, Interpretability, and Fairness
 
-**Hakan Akyüz & İlker Birbil**
+**Adia Lumadjeng, Tabea Röber, M. Hakan Akyuz, and S. Ilker Birbil**
 
 
-Rules embody a set of if-then statements which include one or more
-conditions to classify a subset of samples in a dataset. In various
-applications such classification rules are considered to be
-interpretable by the decision makers. We introduce two new algorithms
-for interpretability and learning. Both algorithms take advantage of
-linear programming, and hence, they are scalable to large data
-sets. The first algorithm (RUX) extracts rules for interpretation of
-trained models that are based on tree/rule ensembles. The second
-algorithm (RUG) generates a set of classification rules through a
-column generation approach. The proposed algorithms return a set of
-rules along with their optimal weights indicating the importance of
-each rule for classification.  Moreover, our algorithms allow
-assigning cost coefficients, which could relate to different
-attributes of the rules, such as; rule lengths, estimator weights,
-number of false negatives, and so on.  Thus, the decision makers can
-adjust these coefficients to divert the training process and obtain a
-set of rules that are more appealing for their needs.
+We introduce a new rule-based optimization method for classification with constraints. The proposed method
+takes advantage of linear programming and column generation, and hence, is scalable to large datasets. Moreover, the
+method returns a set of rules along with their optimal weights indicating the importance of each rule for learning. Through
+assigning cost coefficients to the rules and introducing additional constraints, we show that one can also consider inter-
+pretability and fairness of the results. We test the performance of the proposed method on a collection of datasets and
+present two case studies to elaborate its different aspects. Our results show that a good compromise between interpretabil-
+ity and fairness on the one side, and accuracy on the other side, can be obtained by the proposed rule-based learning
+method.
 
 You can find the details of both algorithms in [our manuscript](https://arxiv.org/abs/2104.10751).
 
-This [notebook](RuleDiscovery.ipynb) illustrates how to use RUX and
-RUG.
+This [notebook](RuleDiscovery.ipynb) illustrates how to use RUX and RUG.
 
 ## Installation
 
