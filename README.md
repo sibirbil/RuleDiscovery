@@ -22,11 +22,12 @@ This [notebook](RuleDiscovery.ipynb) illustrates how to use RUX and RUG.
 
  `conda activate rulediscovery`
 
- 4. Check whether the installation works with either of the following files for testing the code.
+ 4. Check whether the installation works with either one of the files explained below.
 
 ---
 
-## Testing the code
+## Running Our Numerical Experiments
+
 The code contains the following files to reproduce the results of our manuscript:
  1. The script `ruxg_testing.py` is used to test the RUX and RUG algorithms in single fold. One or all datasets are selected from the list, and the code will produce the results of RF, ADA and GB, along with RUX(RF), RUX(ADA), RUX(GB), and RUG.
  
