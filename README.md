@@ -22,7 +22,9 @@ This [notebook](RuleDiscovery.ipynb) illustrates how to use RUX and RUG.
 
  `conda activate rulediscovery`
 
- 4. Check whether the installation works with either one of the files explained below.
+ 4. Check whether the installation works with the following command:
+
+ `python ruxg_testing.py`
 
 ## Running Our Numerical Experiments
 
