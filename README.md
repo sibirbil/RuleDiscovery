@@ -40,6 +40,6 @@ The code contains the following files to reproduce the results of our manuscript
 
 ## Solvers
 
-**Note that the default for `solver` option is `gurobi`.** To use the Gurobi solver, you need to first install
+**Note that the default for `solver` option is 'gurobi'.** To use the Gurobi solver, you need to first install
 it. The solver is freely available for academic use. Check the [related page](https://www.gurobi.com/academia/academic-program-and-licenses/)
-on Gurobi's website. The current version of our code also support the open source solver `glpk`.
+on Gurobi's website. The current version of our code also support the open source solver GLPK (set `solver='glpk'`.
