@@ -16,7 +16,7 @@ This [notebook](RuleDiscovery.ipynb) illustrates how to use RUX and RUG.
 
  2. Create a new environment and install the necessary packages:
 
- `conda create -n rulediscovery --channel=conda-forge python=3.8 numpy pandas scikit-learn cvxpy cvxopt gurobi`
+ `conda create -n rulediscovery --channel=conda-forge numpy pandas scikit-learn cvxpy cvxopt gurobi`
 
  3. Activate the current environment:
 
