@@ -12,9 +12,9 @@ import Datasets as DS
 randomState = 21
 maxDepth = 3
 penpar = 1.0
-solver = 'gurobi' # or 'glpk'
+solver = 'glpk' # Default is: 'gurobi'
 
-# CLASSIFICATION
+# CLASSIFICATION
 problems = [DS.banknote, DS.hearts, DS.ILPD, DS.ionosphere,
             DS.liver, DS.diabetes_pima, DS.tictactoe, DS.transfusion,
             DS.wdbc, DS.adult, DS.bank_mkt, DS.magic, DS.mushroom, DS.musk,
