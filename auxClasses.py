@@ -1,11 +1,36 @@
-#!/usr/bin/env python3
-# -*- coding: utf-8 -*-
 """
-21 April 2021
-
 @author: sibirbil
 """
 import numpy as np
+
+class SklearnEstimator:
+    '''
+    This base class is dummy, just for guideline. Sklearn does not
+    provide a base class that has both fit and predict
+    '''
+    def fit(self, X: np.array, y: np.array):
+        raise NotImplementedError('Needs to implement fit(X, y)')
+
+    def predict(self, X0: np.array):
+        raise NotImplementedError('Needs to implement predict(X, y)')
+
+class Coefficients:
+    
+        def __init__(self, yvals=np.empty(shape=(0), dtype=np.float),
+                     rows=np.empty(shape=(0), dtype=np.int32),
+                     cols=np.empty(shape=(0), dtype=np.int32),
+                     costs=np.empty(shape=(0), dtype=np.float)):
+
+            self.yvals = yvals
+            self.rows = rows
+            self.cols = cols
+            self.costs = costs
+            
+        def _cleanup(self):
+            self.yvals = np.empty(shape=(0), dtype=np.float)
+            self.rows=np.empty(shape=(0), dtype=np.int32)
+            self.cols=np.empty(shape=(0), dtype=np.int32)
+            self.costs=np.empty(shape=(0), dtype=np.float)
 
 class Clause:
     
@@ -59,11 +84,10 @@ class Clause:
                         returnList[indx] = True
         return returnList
 
-
 class Rule:
     
     def __init__(self, label=None, clauses=[], weight=None):
-        self.label = label # class or the value
+        self.label = label # class
         self.clauses = clauses # clauses
         self.weight = weight # weight
         self.cleaned = False
@@ -122,7 +146,7 @@ class Rule:
         return returnList
     
     def _cleanRule(self):
-        # TODO: Probably can be done more efficient
+        # TODO: Probably can be done more efficiently
         # but overhead is negligible
         if (~self.cleaned):
             n = len(self.clauses)
