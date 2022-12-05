@@ -24,8 +24,6 @@ This [notebook](RuleDiscovery.ipynb) illustrates how to use RUX and RUG.
 
  4. Check whether the installation works with either one of the files explained below.
 
----
-
 ## Running Our Numerical Experiments
 
 The code contains the following files to reproduce the results of our manuscript:
@@ -40,11 +38,8 @@ The code contains the following files to reproduce the results of our manuscript
 
  4. The folder `COMPASCase` contains a notebook and two .csv files of results subject to different fairness metrics, used to create Figure 5 in our manuscript. The notebook is ready to run. For Figures 5(a) and 5(b) subject to disparate mistreatment per class, we use `compas_results_dmc.csv`. For Figures 5(c) and 5(d) subject overall disparate mistreatment, we use `compas_results_odm.csv.`
 
----
-**OPTIONAL:**
+## Solvers
 
-To use the Gurobi solver, you need to first install
-it. The solver is freely available for academic use. Check the
-[related
-page](https://www.gurobi.com/academia/academic-program-and-licenses/)
-on Gurobi's website.
+**Note that the default for `solver` option is `gurobi`.** To use the Gurobi solver, you need to first install
+it. The solver is freely available for academic use. Check the [related page](https://www.gurobi.com/academia/academic-program-and-licenses/)
+on Gurobi's website. The current version of our code also support the open source solver `glpk`.
