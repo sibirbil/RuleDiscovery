@@ -1,0 +1,14 @@
+--->
+ADULT, sample size: 32561, random state: 21
+fairness metric: equaloverallmistreatment, epsilon: 0.025
+    Method  Accuracy  SD (Acc)    NoR     ARL  SD (ARL)  ANoRpS  SD (ANoRpS)  Fairness  SD (Fairness)  Training time  Prediction time
+0       RF    0.7952  0.006615  796.4     NaN       NaN     NaN          NaN    0.8482       0.009714         0.9814           0.9814
+1      ADA    0.8659  0.004867  381.4     NaN       NaN     NaN          NaN    0.9022       0.009847         5.3990           5.3990
+2       GB    0.8619  0.005522  790.3     NaN       NaN     NaN          NaN    0.8968       0.011025         8.5087           8.5087
+3       DT    0.8438  0.006290    8.0     NaN       NaN     NaN          NaN    0.8789       0.008734         0.0792           0.0792
+4   RUX-RF    0.8478  0.007947   43.0  2.9180  0.026578  2.4150     1.310802    0.9054       0.008663        32.8461           3.1796
+5  RUX-ADA    0.8597  0.006573   72.6  2.1721  0.100142  1.4960     0.067232    0.8987       0.009582        16.3534           5.2411
+6   RUX-GB    0.8585  0.005749   62.1  2.5053  0.064264  1.4550     0.381543    0.8988       0.009421        30.5895           3.9307
+7      RUG    0.8582  0.006096   40.2  2.3822  0.122678  1.6443     0.734149    0.8983       0.010179        60.4248           2.7584
+<---
+
