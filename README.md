@@ -21,6 +21,7 @@ This [notebook](RuleDiscovery.ipynb) illustrates how to use RUX and RUG.
  3. Activate the current environment and install `gurobi` package in the environment:
 
  `conda activate rulediscovery`
+ 
  `conda install -c gurobi gurobi`
 
  4. Check whether the installation works with the following command:
