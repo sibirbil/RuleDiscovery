@@ -12,3 +12,30 @@ fairness metric: equaloverallmistreatment, epsilon: 0.025
 7      RUG    0.8582  0.006096   40.2  2.3822  0.122678  1.6443     0.734149    0.8983       0.010179        60.4248           2.7584
 <---
 
+--->
+ADULT, sample size: 32561, random state: 21
+fairness metric: odm, epsilon: 0
+    Method  Accuracy  SD (Acc)    NoR     ARL  SD (ARL)  ANoRpS  SD (ANoRpS)  Fairness  SD (Fairness)  Training time  Prediction time
+0       RF    0.7952  0.006615  796.4     NaN       NaN     NaN          NaN    0.8482       0.009714         0.5582           0.5582
+1      ADA    0.8659  0.004867  381.4     NaN       NaN     NaN          NaN    0.9022       0.009847         2.5618           2.5618
+2       GB    0.8619  0.005522    NaN     NaN       NaN     NaN          NaN    0.8968       0.011025         4.2385           4.2385
+3       DT    0.8438  0.006290    8.0     NaN       NaN     NaN          NaN    0.8789       0.008734         0.0424           0.0424
+4   RUX-RF    0.8479  0.007968   43.0  2.9180  0.026578  2.4066     1.296092    0.9052       0.008716        19.8086           1.8977
+5  RUX-ADA    0.8596  0.006468   72.4  2.1717  0.099469  1.4963     0.068260    0.8987       0.009435         9.2205           3.0821
+6      RUG    0.8573  0.004691   52.3  2.3513  0.183996  3.0372     3.848410    0.8947       0.009133        33.0845           2.2457
+<---
+
+--->
+ADULT, sample size: 32561, random state: 21
+fairness metric: odm, epsilon: 0
+    Method  Accuracy  SD (Acc)    NoR     ARL  SD (ARL)  ANoRpS  SD (ANoRpS)  Fairness  SD (Fairness)  Training time  Prediction time
+0       RF    0.7952  0.006615  796.4     NaN       NaN     NaN          NaN    0.8482       0.009714         0.5874           0.5874
+1      ADA    0.8659  0.004867  381.4     NaN       NaN     NaN          NaN    0.9022       0.009847         2.6715           2.6715
+2       GB    0.8619  0.005522  790.3     NaN       NaN     NaN          NaN    0.8968       0.011025         4.4045           4.4045
+3       DT    0.8438  0.006290    8.0     NaN       NaN     NaN          NaN    0.8789       0.008734         0.0495           0.0495
+4   RUX-RF    0.8479  0.007968   43.0  2.9180  0.026578  2.4066     1.296092    0.9052       0.008716        19.8592           1.8650
+5  RUX-ADA    0.8596  0.006468   72.4  2.1717  0.099469  1.4963     0.068260    0.8987       0.009435         9.3128           2.9653
+6   RUX-GB    0.8571  0.005338   62.4  2.5043  0.065055  1.4560     0.381182    0.9017       0.011866        18.5420           2.3974
+7      RUG    0.8575  0.004965   52.7  2.3270  0.193020  2.9634     3.580404    0.8957       0.008978        34.7368           2.2990
+<---
+
