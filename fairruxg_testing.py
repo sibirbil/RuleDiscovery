@@ -18,14 +18,14 @@ numEstimators = 100
 maxDepth = 3
 penpar = 1.0
 solver = 'gurobi' # or 'glpk'
-fairness_epsilon = 0.01
+fairness_epsilon = 0
 fairness_metric = 'odm'
 
 fname: str = './FairnessResults/'+str(fairness_metric)+'/fairruxg_'
 
 # Select datasets
 # problems = [DS.compas, DS.adult_fairness, DS.default, DS.law, DS.attrition, DS.recruitment, DS.student, DS.nursery]
-problems = [DS.nursery]
+problems = [DS.adult]
 
 print('Random State, Maximum Depth: %d, %d\n' % (randomState, maxDepth))
 
@@ -46,7 +46,6 @@ for problem in problems:
     groups.sort()  
     classes = pd.unique(y)
     classes.sort()
-    print(classes, groups)
 
     # K-Fold
     kfold = KFold(10, shuffle=True, random_state=randomState)
@@ -194,6 +193,9 @@ for problem in problems:
         results_DT.append(round(DT_time,3))
         DT_kfold.append(results_DT)
 
+        # # For adult dataset
+        # for i in range(0, len(RUXGB_pred)):
+        #     RUXGB_pred[i]=round(RUXGB_pred[i],0)
         results_RUXGB.append(round(accuracy_score(RUXGB_pred,y_test),3)) 
         results_RUXGB.append(round(RUXGB.get_num_of_rules(),3)) 
         results_RUXGB.append(round(RUXGB.get_avg_rule_length(),3)) 
