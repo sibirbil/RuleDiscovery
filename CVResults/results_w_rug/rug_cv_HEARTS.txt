@@ -1,0 +1,10 @@
+--->
+HEARTS
+RUG 
+
+Accuracy: 	 0.7859 (0.0609)
+Nr of Rules: 	 27.8000 (33.1777)
+Avg. Rule Length: 	 3.4133 (0.7922)
+Avg. Nr. Rules per Sample: 	 3.9672 (3.1940)
+<---
+

@@ -1,0 +1,10 @@
+--->
+TICTACTOE
+RUG 
+
+Accuracy: 	 1.0000 (0.0000)
+Nr of Rules: 	 104.7000 (8.3433)
+Avg. Rule Length: 	 4.6134 (0.1831)
+Avg. Nr. Rules per Sample: 	 5.3613 (0.5900)
+<---
+

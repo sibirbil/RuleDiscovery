@@ -1,0 +1,10 @@
+--->
+TRANSFUSION
+RUG 
+
+Accuracy: 	 0.7779 (0.0451)
+Nr of Rules: 	 8.5000 (3.7216)
+Avg. Rule Length: 	 2.3823 (0.3762)
+Avg. Nr. Rules per Sample: 	 1.3470 (0.5689)
+<---
+

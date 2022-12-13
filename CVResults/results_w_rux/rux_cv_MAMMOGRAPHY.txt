@@ -1,0 +1,12 @@
+--->
+MAMMOGRAPHY
+Method: 	 Accuracy 	 Std. Dev. 	 Nr of Rules 	 Std. Dev. 	 Avg. Rule Length 	 Std. Dev. 	 Avg # Rules Sample 	 Std. Dev. 
+
+RF: 	 0.9852 	 0.0035 	 2480.5000 	 37.2351 	 nan 	 nan 	 nan 	 nan
+ADA: 	 0.9849 	 0.0044 	 100.0000 	 0.0000 	 nan 	 nan 	 nan 	 nan
+GB: 	 0.9860 	 0.0043 	 782.1000 	 4.0853 	 nan 	 nan 	 nan 	 nan
+RUX-RF: 	 0.9849 	 0.0037 	 250.0000 	 11.6103 	 3.3363 	 0.0527 	 14.7725 	 2.6674
+RUX-ADA: 	 0.9813 	 0.0047 	 20.2000 	 6.2258 	 1.0000 	 0.0000 	 9.7575 	 3.5032
+RUX-GB: 	 0.9854 	 0.0025 	 131.3000 	 7.6557 	 2.1960 	 0.0550 	 8.3821 	 0.8775
+<---
+

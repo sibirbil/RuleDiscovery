@@ -1,0 +1,12 @@
+--->
+WDBC
+Method: 	 Accuracy 	 Std. Dev. 	 Nr of Rules 	 Std. Dev. 	 Avg. Rule Length 	 Std. Dev. 	 Avg # Rules Sample 	 Std. Dev. 
+
+RF: 	 0.9596 	 0.0176 	 1539.1000 	 20.7820 	 nan 	 nan 	 nan 	 nan
+ADA: 	 0.9684 	 0.0189 	 100.0000 	 0.0000 	 nan 	 nan 	 nan 	 nan
+GB: 	 0.9631 	 0.0123 	 780.0000 	 10.0896 	 nan 	 nan 	 nan 	 nan
+RUX-RF: 	 0.9578 	 0.0296 	 53.7000 	 3.4366 	 3.4634 	 0.1570 	 8.7653 	 1.1328
+RUX-ADA: 	 0.9649 	 0.0135 	 36.2000 	 2.2271 	 1.0000 	 0.0000 	 14.1209 	 1.6701
+RUX-GB: 	 0.9614 	 0.0153 	 41.7000 	 4.0262 	 2.5726 	 0.0315 	 10.5737 	 1.1967
+<---
+

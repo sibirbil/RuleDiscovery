@@ -1,0 +1,12 @@
+--->
+ADULT
+Method: 	 Accuracy 	 Std. Dev. 	 Nr of Rules 	 Std. Dev. 	 Avg. Rule Length 	 Std. Dev. 	 Avg # Rules Sample 	 Std. Dev. 
+
+RF: 	 0.8381 	 0.0051 	 2841.8000 	 7.5604 	 nan 	 nan 	 nan 	 nan
+ADA: 	 0.8574 	 0.0073 	 100.0000 	 0.0000 	 nan 	 nan 	 nan 	 nan
+GB: 	 0.8622 	 0.0072 	 792.2000 	 1.9900 	 nan 	 nan 	 nan 	 nan
+RUX-RF: 	 0.8557 	 0.0079 	 392.6000 	 210.1025 	 4.5695 	 0.1039 	 9.5155 	 10.5185
+RUX-ADA: 	 0.8287 	 0.0097 	 11.0000 	 2.0494 	 1.0000 	 0.0000 	 1.6399 	 0.2865
+RUX-GB: 	 0.8597 	 0.0056 	 58.2000 	 8.5884 	 2.4334 	 0.0602 	 1.5637 	 0.6780
+<---
+

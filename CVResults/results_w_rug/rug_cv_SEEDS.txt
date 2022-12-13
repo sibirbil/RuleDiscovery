@@ -1,0 +1,10 @@
+--->
+SEEDS
+RUG 
+
+Accuracy: 	 0.9048 (0.0639)
+Nr of Rules: 	 25.5000 (6.8154)
+Avg. Rule Length: 	 2.6669 (0.2785)
+Avg. Nr. Rules per Sample: 	 5.7000 (1.4965)
+<---
+

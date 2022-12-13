@@ -1,0 +1,12 @@
+--->
+TRANSFUSION
+Method: 	 Accuracy 	 Std. Dev. 	 Nr of Rules 	 Std. Dev. 	 Avg. Rule Length 	 Std. Dev. 	 Avg # Rules Sample 	 Std. Dev. 
+
+RF: 	 0.7913 	 0.0400 	 2433.3000 	 58.0449 	 nan 	 nan 	 nan 	 nan
+ADA: 	 0.7873 	 0.0438 	 100.0000 	 0.0000 	 nan 	 nan 	 nan 	 nan
+GB: 	 0.7699 	 0.0319 	 753.4000 	 9.2865 	 nan 	 nan 	 nan 	 nan
+RUX-RF: 	 0.7165 	 0.0483 	 142.7000 	 11.6966 	 2.8441 	 0.0704 	 5.3659 	 0.7252
+RUX-ADA: 	 0.7606 	 0.0342 	 7.8000 	 3.5721 	 1.0000 	 0.0000 	 2.6218 	 1.3321
+RUX-GB: 	 0.7539 	 0.0418 	 56.0000 	 11.8322 	 2.0545 	 0.0841 	 3.6713 	 1.6576
+<---
+

@@ -1,0 +1,10 @@
+--->
+ILPD
+RUG 
+
+Accuracy: 	 0.6926 (0.0420)
+Nr of Rules: 	 60.1000 (75.9282)
+Avg. Rule Length: 	 3.6221 (1.0493)
+Avg. Nr. Rules per Sample: 	 3.7429 (3.0792)
+<---
+

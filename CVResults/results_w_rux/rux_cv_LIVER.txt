@@ -1,0 +1,12 @@
+--->
+LIVER
+Method: 	 Accuracy 	 Std. Dev. 	 Nr of Rules 	 Std. Dev. 	 Avg. Rule Length 	 Std. Dev. 	 Avg # Rules Sample 	 Std. Dev. 
+
+RF: 	 0.7270 	 0.0803 	 2081.4000 	 60.5363 	 nan 	 nan 	 nan 	 nan
+ADA: 	 0.7250 	 0.0614 	 100.0000 	 0.0000 	 nan 	 nan 	 nan 	 nan
+GB: 	 0.7563 	 0.0989 	 778.8000 	 5.8958 	 nan 	 nan 	 nan 	 nan
+RUX-RF: 	 0.6775 	 0.0999 	 150.7000 	 5.4781 	 3.2157 	 0.0653 	 11.3686 	 0.7754
+RUX-ADA: 	 0.7186 	 0.0739 	 29.6000 	 4.8415 	 1.0000 	 0.0000 	 7.9504 	 2.4260
+RUX-GB: 	 0.6720 	 0.0831 	 101.7000 	 2.3685 	 2.2916 	 0.0433 	 12.5692 	 1.6963
+<---
+

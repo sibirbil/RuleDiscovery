@@ -1,0 +1,12 @@
+--->
+BANK_MKT
+Method: 	 Accuracy 	 Std. Dev. 	 Nr of Rules 	 Std. Dev. 	 Avg. Rule Length 	 Std. Dev. 	 Avg # Rules Sample 	 Std. Dev. 
+
+RF: 	 0.8082 	 0.0092 	 2875.0000 	 22.7288 	 nan 	 nan 	 nan 	 nan
+ADA: 	 0.8270 	 0.0087 	 100.0000 	 0.0000 	 nan 	 nan 	 nan 	 nan
+GB: 	 0.8486 	 0.0081 	 795.9000 	 2.9479 	 nan 	 nan 	 nan 	 nan
+RUX-RF: 	 0.8484 	 0.0077 	 794.2000 	 25.4197 	 4.5740 	 0.0107 	 22.4642 	 0.6212
+RUX-ADA: 	 0.8270 	 0.0098 	 37.6000 	 8.6394 	 1.0000 	 0.0000 	 10.5913 	 3.2561
+RUX-GB: 	 0.8573 	 0.0076 	 264.1000 	 11.2379 	 2.7662 	 0.0280 	 23.6984 	 1.3942
+<---
+

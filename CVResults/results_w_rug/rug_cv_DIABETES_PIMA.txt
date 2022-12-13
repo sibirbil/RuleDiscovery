@@ -1,0 +1,10 @@
+--->
+DIABETES_PIMA
+RUG 
+
+Accuracy: 	 0.7462 (0.0551)
+Nr of Rules: 	 30.8000 (19.2499)
+Avg. Rule Length: 	 3.3433 (0.9406)
+Avg. Nr. Rules per Sample: 	 3.3155 (1.4497)
+<---
+

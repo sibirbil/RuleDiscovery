@@ -1,0 +1,10 @@
+--->
+MAMMOGRAPHY
+RUG 
+
+Accuracy: 	 0.9870 (0.0043)
+Nr of Rules: 	 103.8000 (27.6072)
+Avg. Rule Length: 	 4.2125 (0.5137)
+Avg. Nr. Rules per Sample: 	 6.4606 (2.1160)
+<---
+

@@ -1,0 +1,12 @@
+--->
+MUSK
+Method: 	 Accuracy 	 Std. Dev. 	 Nr of Rules 	 Std. Dev. 	 Avg. Rule Length 	 Std. Dev. 	 Avg # Rules Sample 	 Std. Dev. 
+
+RF: 	 0.9442 	 0.0064 	 2599.7000 	 23.7110 	 nan 	 nan 	 nan 	 nan
+ADA: 	 0.9514 	 0.0044 	 100.0000 	 0.0000 	 nan 	 nan 	 nan 	 nan
+GB: 	 0.9641 	 0.0078 	 789.0000 	 3.5214 	 nan 	 nan 	 nan 	 nan
+RUX-RF: 	 0.9786 	 0.0043 	 255.1000 	 13.9603 	 4.7180 	 0.0383 	 10.6139 	 1.0094
+RUX-ADA: 	 0.8630 	 0.0216 	 33.8000 	 1.6000 	 1.0000 	 0.0000 	 5.5623 	 0.5993
+RUX-GB: 	 0.9814 	 0.0056 	 141.5000 	 5.6613 	 2.9127 	 0.0335 	 10.2907 	 1.2318
+<---
+

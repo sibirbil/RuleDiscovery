@@ -1,0 +1,10 @@
+--->
+GLASS
+RUG 
+
+Accuracy: 	 0.7104 (0.0898)
+Nr of Rules: 	 70.5000 (9.4684)
+Avg. Rule Length: 	 4.2729 (0.2049)
+Avg. Nr. Rules per Sample: 	 6.1963 (0.6327)
+<---
+

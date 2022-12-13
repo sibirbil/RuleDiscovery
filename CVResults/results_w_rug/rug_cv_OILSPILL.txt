@@ -1,0 +1,10 @@
+--->
+OILSPILL
+RUG 
+
+Accuracy: 	 0.9626 (0.0216)
+Nr of Rules: 	 32.5000 (8.1517)
+Avg. Rule Length: 	 3.1330 (0.6964)
+Avg. Nr. Rules per Sample: 	 6.3469 (1.7177)
+<---
+

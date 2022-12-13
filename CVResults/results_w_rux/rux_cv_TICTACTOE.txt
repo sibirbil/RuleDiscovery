@@ -1,0 +1,12 @@
+--->
+TICTACTOE
+Method: 	 Accuracy 	 Std. Dev. 	 Nr of Rules 	 Std. Dev. 	 Avg. Rule Length 	 Std. Dev. 	 Avg # Rules Sample 	 Std. Dev. 
+
+RF: 	 0.8538 	 0.0547 	 2879.5000 	 10.5380 	 nan 	 nan 	 nan 	 nan
+ADA: 	 0.8518 	 0.0402 	 100.0000 	 0.0000 	 nan 	 nan 	 nan 	 nan
+GB: 	 0.9822 	 0.0115 	 800.0000 	 0.0000 	 nan 	 nan 	 nan 	 nan
+RUX-RF: 	 0.9969 	 0.0048 	 113.0000 	 16.3279 	 4.7008 	 0.0543 	 5.2209 	 0.8734
+RUX-ADA: 	 0.6994 	 0.0556 	 18.0000 	 0.0000 	 1.0000 	 0.0000 	 9.3800 	 0.0870
+RUX-GB: 	 0.9906 	 0.0109 	 62.9000 	 6.7594 	 3.0000 	 0.0000 	 7.0204 	 1.4417
+<---
+
