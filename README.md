@@ -14,7 +14,7 @@ This [notebook](RuleDiscovery.ipynb) illustrates how to use RUX and RUG.
 
  1. Install [Anaconda Distribution](https://www.anaconda.com/products/individual).
 
- 2. Create a new environment and install the necessary packages
+ 2. Create a new environment and install the necessary packages:
 
  `conda create -n rulediscovery -c conda-forge numpy pandas scikit-learn cvxpy cvxopt`
 
@@ -34,7 +34,7 @@ The code contains the following files to reproduce the results of our manuscript
 
 1. The script `ruxg_testing.py` is used to test the RUX and RUG algorithms in single fold. One or all datasets are selected from the list, and the code will produce the results of RF, ADA and GB, along with RUX(RF), RUX(ADA), RUX(GB), and RUG.
  
-2. **TO BE COMPLETED ...** The folder `CVResults` consists of three files `ruxg_cv_others.py`, `ruxg_cv_RUX.py` and `ruxg_cv_RUG.py`, to produce the cross validated results of Table EC.3 and Table EC.4 of our manuscript. Table EC.3 consists of the predictive performances of existing methods for all 23 datasets together with the predictive performance of RUG (last column). These results can be reproduced by `ruxg_cv_others.py` and `ruxg_cv_RUG.py`. Table EC.4 contains the predictive performance, along with other measures for interpretability, for RUX and RUG. These can be obtained by running `ruxg_cv_rux.py` and `ruxg_cv_rug.py`. 
+2. **TO BE COMPLETED ...** The folder `CVResults` consists of three files `ruxg_cv_others.py`, `ruxg_cv_RUX.py` and `ruxg_cv_RUG.py`, to produce the cross validated results of Table 9 and Table 10 of our manuscript. Table 9 consists of the predictive performances of existing methods for all 23 datasets together with the predictive performance of RUG (last column). These results can be reproduced by `ruxg_cv_others.py` and `ruxg_cv_RUG.py`. Table 10 contains the predictive performance, along with other measures for interpretability, for RUX and RUG. These can be obtained by running `ruxg_cv_RUX.py` and `ruxg_cv_RUG.py`. 
 
  2. The script `fairruxg_testing.py` is used to test the FairRUX and FairRUG algorithms for the eight datasets `COMPAS`, `adult`, `default`, `law`, `attrition`, `recruitment`, `student`, and `nursery`. To reproduce the results of the upper half of Table EC.5 in our manuscript, the tests are run with `randomState=21`, `maxDepth=3`, `numEstimators=100`, `fairness_metric='dmc'`, and we set the value of `fairness_eps` to 0 for `COMPAS` and default; 0.01 for `attrition`, `recruitment`, and `student`; 0.025 for `adult`, `law`, and `nursery`. Running the file should immediately start the 10-fold cross validation and append the results to .txt files in the folder FairnessResults. To produce the results of the lower half of Table EC.5, we set `fairness_metric='odm'` and `fairness_eps` to 0 for `COMPAS` and `law`; 0.01 for `nursery` and `attritio`; 0.025 for `default`, `recruitment`, and `student`; 0.05 for `adult`. This file is also used to produce the results of Table 3 in our manuscript, for the `COMPAS` case study.
 
