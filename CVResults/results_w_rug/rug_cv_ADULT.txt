@@ -1,0 +1,10 @@
+--->
+ADULT
+RUG 
+
+Accuracy: 	 0.8615 (0.0060)
+Nr of Rules: 	 148.8000 (97.4883)
+Avg. Rule Length: 	 5.8341 (1.6965)
+Avg. Nr. Rules per Sample: 	 3.5769 (2.9631)
+<---
+
