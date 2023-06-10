@@ -16,10 +16,10 @@ class SklearnEstimator:
 
 class Coefficients:
     
-        def __init__(self, yvals=np.empty(shape=(0), dtype=np.float),
+        def __init__(self, yvals=np.empty(shape=(0), dtype=np.float64),
                      rows=np.empty(shape=(0), dtype=np.int32),
                      cols=np.empty(shape=(0), dtype=np.int32),
-                     costs=np.empty(shape=(0), dtype=np.float)):
+                     costs=np.empty(shape=(0), dtype=np.float64)):
 
             self.yvals = yvals
             self.rows = rows
@@ -27,10 +27,10 @@ class Coefficients:
             self.costs = costs
             
         def _cleanup(self):
-            self.yvals = np.empty(shape=(0), dtype=np.float)
+            self.yvals = np.empty(shape=(0), dtype=np.float64)
             self.rows=np.empty(shape=(0), dtype=np.int32)
             self.cols=np.empty(shape=(0), dtype=np.int32)
-            self.costs=np.empty(shape=(0), dtype=np.float)
+            self.costs=np.empty(shape=(0), dtype=np.float64)
 
 class Clause:
     
