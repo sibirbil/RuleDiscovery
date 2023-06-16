@@ -32,6 +32,7 @@ class RUXG(BaseEstimator, SklearnEstimator):
         self.missedXvals = None        
         self.numOfMissed = None
         self.rulesPerSample = None
+        self.ruleLengthPerSample = None
         self.normConst = 1.0
         # Coefficients (A, Abar & costs) are used as CSR sparse matrices
         self._coeffs = Coefficients()
@@ -69,6 +70,7 @@ class RUXG(BaseEstimator, SklearnEstimator):
         self.missedXvals = None
         self.numOfMissed = None
         self.rulesPerSample = None
+        self.ruleLengthPerSample = None
         self._coeffs._cleanup()    
 
     def _getRule(self, fitTree, nodeid):
@@ -273,7 +275,7 @@ class RUXG(BaseEstimator, SklearnEstimator):
         betas = np.array(modprimal.getAttr(GRB.Attr.Pi)[:n])        
         
         return ws.X, vs.X, betas
-
+    
     def print_rules(self, indices=[]):
         
         if (len(indices) == 0):
@@ -291,6 +293,13 @@ class RUXG(BaseEstimator, SklearnEstimator):
                 rule.printRule()
             print('Class: %.0f' % rule.label)
             print('Scaled rule weight: %.4f\n' % rule.weight)
+
+    def print_rules_for_instances(self, IDs, x_id_to_rule_ids_dict, colnames):
+        for x0_id in IDs:
+            print('Rules for the instance:\n')
+            rule_ids = x_id_to_rule_ids_dict[x0_id]
+            self.print_rules(feature_names=colnames, indices=rule_ids)
+            print('\n \n')  
 
     def print_weights(self, indices=[]):
 
@@ -334,7 +343,11 @@ class RUXG(BaseEstimator, SklearnEstimator):
     
     def get_avg_num_rules_per_sample(self):
         
-        return np.mean(self.rulesPerSample)    
+        return np.mean(self.rulesPerSample)
+
+    def get_avg_rule_length_per_sample(self):
+
+        return np.mean(self.ruleLengthPerSample)
 
     def get_fit_time(self):
         
@@ -358,17 +371,22 @@ class RUXG(BaseEstimator, SklearnEstimator):
         self.missedXvals = []        
         self.numOfMissed = 0
         self.rulesPerSample = np.zeros(len(X))
+        self.ruleLengthPerSample = np.zeros(len(X))
         
         startTime = time.time()
         returnPrediction = []
         for sindx, x0 in enumerate(X):
             sumClassWeights = np.zeros(self.K)
+            rule_lengths = []
             for indx in indices:
                 rule = self.rules[indx]
                 if(rule.checkRule(x0)):
                     lab2int = self.labelToInteger[rule.label]
                     sumClassWeights[lab2int] += rule.weight
                     self.rulesPerSample[sindx] += 1.0
+                    rule_lengths.append(rule.length())
+            if len(rule_lengths) > 0:
+                self.ruleLengthPerSample = np.mean(rule_lengths)
             
             if (np.sum(sumClassWeights) == 0):
                 # Unclassified test sample
