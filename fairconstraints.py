@@ -113,9 +113,7 @@ def fairnessEvaluation(y_actual, y_pred, setsP, classes, pairs):
 
                 alpha = abs((1/setsize_group1)*sum(u1)-(1/setsize_group2)*sum(u2))
            
-            unfairness_mat.append(alpha)
         unfairness = unfairnessLevel_multiclass(unfairness_mat, classes, pairs)
-
     else: # For Binary Class
         # Assume that the second class of binary class is the advantageous one, so 0 = negative, 1 = positive
         pair = setsP[1] 
@@ -149,9 +147,86 @@ def fairnessEvaluation(y_actual, y_pred, setsP, classes, pairs):
 
             alpha = abs((1/setsize_group1)*sum(u1)-(1/setsize_group2)*sum(u2))
         unfairness = alpha
+
         #print(unfairness)
 
     return unfairness
+
+def binary_EqOdds(y_actual, y_pred, setsP, classes, pairs):
+    if len(classes)==2: # For Binary Class
+        # Assume that the second class of binary class is the advantageous one, so 0 = negative, 1 = positive
+        pair = setsP[1] 
+        set_group1 = pair[0]
+        set_group2 = pair[1]
+        setsize_group1 = int(sum(set_group1))
+        setsize_group2 = int(sum(set_group2))
+
+        # print(setsize_group1)
+        # print(setsize_group2)
+ 
+        if setsize_group1==0:                
+            alpha=0
+        elif setsize_group2==0:
+            alpha=0
+        else:
+            u1 = np.zeros(len(y_actual)) #misclassification counting vectors for group 1 and 2 below.
+            u2 = np.zeros(len(y_actual))
+
+            # MISSCLASSIFCATION COUNTING VECTOR FOR GROUP G=1
+            for idx in range(0, len(set_group1)): 
+                if set_group1[idx] == 1: #if in group 1
+                    if y_actual[idx] != y_pred[idx]: #if misclassified
+                        u1[idx] = 1  #set counting vector idx to 1
+                
+            # MISCLASSIFCAITON COUTNING VECTOR FOR GROUP G'=2
+            for idx in range(0, len(set_group2)): 
+                if set_group2[idx] == 1:
+                    if y_actual[idx] != y_pred[idx]:
+                        u2[idx] = 1
+
+            alpha = abs((1/setsize_group1)*sum(u1)-(1/setsize_group2)*sum(u2))
+        unfairness = alpha
+    return unfairness
+
+def binary_EqOpp(y_actual, y_pred, setsP, classes, pairs):
+    #calculates the gap between false negative rates for both groups
+    if len(classes)==2: # For Binary Class
+        # Assume that the second class of binary class is the advantageous one, so 0 = negative, 1 = positive
+        pair = setsP[1] 
+        set_group1 = pair[0]
+        set_group2 = pair[1]
+        setsize_group1 = int(sum(set_group1))
+        setsize_group2 = int(sum(set_group2))
+
+        # print(setsize_group1)
+        # print(setsize_group2)
+ 
+        if setsize_group1==0:                
+            alpha=0
+        elif setsize_group2==0:
+            alpha=0
+        else:
+            u1 = np.zeros(len(y_actual)) 
+            u2 = np.zeros(len(y_actual))
+
+            # MISSCLASSIFCATION COUNTING VECTOR FOR GROUP G=1
+            for idx in range(0, len(set_group1)): 
+                if set_group1[idx] == 1: #if in group 1
+                    if (y_actual[idx] ==1 and y_pred[idx] ==0): #if acutal class is positive(1), but is classified as negative (0)
+                        u1[idx] = 1 #set misclassification vector idx to 1
+            # MISCLASSIFCAITON COUTNING VECTOR FOR GROUP G'=2
+            for idx in range(0, len(set_group2)): 
+                if set_group2[idx] == 1:
+                    if (y_actual[idx] ==1 and y_pred[idx] ==0):
+                        u2[idx] = 1
+        
+
+            alpha = abs((1/setsize_group1)*sum(u1)-(1/setsize_group2)*sum(u2))
+            # print('unfairness = ', alpha)
+            # quit()
+        unfairness = alpha
+    return unfairness
+
 
 def unfairnessLevel_multiclass(unfairness_array, classes, group_pairs):
     sizeK = len(classes)
