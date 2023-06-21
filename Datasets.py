@@ -300,22 +300,68 @@ def adult(wd): # Two classes
     df = pd.get_dummies(data = df, columns= cols_to_encode, drop_first=False)
     df=df.drop(columns=[0])
     df['y'] = (y == ' >50K')*1
-   
+    # print(df['sex']) #1 = male
+    # quit()
     print('Size data set:' , len(df['y']))
  
     return df
 
-def compas(wd):
+def compas_whitevsnonwhite(wd):
+    """
+    2 classes
+    6172 x 7 after prepping
+    https://github.com/propublica/compas-analysis/
+    """
+    df = pd.read_csv(wd+'compas_full_whitevsnonwhite_RUG.csv', header = 0, sep = '\;', engine = 'python')
+
+    df.columns = ['X_' + str(i) for i in range(len(df.columns)-1)] + ['y']
+    print('Size data set:' , len(df['y']))
+    
+    return df
+
+def compas_fairlearn(wd):
+    """
+    2 classes
+    6172 x 7 after prepping
+    https://github.com/propublica/compas-analysis/
+    """
+    df = pd.read_csv(wd+'compas_FAIRLEARN.csv', header = 0, sep = '\,', engine = 'python')
+    
+    df.columns = ['X_' + str(i) for i in range(len(df.columns)-1)] + ['y']
+    df = pd.get_dummies(data = df, columns=['X_0'], drop_first=False)   
+    race_column = df.pop(df.columns[-1])
+    df.insert(0, 'race', race_column) #0=back, 1=white
+    df.pop(df.columns[-1])   
+    print('Size data set:' , len(df['y']))
+    
+    return df
+
+def compas(wd): #0=negative class=has recommitted, 1=positive class=has not recommitted, group 0=white, group1 = black
+    """
+    2 classes
+    6172 x 7 after prepping
+    https://github.com/propublica/compas-analysis/
+    """
+    df = pd.read_csv(wd+'compas_blackvswhite.csv', header = 0, sep = '\;', engine = 'python')
+
+    df.columns = ['X_' + str(i) for i in range(len(df.columns)-1)] + ['y']
+    print('Size data set:' , len(df['y']))
+
+    return df
+
+def compas_fairlearnpackage(wd):
     """
     2 classes
     6172 x 7 after prepping
     https://github.com/propublica/compas-analysis/
     """
     df = pd.read_csv(wd+'compas.csv', header = None, sep = '\;', engine = 'python')
-    df.columns = ['X_' + str(i) for i in range(len(df.columns)-1)] + ['y']
+    #df.columns = ['X_' + str(i) for i in range(len(df.columns)-1)] + ['y']
     print('Size data set:' , len(df['y']))
 
     return df
+
+
 
 def nursery(wd): 
     """
@@ -341,8 +387,10 @@ def default(wd):
     sex = df['X_1']
 
     df = df.drop(columns=['X_1'])
-    df.insert(loc=0, column='X_1', value=sex)
-    print('Size data set:' , len(df['y']))
+    df.insert(loc=0, column='X_1', value=sex) #2=femaile, 1=male
+    print('Size data set:' , len(df['y'])) #1=to default payment, bad label, 0=positive label
+    # print(df['X_1'])
+    # quit()
     
 
     return df
@@ -364,8 +412,8 @@ def attrition(wd):
     2 classes
     https://www.kaggle.com/datasets/pavansubhasht/ibm-hr-analytics-attrition-dataset
     """
-    # Dataset IBM HR analytics employee attrition and performance
-    df = pd.read_csv(wd+'attrition.csv', header=1, sep = '\;', engine = 'python')
+    # Dataset IBM HR analytics employee attrition and performance. 0 = positive class (no attrition), 1=negative class(attrition)
+    df = pd.read_csv(wd+'attrition.csv', header=0, sep = '\;', engine = 'python')
     df.columns = ['X_' + str(i) for i in range(len(df.columns)-1)] + ['y']
     print('Size data set:' , len(df['y']))
     string_headers = [2, 4, 7, 14, 16, 20, 21]
@@ -377,6 +425,7 @@ def attrition(wd):
     workLifeBalance = df['X_29']
     df = df.drop(columns=['X_29'])
     df.insert(loc=0, column='X_29', value=workLifeBalance)
+
     return df
 
 def recruitment(wd):
