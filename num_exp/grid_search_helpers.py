@@ -1,8 +1,12 @@
+"""
+We need to be able to access the code of other repo, specifically:
+- ./binoct      # for BinOCT
+- ./pydl8.5-lbguess     # for FSDT
+- ./FairCG/src      # for FairCG and CG
+- ./FairCG/sample_experiment_notebooks      # for FairCG and CG
+"""
 import sys
-sys.path.insert(1, '/Users/tabearober/OneDrive - UvA/Interpretable ML/13_MPinXAI/Code/binoct')
-sys.path.insert(1, '/Users/tabearober/OneDrive - UvA/Interpretable ML/13_MPinXAI/Code/pydl8.5-lbguess')
-sys.path.insert(1, '/Users/tabearober/OneDrive - UvA/Interpretable ML/13_MPinXAI/Code/FairCG/src')
-sys.path.insert(1, '/Users/tabearober/OneDrive - UvA/Interpretable ML/13_MPinXAI/Code/FairCG/sample experiment notebooks')
+# sys.path.insert(1,'...')
 
 import os
 import Datasets as DS
@@ -13,11 +17,16 @@ from sklearn.model_selection import train_test_split
 import itertools
 from sklearn.model_selection import KFold
 from sklearn.metrics import accuracy_score, f1_score, matthews_corrcoef
-import DL85_helpers as FastSDTOpt_helpers
-# import binoct_helpers as binoct_helpers
-from dl85 import DL85Classifier
-import learn_class_bin as lcb
 import time
+
+# for FSDT
+import DL85_helpers as FastSDTOpt_helpers
+from dl85 import DL85Classifier
+
+# for BinOCT
+import learn_class_bin as lcb
+
+# for CG and FairCG
 from test_helpers import *
 import fairconstraints as FC
 
@@ -164,7 +173,7 @@ def cv(param_grid, X, y, pname, numSplits = 5, randomState = 0, model = 'RUG', d
             y_train, y_val = y[train_index], y[val_index]
 
             # clf = RUGClassifier(random_state=randomState)
-            clf = RUGClassifier(random_state=randomState, threshold=0.05)
+            clf = RUGClassifier(random_state=randomState, threshold=0.05, rule_length_cost=True)
             clf.set_params(**param_grid)
             clf.fit(X_train, y_train)
             y_pred = clf.predict(X_val)
@@ -497,8 +506,6 @@ def write_results(pname, scores, path, binary, shape, best_params, param_grid, m
     return
 
 def CG_rules_per_sample(X, rules):
-    # average nr of rules per sample
-    # predict using the fitRulesSet
     K = []
     for rule in rules:
         K.append(np.all(X[:, rule.astype(np.bool_)], axis=1))
@@ -529,15 +536,6 @@ def CG_rules_per_sample(X, rules):
         for v in value:
             rule_lengths_per_sample[key].append(rule_lengths[v])
 
-    # average rule length per sample
-    # for each sample, take the average of the rule lengths of the rules used for that sample
-    # dict_avg_rule_length_sample = {}
-    # for key, value in rule_lengths_per_sample.items():
-    #     if len(value) > 0:
-    #         dict_avg_rule_length_sample[key] = np.mean(value)
-    #     else:
-    #         dict_avg_rule_length_sample[key] = 0
-
     nr_rules = []
     for key, value in dict_rules_per_sample.items():
         nr_rules.append(len(value))
@@ -546,9 +544,6 @@ def CG_rules_per_sample(X, rules):
     avg_rule_length_sample = []
     for key, value in rule_lengths_per_sample.items():
         avg_rule_length_sample.append(np.mean(value))
-
-    # avg_number_rules_per_sample = np.nanmean(nr_rules)
-    # avg_rule_length_per_sample = np.nanmean(avg_rule_length_sample)
 
     return np.nanmean(nr_rules), np.nanmean(avg_rule_length_sample)
 
@@ -596,7 +591,7 @@ def run(problem, pgrid, save_path = None,
 
     # test model on hold-out test set (X_test)
     if model == 'RUG':
-        clf_final = RUGClassifier(random_state=randomState, threshold=0.05)
+        clf_final = RUGClassifier(random_state=randomState, threshold=0.05, rule_length_cost=True)
         clf_final.set_params(**best_params)
         clf_final.fit(X_train, y_train)
         y_pred = clf_final.predict(X_test)
@@ -703,16 +698,20 @@ def run(problem, pgrid, save_path = None,
         clf_final.fit(X_train, y_train, groups=constraintSetPairs_train)
         y_pred = clf_final.predict(X_test)
         # RUG_unfairness = FC.fairnessEvaluation(y_test, y_pred, constraintSetPairs_test, classes, pairs)
-        scores = get_results(y_test, y_pred, clf_final, X_test=X_test, model=model, binary=binary)
+        scores = get_results(y_test, y_pred, clf_final, X_test=X_test, model=model)
 
         if len(classes)==2 and fairness_metric=='dmc':
             RUG_EqualizedOdds = FC.binary_EqOdds(y_test, y_pred, constraintSetPairs_test, classes, pairs)
             RUG_EqualOpportunity = FC.binary_EqOpp(y_test, y_pred, constraintSetPairs_test, classes, pairs)
             scores['Equalized Odds'] = [1-RUG_EqualizedOdds]
             scores['Equal Opportunity'] = [1-RUG_EqualOpportunity]
-        else: #this includes odm, should be run separately from dmc
+        else:  # this includes odm, should be run separately from dmc
             RUG_unfairness = FC.fairnessEvaluation(y_test, y_pred, constraintSetPairs_test, classes, pairs)
-            scores['Fairness ODM'] = [1-RUG_unfairness]
+            if len(classes) > 2:
+                scores['Fairness'] = [1 - RUG_unfairness]
+            else:
+                scores['Fairness ODM'] = [1 - RUG_unfairness]
+
     elif model == 'FairCG':
         # create folder to save files generated by CG
         path = './results_w_FairCG_manual/res/'
@@ -771,6 +770,9 @@ def run(problem, pgrid, save_path = None,
         scores['fitRuleSet - Avg. Rule Length'] = np.mean(np.sum(final_rule_set, axis=1))
         scores['fitRuleSet - Avg. Nr Rules per Sample'], scores['fitRuleSet - Avg. Rule Length per Sample'] = CG_rules_per_sample(X_test, final_rule_set)
         scores['Fit Time'] = res.res['times']
+        scores['Equalized Odds'] = [1-value for value in res.res['EqualizedOdds']]
+        scores['EqualOpportunity'] = [1-value for value in res.res['EqualOpportunity']]
+        scores['ODM'] = [1-value for value in res.res['ODM']]
 
     else:
         return
