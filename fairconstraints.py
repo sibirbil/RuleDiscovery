@@ -112,6 +112,7 @@ def fairnessEvaluation(y_actual, y_pred, setsP, classes, pairs):
                 # print("set size group2: ", setsize_group2)
 
                 alpha = abs((1/setsize_group1)*sum(u1)-(1/setsize_group2)*sum(u2))
+                unfairness_mat.append(alpha)
            
         unfairness = unfairnessLevel_multiclass(unfairness_mat, classes, pairs)
     else: # For Binary Class
