@@ -1,0 +1,22 @@
+--->
+TICTACTOE
+FastSDTOpt
+Binary file used: True
+Dataset shape (train+test): (958, 19) 
+
+Parameters tried for grid search: 
+ {'max_depth': [3, 5, 10]} 
+
+Best parameters: 
+ {'max_depth': 5} 
+
+Accuracy: 	 0.8594 (0.0000)
+F1-score: 	 0.8933 (0.0000)
+MCC: 	 0.6877 (0.0000)
+Nr of Rules: 	 27.0000 (0.0000)
+Avg. Rule Length: 	 4.8519 (0.0000)
+Avg. Nr. Rules per Sample: 	 1.0000 (0.0000)
+Avg. Rule Length per Sample: 	 4.5104 (0.0000)
+Fit Time: 	 1.0830 (0.0000)
+<---
+

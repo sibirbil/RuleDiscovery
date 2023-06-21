@@ -1,0 +1,22 @@
+--->
+BANK_MKT
+RUG
+Binary file used: False
+Dataset shape (train+test): (11162, 43) 
+
+Parameters tried for grid search: 
+ {'pen_par': [0.1, 1.0, 10.0], 'max_depth': [3, 5], 'max_RMP_calls': [5, 10, 15]} 
+
+Best parameters: 
+ {'pen_par': 10.0, 'max_depth': 5, 'max_RMP_calls': 15} 
+
+Accuracy: 	 0.8522 (0.0000)
+F1-score: 	 0.8485 (0.0000)
+MCC: 	 0.7056 (0.0000)
+Nr of Rules: 	 93.0000 (0.0000)
+Avg. Rule Length: 	 4.0000 (0.0000)
+Avg. Nr. Rules per Sample: 	 6.8988 (0.0000)
+Avg. Rule Length per Sample: 	 4.2500 (0.0000)
+Fit Time: 	 3.5325 (0.0000)
+<---
+

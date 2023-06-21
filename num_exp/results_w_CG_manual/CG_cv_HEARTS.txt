@@ -1,0 +1,22 @@
+--->
+HEARTS
+CG
+Binary file used: True
+Dataset shape (train+test): (303, 44) 
+
+Parameters tried for grid search: 
+ {'complexity': [10, 15, 20]} 
+
+Best parameters: 
+ {'complexity': 15} 
+
+Accuracy: 	 0.7705 (0.0000)
+F1: 	 0.7941 (0.0000)
+MCC: 	 0.5365 (0.0000)
+fitRuleSet - Nr of Rules: 	 5.0000 (0.0000)
+fitRuleSet - Avg. Rule Length: 	 1.6000 (0.0000)
+fitRuleSet - Avg. Nr Rules per Sample: 	 1.5429 (0.0000)
+fitRuleSet - Avg. Rule Length per Sample: 	 1.6714 (0.0000)
+Fit Time: 	 300.0813 (0.0000)
+<---
+

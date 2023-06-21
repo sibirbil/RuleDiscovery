@@ -1,0 +1,24 @@
+--->
+SENSORLESS
+RUG
+Binary file used: False
+Dataset shape (train+test): (58509, 49) 
+
+Parameters tried for grid search: 
+ {'pen_par': [0.1, 1.0, 10.0], 'max_depth': [3, 5], 'max_RMP_calls': [5, 10, 15]} 
+
+Best parameters: 
+ {'pen_par': 10.0, 'max_depth': 5, 'max_RMP_calls': 10} 
+
+Accuracy: 	 0.7842 (0.0000)
+F1-score: 	 nan (nan)
+MCC: 	 0.7686 (0.0000)
+Nr of Rules: 	 83.0000 (0.0000)
+Avg. Rule Length: 	 4.2530 (0.0000)
+Avg. Nr. Rules per Sample: 	 5.3281 (0.0000)
+Avg. Rule Length per Sample: 	 4.3750 (0.0000)
+Fit Time: 	 11.2886 (0.0000)
+F1-score-macro: 	 0.7918 (0.0000)
+F1-score-weighted: 	 0.7918 (0.0000)
+<---
+

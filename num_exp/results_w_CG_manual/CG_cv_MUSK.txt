@@ -1,0 +1,22 @@
+--->
+MUSK
+CG
+Binary file used: True
+Dataset shape (train+test): (6598, 665) 
+
+Parameters tried for grid search: 
+ {'complexity': [120, 125, 130]} 
+
+Best parameters: 
+ {'complexity': 125} 
+
+Accuracy: 	 0.8833 (0.0000)
+F1: 	 0.5032 (0.0000)
+MCC: 	 0.4736 (0.0000)
+fitRuleSet - Nr of Rules: 	 5.0000 (0.0000)
+fitRuleSet - Avg. Rule Length: 	 2.0000 (0.0000)
+fitRuleSet - Avg. Nr Rules per Sample: 	 1.2336 (0.0000)
+fitRuleSet - Avg. Rule Length per Sample: 	 2.0000 (0.0000)
+Fit Time: 	 300.7315 (0.0000)
+<---
+

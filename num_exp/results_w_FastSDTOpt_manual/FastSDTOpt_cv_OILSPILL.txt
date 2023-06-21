@@ -1,0 +1,22 @@
+--->
+OILSPILL
+RUG
+Binary file used: True
+Dataset shape (train+test): (937, 186) 
+
+Parameters tried for grid search: 
+ {'max_depth': [3, 5, 10]} 
+
+Best parameters: 
+ {'max_depth': 3} 
+
+Accuracy: 	 0.9628 (0.0000)
+F1-score: 	 0.4615 (0.0000)
+MCC: 	 0.4565 (0.0000)
+Nr of Rules: 	 8.0000 (0.0000)
+Avg. Rule Length: 	 3.0000 (0.0000)
+Avg. Nr. Rules per Sample: 	 1.0000 (0.0000)
+Avg. Rule Length per Sample: 	 3.0000 (0.0000)
+Fit Time: 	 4.3106 (0.0000)
+<---
+

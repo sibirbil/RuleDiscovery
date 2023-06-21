@@ -1,0 +1,22 @@
+--->
+IONOSPHERE
+FastSDTOpt
+Binary file used: True
+Dataset shape (train+test): (351, 130) 
+
+Parameters tried for grid search: 
+ {'max_depth': [3, 5, 10]} 
+
+Best parameters: 
+ {'max_depth': 3} 
+
+Accuracy: 	 0.8310 (0.0000)
+F1-score: 	 0.8750 (0.0000)
+MCC: 	 0.6206 (0.0000)
+Nr of Rules: 	 8.0000 (0.0000)
+Avg. Rule Length: 	 3.0000 (0.0000)
+Avg. Nr. Rules per Sample: 	 1.0000 (0.0000)
+Avg. Rule Length per Sample: 	 3.0000 (0.0000)
+Fit Time: 	 1.7997 (0.0000)
+<---
+

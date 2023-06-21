@@ -1,0 +1,22 @@
+--->
+HEARTS
+FastSDTOpt
+Binary file used: True
+Dataset shape (train+test): (303, 44) 
+
+Parameters tried for grid search: 
+ {'max_depth': [3, 5, 10]} 
+
+Best parameters: 
+ {'max_depth': 3} 
+
+Accuracy: 	 0.7705 (0.0000)
+F1-score: 	 0.8056 (0.0000)
+MCC: 	 0.5413 (0.0000)
+Nr of Rules: 	 8.0000 (0.0000)
+Avg. Rule Length: 	 3.0000 (0.0000)
+Avg. Nr. Rules per Sample: 	 1.0000 (0.0000)
+Avg. Rule Length per Sample: 	 3.0000 (0.0000)
+Fit Time: 	 0.0671 (0.0000)
+<---
+
