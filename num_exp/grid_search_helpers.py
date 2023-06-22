@@ -3,16 +3,9 @@ We need to be able to access the code of other repo, specifically:
 - ./binoct      # for BinOCT
 - ./pydl8.5-lbguess     # for FSDT
 - ./FairCG/src      # for FairCG and CG
-- ./FairCG/sample_experiment_notebooks      # for FairCG and CG
 """
 import sys
 # sys.path.insert(1,'...')
-
-# sys.path.insert(1, '/Users/tabearober/OneDrive - UvA/Interpretable ML/13_MPinXAI/Code/binoct')
-# sys.path.insert(1, '/Users/tabearober/OneDrive - UvA/Interpretable ML/13_MPinXAI/Code/pydl8.5-lbguess')
-# sys.path.insert(1, '/Users/tabearober/OneDrive - UvA/Interpretable ML/13_MPinXAI/Code/FairCG/src')
-# sys.path.insert(1, '/Users/tabearober/OneDrive - UvA/Interpretable ML/13_MPinXAI/Code/FairCG/sample experiment notebooks')
-
 
 import os
 import Datasets as DS
@@ -393,7 +386,7 @@ def cv(param_grid, X, y, pname, numSplits = 5, randomState = 0, model = 'RUG', d
 
     if model=='FairRUG':
         param_grid_out['Unfairness'] = np.mean(unfairness)
-    if model=='CG' or model=='FairCG':
+    if model=='FairCG':
         if fairness_metric=='EqOfOp':
             param_grid_out['Unfairness'] = np.mean(CG_EqOfOp)
         elif fairness_metric=='HammingEqOdd' or fairness_metric=='unfair':
