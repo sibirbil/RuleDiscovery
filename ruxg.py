@@ -119,7 +119,7 @@ class RUXG(BaseEstimator, SklearnEstimator):
             fillAhat = np.dot(self.vecY[:, covers].T, labelVector)
             self._coeffs.rows = np.hstack((self._coeffs.rows, covers))
             self._coeffs.cols = np.hstack((self._coeffs.cols, np.ones(len(covers), dtype=np.int32)*col))
-            self._coeffs.yvals = np.hstack((self._coeffs.yvals, np.ones(len(covers), dtype=np.float)*fillAhat))
+            self._coeffs.yvals = np.hstack((self._coeffs.yvals, np.ones(len(covers), dtype=np.float64) * fillAhat))
             if (self.rule_length_cost):
                 tempRule = self._getRule(fitTree, leafno)
                 cost = tempRule.length()
@@ -185,9 +185,9 @@ class RUXG(BaseEstimator, SklearnEstimator):
             raise ValueError('Solver {0} does not exist'.format(self.solver))
 
     def _solvePrimalGLPK(self, y=None, ws0=[], vs0=[], groups=None):
-        
-        Ahat = csr_matrix((self._coeffs.yvals, (self._coeffs.rows, self._coeffs.cols)), dtype=np.float)       
-        
+
+        Ahat = csr_matrix((self._coeffs.yvals, (self._coeffs.rows, self._coeffs.cols)), dtype=np.float64)
+
         n, m = max(self._coeffs.rows)+1, max(self._coeffs.cols)+1       
         # Variables
         vs = cp.Variable(n, nonneg=True)
@@ -229,9 +229,9 @@ class RUXG(BaseEstimator, SklearnEstimator):
         return ws.value, vs.value, betas
 
     def _solvePrimalGurobi(self, y=None, ws0=[], vs0=[], groups=None):
-        
-        Ahat = csr_matrix((self._coeffs.yvals, (self._coeffs.rows, self._coeffs.cols)), dtype=np.float)          
-        
+
+        Ahat = csr_matrix((self._coeffs.yvals, (self._coeffs.rows, self._coeffs.cols)), dtype=np.float64)
+
         n, m = max(self._coeffs.rows)+1, max(self._coeffs.cols)+1    
         # Primal Model
         modprimal = gp.Model('RUXG Primal')
@@ -508,7 +508,7 @@ class RUGClassifier(RUXG, ClassifierMixin):
             if (red_cost > 0): # only columns with proper reduced costs are added  
                 self._coeffs.rows = np.hstack((self._coeffs.rows, covers))
                 self._coeffs.cols = np.hstack((self._coeffs.cols, np.ones(len(covers), dtype=np.int32)*col))
-                self._coeffs.yvals = np.hstack((self._coeffs.yvals, np.ones(len(covers), dtype=np.float)*fillAhat))
+                self._coeffs.yvals = np.hstack((self._coeffs.yvals, np.ones(len(covers), dtype=np.float64) * fillAhat))
                 self._coeffs.costs = np.append(self._coeffs.costs, cost)
                 self.ruleInfo[col] = (treeno, leafno, label)
                 col += 1
@@ -538,10 +538,10 @@ class RUGClassifier(RUXG, ClassifierMixin):
         self._getMatrix(X, y, fitTree, treeno)
         ws, vs, betas = self._solvePrimal(groups=groups)
         # Column generation
-        for _ in range(self.max_RMP_calls):        
+        for _ in range(self.max_RMP_calls):
             treeno += 1
             DT = DecisionTreeClassifier(max_depth=self.max_depth,
-                                        random_state=self.rng_.integers(np.iinfo(np.int16).max))                
+                                        random_state=self.rng_.integers(np.iinfo(np.int16).max))
             fitTree = DT.fit(X, y, sample_weight=betas) # use duals as weights                  
             self.fittedDTs[treeno] = copy.deepcopy(fitTree)
             noImprovement = self._PSPDT(X, y, fitTree, treeno, betas)
