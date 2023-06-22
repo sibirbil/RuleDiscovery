@@ -19,7 +19,7 @@ from sklearn.metrics import accuracy_score, f1_score, matthews_corrcoef
 import time
 
 # for FSDT
-import DL85_helpers as FastSDTOpt_helpers
+import FSDT_helpers as FSDT_helpers
 from dl85 import DL85Classifier
 
 # for BinOCT
@@ -180,7 +180,7 @@ def cv(param_grid, X, y, pname, numSplits = 5, randomState = 0, model = 'RUG', d
 
             # save accuracy of fold
             accuracy.append(accuracy_score(y_val, y_pred))
-    elif model == 'FastSDTOpt':
+    elif model == 'FSDT':
         print(f'{model} {numSplits}-fold cross validation with max_depth={param_grid["max_depth"]}')
         # kf-fold cross-validation loop
         foldnum = 0
@@ -375,7 +375,7 @@ def cv(param_grid, X, y, pname, numSplits = 5, randomState = 0, model = 'RUG', d
             CG_HammingEqOdd.append(res.res['EqualizedOdds'])
 
     else:
-        print("WARNING: please specify model type (either 'RUG' or 'FastSDTOpt' or 'binoct' or 'CG' or 'FairRUG')")
+        print("WARNING: please specify model type (either 'RUG' or 'FSDT' or 'binoct' or 'CG' or 'FairRUG')")
         return
 
     print(f'Mean Accuracy for these parameters: {np.mean(accuracy)}')
@@ -465,11 +465,11 @@ def get_results(y_test, y_pred, clf, X_test, model):
         scores['Avg. Nr. Rules per Sample'].append(clf.get_avg_num_rules_per_sample())
         scores['Avg. Rule Length per Sample'].append(clf.get_avg_rule_length_per_sample())
         scores['Fit Time'].append(clf.get_fit_time())
-    elif model == 'FastSDTOpt':
-        scores['Nr of Rules'].append(FastSDTOpt_helpers.get_num_leaves(clf.tree_))
-        scores['Avg. Rule Length'].append(FastSDTOpt_helpers.get_avg_rule_length(clf.tree_))
+    elif model == 'FSDT':
+        scores['Nr of Rules'].append(FSDT_helpers.get_num_leaves(clf.tree_))
+        scores['Avg. Rule Length'].append(FSDT_helpers.get_avg_rule_length(clf.tree_))
         scores['Avg. Nr. Rules per Sample'].append(1)
-        scores['Avg. Rule Length per Sample'].append(FastSDTOpt_helpers.get_avg_rule_length_per_sample(clf.tree_, X_test))
+        scores['Avg. Rule Length per Sample'].append(FSDT_helpers.get_avg_rule_length_per_sample(clf.tree_, X_test))
         scores['Fit Time'].append(clf.runtime_)
 
     return scores
@@ -611,7 +611,7 @@ def run(problem, pgrid, save_path = None,
         clf_final.fit(X_train, y_train)
         y_pred = clf_final.predict(X_test)
         scores = get_results(y_test, y_pred, clf_final, X_test=X_test, model=model)
-    elif model == 'FastSDTOpt':
+    elif model == 'FSDT':
         clf_final = DL85Classifier(time_limit=300, desc=True)
         clf_final.set_params(**best_params)
         clf_final.fit(X_train, y_train)
