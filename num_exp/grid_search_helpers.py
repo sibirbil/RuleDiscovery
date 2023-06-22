@@ -8,6 +8,12 @@ We need to be able to access the code of other repo, specifically:
 import sys
 # sys.path.insert(1,'...')
 
+# sys.path.insert(1, '/Users/tabearober/OneDrive - UvA/Interpretable ML/13_MPinXAI/Code/binoct')
+# sys.path.insert(1, '/Users/tabearober/OneDrive - UvA/Interpretable ML/13_MPinXAI/Code/pydl8.5-lbguess')
+# sys.path.insert(1, '/Users/tabearober/OneDrive - UvA/Interpretable ML/13_MPinXAI/Code/FairCG/src')
+# sys.path.insert(1, '/Users/tabearober/OneDrive - UvA/Interpretable ML/13_MPinXAI/Code/FairCG/sample experiment notebooks')
+
+
 import os
 import Datasets as DS
 from ruxg import RUGClassifier
@@ -27,7 +33,8 @@ from dl85 import DL85Classifier
 import learn_class_bin as lcb
 
 # for CG and FairCG
-from test_helpers import *
+# from test_helpers import *
+from CG_helpers import *
 import fairconstraints as FC
 
 
@@ -217,6 +224,8 @@ def cv(param_grid, X, y, pname, numSplits = 5, randomState = 0, model = 'RUG', d
             # save accuracy of fold
             accuracy.append(accuracy_score(y_val, y_pred))
     elif model == 'CG':
+        CG_EqOfOp = []
+        CG_HammingEqOdd = []
         test_params = {
             'price_limit': 45,
             'train_limit': 300,
@@ -268,6 +277,8 @@ def cv(param_grid, X, y, pname, numSplits = 5, randomState = 0, model = 'RUG', d
 
             # save accuracy of fold
             accuracy.append(res.res['accuracy'])
+            CG_EqOfOp.append(res.res['EqualOpportunity'])
+            CG_HammingEqOdd.append(res.res['EqualizedOdds'])
     elif model == 'FairRUG':
         if fairness_metric is None:
             print('Please provide a fairness metric.')
@@ -309,9 +320,12 @@ def cv(param_grid, X, y, pname, numSplits = 5, randomState = 0, model = 'RUG', d
             # save accuracy of fold
             accuracy.append(accuracy_score(y_val, y_pred))
     elif model == 'FairCG':
+        CG_EqOfOp = []
+        CG_HammingEqOdd = []
         if fairness_metric is None:
             print('Please provide a fairness metric.')
             return
+        unfairness = [] # initialize list to save unfairness values of each fold
         test_params = {
             'price_limit': 45,
             'train_limit': 300,
@@ -364,6 +378,8 @@ def cv(param_grid, X, y, pname, numSplits = 5, randomState = 0, model = 'RUG', d
 
             # save accuracy of fold
             accuracy.append(res.res['accuracy'])
+            CG_EqOfOp.append(res.res['EqualOpportunity'])
+            CG_HammingEqOdd.append(res.res['EqualizedOdds'])
 
     else:
         print("WARNING: please specify model type (either 'RUG' or 'FastSDTOpt' or 'binoct' or 'CG' or 'FairRUG')")
@@ -374,8 +390,14 @@ def cv(param_grid, X, y, pname, numSplits = 5, randomState = 0, model = 'RUG', d
 
     param_grid_out = pd.DataFrame(param_grid, index=[0])
     param_grid_out['Accuracy'] = np.mean(accuracy)
+
     if model=='FairRUG':
         param_grid_out['Unfairness'] = np.mean(unfairness)
+    if model=='CG' or model=='FairCG':
+        if fairness_metric=='EqOfOp':
+            param_grid_out['Unfairness'] = np.mean(CG_EqOfOp)
+        elif fairness_metric=='HammingEqOdd' or fairness_metric=='unfair':
+            param_grid_out['Unfairness'] = np.mean(CG_HammingEqOdd)
 
     return param_grid_out
 
