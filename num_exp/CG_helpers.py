@@ -9,6 +9,106 @@ import time
 import json
 import copy
 
+"""
+Note: this file is an adapted version from test_helpers.py from 
+https://github.com/conlaw/FairCG/blob/main/sample%20experiment%20notebooks/test_helpers.py
+"""
+
+
+def run_CG(pname, X_train, X_test, y_train, y_test, params, fairness_metric='unfair', time_limit=300):
+    if fairness_metric=='unfair':
+        print('Running CG without fairness')
+    else:
+        print(f'Running FairCG with {fairness_metric}')
+
+    test_params = {
+        'price_limit': 45,
+        'train_limit': time_limit,
+        'fixed_model_params': {
+            'ruleGenerator': 'Hybrid',
+            'masterSolver': 'barrierCrossover',
+            'numRulesToReturn': 100,
+            'fairness_module':fairness_metric
+        },
+    }
+    train = pd.DataFrame(X_train)
+    train.columns = ['X_' + str(i) for i in range(len(train.columns))]
+    train['y'] = y_train
+
+    test = pd.DataFrame(X_test)
+    test.columns = ['X_' + str(i) for i in range(len(test.columns))]
+    test['y'] = y_test
+
+    train = train.astype(bool)
+    test = test.astype(bool)
+
+    # Set up reporting
+    eps = 1
+    res = TestResults(pname + ' ' + '(%d,%d)' % (eps, params['complexity']))
+    res.res['eps'] = eps
+    res.res['C'] = params['complexity']
+
+    # Set hyperparameters
+    test_params = test_params.copy()
+    test_params['fixed_model_params']['epsilon'] = eps
+    test_params['fixed_model_params']['ruleComplexity'] = params['complexity']
+
+    # print('---TRAIN FINAL MODEL---')
+    # Run CG
+    saved_rules = None
+    res, classif = runSingleTest(train.drop('y', axis=1).to_numpy(), train['y'].to_numpy(),
+                                 train['X_0'].to_numpy(),
+                                 test.drop('y', axis=1).to_numpy(), test['y'].to_numpy(),
+                                 test['X_0'].to_numpy(),
+                                 test_params,
+                                 saved_rules, res, colGen=True, rule_filter=False)
+    return res, classif
+
+
+def CG_rules_per_sample(X, rules):
+    K = []
+    for rule in rules:
+        K.append(np.all(X[:, rule.astype(np.bool_)], axis=1))
+    preds_manual = np.sum(K, axis=0) > 0
+
+    # for each sample, record the indeces of the rules used
+    dict_rules_per_sample = {}
+    for i, x in enumerate(X):
+        dict_rules_per_sample[i] = []
+
+    for rule_index, output in enumerate(K):
+        output = list(output)
+        indices = [i for i, x in enumerate(output) if x == True]
+        for s in indices:
+            dict_rules_per_sample[s].append(rule_index)
+
+    # for each rule, record the length of this rule
+    rule_lengths = {}
+    for i, rule in enumerate(rules):
+        rule_lengths[i] = sum(rule)
+
+    # combine both:
+    # for each sample, record the lengths of the rules used for that sample
+    rule_lengths_per_sample = {}
+    for i, x in enumerate(X):
+        rule_lengths_per_sample[i] = []
+    for key, value in dict_rules_per_sample.items():
+        for v in value:
+            rule_lengths_per_sample[key].append(rule_lengths[v])
+
+    nr_rules = []
+    for key, value in dict_rules_per_sample.items():
+        nr_rules.append(len(value))
+    nr_rules = [x for x in nr_rules if x != 0]
+
+    avg_rule_length_sample = []
+    for key, value in rule_lengths_per_sample.items():
+        avg_rule_length_sample.append(np.mean(value))
+
+    return np.nanmean(nr_rules), np.nanmean(avg_rule_length_sample)
+
+
+
 class TestResults(object):
     '''
     Object to contain and run the restricted model
