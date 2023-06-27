@@ -504,7 +504,7 @@ def write_results(pname, scores, path, binary, shape, best_params, param_grid, m
         print('--->', file=f)
         print(pname, file=f)
         print(model, file=f)
-        if model == 'FairRUG':
+        if model == 'FairRUG' or model=='FairCG':
             print(f'Fairness metric used: {fairness_metric}', file=f)
         print(f'Binary file used: {binary}', file=f)
         print(f'Dataset shape (train+test): {shape} \n', file=f)
