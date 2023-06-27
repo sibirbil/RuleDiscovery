@@ -12,7 +12,8 @@ problems = [DS.banknote, DS.hearts, DS.ILPD, DS.ionosphere,
             DS.wdbc, DS.adult, DS.bank_mkt, DS.magic, DS.mushroom, DS.musk,
             DS.oilspill, DS.phoneme, DS.mammography, DS.skinnonskin]
 
-# CG_pgrid = {'complexity':[3, 5, 10]}
+CG_pgrid = {'epsilon':[1]}
+
 complexities = {
     'banknote':[20,25,30],
     'hearts':[10,15,20],
@@ -35,9 +36,8 @@ complexities = {
 }
 
 for problem in problems:
-    # solve_problem(problem)
     pname = problem.__name__
-    CG_pgrid = {'complexity':complexities[pname]}
+    CG_pgrid['complexity'] = complexities[pname]
     print(CG_pgrid)
 
     gs_helpers.run(problem, CG_pgrid, model = 'CG',
