@@ -294,12 +294,36 @@ class RUXG(BaseEstimator, SklearnEstimator):
             print('Class: %.0f' % rule.label)
             print('Scaled rule weight: %.4f\n' % rule.weight)
 
-    def print_rules_for_instances(self, IDs, x_id_to_rule_ids_dict, colnames):
+    # Gets the rules used for prediction for each instance
+    def get_instance_to_rule_dicts(self, IDs, X_test, rule_w_thresh=0):
+
+        x_id_to_rule_ids_dict = {}
+        x_id_to_rule_num_dict = {}
+
+        rule_ids = self.rules.keys()
+
+        for x0_id in IDs:
+            rule_num = 0
+            x0 = X_test.loc[x0_id].to_numpy()
+            sumClassWeights = np.zeros(self.K)
+            x_id_to_rule_ids_dict[x0_id] = []
+            for rule_id in rule_ids:
+                rule = self.rules[rule_id]
+                if rule.checkRule(x0) and rule.weight > rule_w_thresh:
+                    rule_num += 1
+                    x_id_to_rule_ids_dict[x0_id].append(rule_id)
+
+            x_id_to_rule_num_dict[x0_id] = rule_num
+
+        return x_id_to_rule_ids_dict, x_id_to_rule_num_dict
+
+
+    def print_rules_for_instances(self, IDs, x_id_to_rule_ids_dict):
         for x0_id in IDs:
             print('Rules for the instance:\n')
             rule_ids = x_id_to_rule_ids_dict[x0_id]
-            self.print_rules(feature_names=colnames, indices=rule_ids)
-            print('\n \n')  
+            self.print_rules(indices=rule_ids)
+            print('\n \n')
 
     def print_weights(self, indices=[]):
 
