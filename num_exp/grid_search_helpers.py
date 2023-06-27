@@ -26,8 +26,9 @@ from dl85 import DL85Classifier
 import learn_class_bin as lcb
 
 # for CG and FairCG
-# from test_helpers import *
 from CG_helpers import *
+
+# For FairRUG
 import fairconstraints as FC
 
 
@@ -219,17 +220,9 @@ def cv(param_grid, X, y, pname, numSplits = 5, randomState = 0, model = 'RUG', d
     elif model == 'CG':
         CG_EqOfOp = []
         CG_HammingEqOdd = []
-        test_params = {
-            'price_limit': 45,
-            'train_limit': 300,
-            'fixed_model_params': {
-                'ruleGenerator': 'Hybrid',
-                'masterSolver': 'barrierCrossover',
-                'numRulesToReturn': 100,
-                'fairness_module': 'unfair'
-            },
-        }
-        print(f'{model} {numSplits}-fold cross validation with complexity={param_grid["complexity"]}')
+
+        print(f'{model} {numSplits}-fold cross validation with complexity={param_grid["complexity"]} and '
+              f'epsilon={param_grid["epsilon"]}')
         foldnum = 0
         for train_index, val_index in kf.split(X):
             foldnum += 1
@@ -237,38 +230,8 @@ def cv(param_grid, X, y, pname, numSplits = 5, randomState = 0, model = 'RUG', d
             X_train, X_val = X[train_index], X[val_index]
             y_train, y_val = y[train_index], y[val_index]
 
-            train = pd.DataFrame(X_train)
-            train.columns = ['X_' + str(i) for i in range(len(train.columns))]
-            train['y'] = y_train
+            res, classif = run_CG(pname, X_train, X_val, y_train, y_val, param_grid)
 
-            val = pd.DataFrame(X_val)
-            val.columns = ['X_' + str(i) for i in range(len(val.columns))]
-            val['y'] = y_val
-
-            train = train.astype(bool)
-            val = val.astype(bool)
-
-            # Set up reporting
-            eps = 1
-            res = TestResults(pname + ' ' + '(%d,%d)' % (eps, param_grid['complexity']) + '-' + str(foldnum))
-            res.res['eps'] = eps
-            res.res['C'] = param_grid['complexity']
-
-            # Set hyperparameters
-            test_params = test_params.copy()
-            test_params['fixed_model_params']['epsilon'] = eps
-            test_params['fixed_model_params']['ruleComplexity'] = param_grid['complexity']
-
-            # Run CG
-            saved_rules = None
-            res, classif = runSingleTest(train.drop('y', axis=1).to_numpy(), train['y'].to_numpy(),
-                                         train['X_0'].to_numpy(),
-                                         val.drop('y', axis=1).to_numpy(), val['y'].to_numpy(),
-                                         val['X_0'].to_numpy(),
-                                         test_params,
-                                         saved_rules, res, colGen=True, rule_filter=False)
-
-            # save accuracy of fold
             accuracy.append(res.res['accuracy'])
             CG_EqOfOp.append(res.res['EqualOpportunity'])
             CG_HammingEqOdd.append(res.res['EqualizedOdds'])
@@ -319,16 +282,7 @@ def cv(param_grid, X, y, pname, numSplits = 5, randomState = 0, model = 'RUG', d
             print('Please provide a fairness metric.')
             return
         unfairness = [] # initialize list to save unfairness values of each fold
-        test_params = {
-            'price_limit': 45,
-            'train_limit': 300,
-            'fixed_model_params': {
-                'ruleGenerator': 'Hybrid',
-                'masterSolver': 'barrierCrossover',
-                'numRulesToReturn': 100,
-                'fairness_module': fairness_metric
-            },
-        }
+
         print(f'{model} {numSplits}-fold cross validation with complexity={param_grid["complexity"]}, '
               f'epsilon={param_grid["epsilon"]}, and fairness_metric={fairness_metric}')
         foldnum = 0
@@ -338,36 +292,7 @@ def cv(param_grid, X, y, pname, numSplits = 5, randomState = 0, model = 'RUG', d
             X_train, X_val = X[train_index], X[val_index]
             y_train, y_val = y[train_index], y[val_index]
 
-            train = pd.DataFrame(X_train)
-            train.columns = ['X_' + str(i) for i in range(len(train.columns))]
-            train['y'] = y_train
-
-            val = pd.DataFrame(X_val)
-            val.columns = ['X_' + str(i) for i in range(len(val.columns))]
-            val['y'] = y_val
-
-            train = train.astype(bool)
-            val = val.astype(bool)
-
-            # Set up reporting
-            eps = param_grid['epsilon']
-            res = TestResults(pname + ' ' + '(%d,%d)' % (eps, param_grid['complexity']) + '-' + str(foldnum), group=True)
-            res.res['eps'] = eps
-            res.res['C'] = param_grid['complexity']
-
-            # Set hyperparameters
-            test_params = test_params.copy()
-            test_params['fixed_model_params']['epsilon'] = eps
-            test_params['fixed_model_params']['ruleComplexity'] = param_grid['complexity']
-
-            # Run CG
-            saved_rules = None
-            res, classif = runSingleTest(train.drop('y', axis=1).to_numpy(), train['y'].to_numpy(),
-                                         train['X_0'].to_numpy(),
-                                         val.drop('y', axis=1).to_numpy(), val['y'].to_numpy(),
-                                         val['X_0'].to_numpy(),
-                                         test_params,
-                                         saved_rules, res, colGen=True, rule_filter=False)
+            res, classif = run_CG(pname, X_train, X_val, y_train, y_val, param_grid, fairness_metric=fairness_metric)
 
             # save accuracy of fold
             accuracy.append(res.res['accuracy'])
@@ -520,48 +445,6 @@ def write_results(pname, scores, path, binary, shape, best_params, param_grid, m
 
     return
 
-def CG_rules_per_sample(X, rules):
-    K = []
-    for rule in rules:
-        K.append(np.all(X[:, rule.astype(np.bool_)], axis=1))
-    preds_manual = np.sum(K, axis=0) > 0
-
-    # for each sample, record the indeces of the rules used
-    dict_rules_per_sample = {}
-    for i, x in enumerate(X):
-        dict_rules_per_sample[i] = []
-
-    for rule_index, output in enumerate(K):
-        output = list(output)
-        indices = [i for i, x in enumerate(output) if x == True]
-        for s in indices:
-            dict_rules_per_sample[s].append(rule_index)
-
-    # for each rule, record the length of this rule
-    rule_lengths = {}
-    for i, rule in enumerate(rules):
-        rule_lengths[i] = sum(rule)
-
-    # combine both:
-    # for each sample, record the lengths of the rules used for that sample
-    rule_lengths_per_sample = {}
-    for i, x in enumerate(X):
-        rule_lengths_per_sample[i] = []
-    for key, value in dict_rules_per_sample.items():
-        for v in value:
-            rule_lengths_per_sample[key].append(rule_lengths[v])
-
-    nr_rules = []
-    for key, value in dict_rules_per_sample.items():
-        nr_rules.append(len(value))
-    nr_rules = [x for x in nr_rules if x != 0]
-
-    avg_rule_length_sample = []
-    for key, value in rule_lengths_per_sample.items():
-        avg_rule_length_sample.append(np.mean(value))
-
-    return np.nanmean(nr_rules), np.nanmean(avg_rule_length_sample)
-
 
 def run(problem, pgrid, save_path = None,
         randomState = 0, testSize=0.3, numSplits=5, binary = True, write=True,
@@ -645,47 +528,8 @@ def run(problem, pgrid, save_path = None,
         if not os.path.exists(path):
             os.makedirs(path)
 
-        test_params = {
-            'price_limit': 45,
-            'train_limit': 300,
-            'fixed_model_params': {
-                'ruleGenerator': 'Hybrid',
-                'masterSolver': 'barrierCrossover',
-                'numRulesToReturn': 100,
-                'fairness_module': 'unfair'
-            },
-        }
-        train = pd.DataFrame(X_train)
-        train.columns = ['X_' + str(i) for i in range(len(train.columns))]
-        train['y'] = y_train
+        res, classif = run_CG(pname, X_train, X_test, y_train, y_test, best_params)
 
-        test = pd.DataFrame(X_test)
-        test.columns = ['X_' + str(i) for i in range(len(test.columns))]
-        test['y'] = y_test
-
-        train = train.astype(bool)
-        test = test.astype(bool)
-
-        # Set up reporting
-        eps = 1
-        res = TestResults(pname + ' ' + '(%d,%d)' % (eps, best_params['complexity']))
-        res.res['eps'] = eps
-        res.res['C'] = best_params['complexity']
-
-        # Set hyperparameters
-        test_params = test_params.copy()
-        test_params['fixed_model_params']['epsilon'] = eps
-        test_params['fixed_model_params']['ruleComplexity'] = best_params['complexity']
-
-        print('---TRAIN FINAL MODEL---')
-        # Run CG
-        saved_rules = None
-        res, classif = runSingleTest(train.drop('y', axis=1).to_numpy(), train['y'].to_numpy(),
-                                     train['X_0'].to_numpy(),
-                                     test.drop('y', axis=1).to_numpy(), test['y'].to_numpy(),
-                                     test['X_0'].to_numpy(),
-                                     test_params,
-                                     saved_rules, res, colGen=True, rule_filter=False)
         final_rule_set = classif.fitRuleSet
 
         preds = classif.predict(X_test)
@@ -726,54 +570,14 @@ def run(problem, pgrid, save_path = None,
                 scores['Fairness'] = [1 - RUG_unfairness]
             else:
                 scores['Fairness ODM'] = [1 - RUG_unfairness]
-
     elif model == 'FairCG':
         # create folder to save files generated by CG
         path = './results_w_FairCG_manual/res/'
         if not os.path.exists(path):
             os.makedirs(path)
 
-        test_params = {
-            'price_limit': 45,
-            'train_limit': 300,
-            'fixed_model_params': {
-                'ruleGenerator': 'Hybrid',
-                'masterSolver': 'barrierCrossover',
-                'numRulesToReturn': 100,
-                'fairness_module': fairness_metric
-            },
-        }
-        train = pd.DataFrame(X_train)
-        train.columns = ['X_' + str(i) for i in range(len(train.columns))]
-        train['y'] = y_train
+        res, classif = run_CG(pname, X_train, X_test, y_train, y_test, best_params, fairness_metric=fairness_metric)
 
-        test = pd.DataFrame(X_test)
-        test.columns = ['X_' + str(i) for i in range(len(test.columns))]
-        test['y'] = y_test
-
-        train = train.astype(bool)
-        test = test.astype(bool)
-
-        # Set up reporting
-        eps = best_params['epsilon']
-        res = TestResults(pname + ' ' + '(%d,%d)' % (eps, best_params['complexity']), group=True)
-        res.res['eps'] = eps
-        res.res['C'] = best_params['complexity']
-
-        # Set hyperparameters
-        test_params = test_params.copy()
-        test_params['fixed_model_params']['epsilon'] = eps
-        test_params['fixed_model_params']['ruleComplexity'] = best_params['complexity']
-
-        print('---TRAIN FINAL MODEL---')
-        # Run CG
-        saved_rules = None
-        res, classif = runSingleTest(train.drop('y', axis=1).to_numpy(), train['y'].to_numpy(),
-                                     train['X_0'].to_numpy(),
-                                     test.drop('y', axis=1).to_numpy(), test['y'].to_numpy(),
-                                     test['X_0'].to_numpy(),
-                                     test_params,
-                                     saved_rules, res, colGen=True, rule_filter=False)
         final_rule_set = classif.fitRuleSet
 
         preds = classif.predict(X_test)
