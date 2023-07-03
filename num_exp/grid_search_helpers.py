@@ -23,7 +23,7 @@ import FSDT_helpers as FSDT_helpers
 from dl85 import DL85Classifier
 
 # for BinOCT
-import learn_class_bin as lcb
+# import learn_class_bin as lcb
 
 # for CG and FairCG
 from CG_helpers import *
@@ -143,7 +143,7 @@ def get_param_grid(param_grid):
 
 
 def cv(param_grid, X, y, pname, numSplits = 5, randomState = 0, model = 'RUG', data_path='./prepped_data/',
-       fairness_metric = None):
+       fairness_metric = None, RUG_rule_length_cost=False, RUG_threshold=None):
     """
     Preps the data into train/test set.
 
@@ -163,7 +163,9 @@ def cv(param_grid, X, y, pname, numSplits = 5, randomState = 0, model = 'RUG', d
     accuracy = [] # initialize list where we will save the accuracy score of each fold
 
     if model == 'RUG':
-        print(f'{model} {numSplits}-fold cross validation with max_depth={param_grid["max_depth"]}, pen_par={param_grid["pen_par"]}, max_RMP_calls={param_grid["max_RMP_calls"]}')
+        print(f'{model} {numSplits}-fold cross validation with max_depth={param_grid["max_depth"]}, '
+              f'pen_par={param_grid["pen_par"]}, max_RMP_calls={param_grid["max_RMP_calls"]}, '
+              f'and rule_length_cost={RUG_rule_length_cost}')
         # kf-fold cross-validation loop
         foldnum = 0
         for train_index, val_index in kf.split(X):
@@ -173,8 +175,10 @@ def cv(param_grid, X, y, pname, numSplits = 5, randomState = 0, model = 'RUG', d
             X_train, X_val = X[train_index], X[val_index]
             y_train, y_val = y[train_index], y[val_index]
 
-            # clf = RUGClassifier(random_state=randomState)
-            clf = RUGClassifier(random_state=randomState, threshold=0.05, rule_length_cost=True)
+            if RUG_threshold is None:
+                clf = RUGClassifier(random_state=randomState, rule_length_cost=RUG_rule_length_cost)
+            else:
+                clf = RUGClassifier(random_state=randomState, threshold=RUG_threshold, rule_length_cost=RUG_rule_length_cost)
             clf.set_params(**param_grid)
             clf.fit(X_train, y_train)
             y_pred = clf.predict(X_val)
@@ -242,7 +246,8 @@ def cv(param_grid, X, y, pname, numSplits = 5, randomState = 0, model = 'RUG', d
         print(
             f'{model} {numSplits}-fold cross validation with max_depth={param_grid["max_depth"]}, '
             f'pen_par={param_grid["pen_par"]}, max_RMP_calls={param_grid["max_RMP_calls"]}, '
-            f'fair_eps={param_grid["fair_eps"]}, fairness_metric={fairness_metric}')
+            f'fair_eps={param_grid["fair_eps"]}, fairness_metric={fairness_metric}, and '
+            f'rule_length_cost={RUG_rule_length_cost}')
 
         # Obtain classes and groups
         groups = pd.unique(X[:, 0])
@@ -264,8 +269,12 @@ def cv(param_grid, X, y, pname, numSplits = 5, randomState = 0, model = 'RUG', d
             constraintSetPairs_train, pairs = FC.create_setsPI(X_train, y_train, groups, metric=fairness_metric)
             constraintSetPairs_test, pairs = FC.create_setsPI(X_val, y_val, groups, metric=fairness_metric)
 
-            # clf = RUGClassifier(random_state=randomState)
-            clf = RUGClassifier(random_state=randomState, threshold=0.05, fair_metric=fairness_metric)
+            if RUG_threshold is None:
+                clf = RUGClassifier(random_state=randomState, fair_metric=fairness_metric,
+                                    rule_length_cost=RUG_rule_length_cost)
+            else:
+                clf = RUGClassifier(random_state=randomState, threshold=RUG_threshold, fair_metric=fairness_metric,
+                                    rule_length_cost=RUG_rule_length_cost)
             clf.set_params(**param_grid)
             clf.fit(X_train, y_train, groups=constraintSetPairs_train)
             y_pred = clf.predict(X_val)
@@ -400,7 +409,8 @@ def get_results(y_test, y_pred, clf, X_test, model):
     return scores
 
 
-def write_results(pname, scores, path, binary, shape, best_params, param_grid, model, fairness_metric=None):
+def write_results(pname, scores, path, binary, shape, best_params, param_grid, model, fairness_metric=None,
+                  RUG_rule_length_cost=None, RUG_threshold=None):
     """
     write results to a .txt file
 
@@ -429,6 +439,9 @@ def write_results(pname, scores, path, binary, shape, best_params, param_grid, m
         print('--->', file=f)
         print(pname, file=f)
         print(model, file=f)
+        if model == 'FairRUG' or model=='RUG':
+            print(f'Rule length cost: {RUG_rule_length_cost}', file=f)
+            print(f'Threshold rule weights: {RUG_threshold}', file=f)
         if model == 'FairRUG' or model=='FairCG':
             print(f'Fairness metric used: {fairness_metric}', file=f)
         print(f'Binary file used: {binary}', file=f)
@@ -449,7 +462,7 @@ def write_results(pname, scores, path, binary, shape, best_params, param_grid, m
 def run(problem, pgrid, save_path = None,
         randomState = 0, testSize=0.3, numSplits=5, binary = True, write=True,
         model = 'RUG', target = 'y', data_path='./prepped_data/',save_splits=True,
-        fairness_metric=None):
+        fairness_metric=None, RUG_rule_length_cost=False, RUG_threshold=None):
 
     if save_path is None:
         save_path = f'./results_w_{model}_manual/'
@@ -474,9 +487,9 @@ def run(problem, pgrid, save_path = None,
     for param_grid in param_grid_list:
         # for each parameter combination, run k-fold cv
         param_grid_out = cv(param_grid, X_train, y_train, pname=pname, numSplits=numSplits, randomState=randomState,
-                            model=model, data_path=data_path, fairness_metric=fairness_metric)
+                            model=model, data_path=data_path, fairness_metric=fairness_metric,
+                            RUG_rule_length_cost=RUG_rule_length_cost, RUG_threshold=RUG_threshold)
         # save accuracy result of cv in dataframe
-        # evaluation_parameters = evaluation_parameters.append(param_grid_out, ignore_index=True)
         evaluation_parameters = pd.concat([evaluation_parameters, param_grid_out], ignore_index=True)
 
     # find best parameters based on average accuracy
@@ -489,7 +502,10 @@ def run(problem, pgrid, save_path = None,
 
     # test model on hold-out test set (X_test)
     if model == 'RUG':
-        clf_final = RUGClassifier(random_state=randomState, threshold=0.05, rule_length_cost=True)
+        if RUG_threshold is None:
+            clf_final = RUGClassifier(random_state=randomState, rule_length_cost=RUG_rule_length_cost)
+        else:
+            clf_final = RUGClassifier(random_state=randomState, threshold=RUG_threshold, rule_length_cost=RUG_rule_length_cost)
         clf_final.set_params(**best_params)
         clf_final.fit(X_train, y_train)
         y_pred = clf_final.predict(X_test)
@@ -552,11 +568,15 @@ def run(problem, pgrid, save_path = None,
         constraintSetPairs_train, pairs = FC.create_setsPI(X_train, y_train, groups, metric=fairness_metric)
         constraintSetPairs_test, pairs = FC.create_setsPI(X_test, y_test, groups, metric=fairness_metric)
 
-        clf_final = RUGClassifier(random_state=randomState, threshold=0.05, fair_metric=fairness_metric)
+        if RUG_threshold is None:
+            clf_final = RUGClassifier(random_state=randomState, fair_metric=fairness_metric, rule_length_cost=RUG_rule_length_cost)
+        else:
+            clf_final = RUGClassifier(random_state=randomState, threshold=RUG_threshold,
+                                      fair_metric=fairness_metric, rule_length_cost=RUG_rule_length_cost)
         clf_final.set_params(**best_params)
         clf_final.fit(X_train, y_train, groups=constraintSetPairs_train)
         y_pred = clf_final.predict(X_test)
-        # RUG_unfairness = FC.fairnessEvaluation(y_test, y_pred, constraintSetPairs_test, classes, pairs)
+
         scores = get_results(y_test, y_pred, clf_final, X_test=X_test, model=model)
 
         if len(classes)==2 and fairness_metric=='dmc':
@@ -601,7 +621,9 @@ def run(problem, pgrid, save_path = None,
         write_results(pname, scores, path = save_path, binary = binary,
                       shape = shape, best_params=best_params,
                       param_grid = pgrid, model=model,
-                      fairness_metric=fairness_metric)
+                      fairness_metric=fairness_metric,
+                      RUG_rule_length_cost=RUG_rule_length_cost,
+                      RUG_threshold=RUG_threshold)
 
     return
 

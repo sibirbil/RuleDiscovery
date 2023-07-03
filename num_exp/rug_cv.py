@@ -6,6 +6,8 @@ write = True
 numCV: int = 5
 testSize = 0.2
 randomState = 21
+RUG_rule_length_cost = True
+RUG_threshold = 0.05
 
 # CLASSIFICATION
 # binary
@@ -15,7 +17,7 @@ problems = [DS.banknote, DS.hearts, DS.ILPD, DS.ionosphere,
             DS.oilspill, DS.phoneme, DS.mammography, DS.skinnonskin]
 
 # multiclass
-# problems = [DS.wine, DS.glass, DS.ecoli, DS.sensorless, DS.seeds]
+problems = [DS.wine, DS.glass, DS.ecoli, DS.sensorless, DS.seeds]
 
 RUG_pgrid = {'pen_par': [0.1, 1.0, 10.0],
              'max_depth': [3, 5],
@@ -27,4 +29,5 @@ RUG_pgrid = {'pen_par': [0.1, 1.0, 10.0],
 for problem in problems:
     gs_helpers.run(problem, RUG_pgrid, model = 'RUG',
                    randomState = randomState, testSize=testSize, numSplits=numCV,
-                   binary = binary, write=write)
+                   binary = binary, write=write, RUG_rule_length_cost=RUG_rule_length_cost,
+                   RUG_threshold = RUG_threshold)
