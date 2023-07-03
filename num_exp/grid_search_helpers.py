@@ -520,11 +520,20 @@ def run(problem, pgrid, save_path = None,
 
         # # For each pair of groups, create sets P (list of vectors/np.array)
         constraintSetPairs_test, pairs = FC.create_setsPI(X_test, y_test, groups, metric='dmc')
-        if len(classes)==2:
+        if len(classes) == 2:
             RUG_EqualizedOdds = FC.binary_EqOdds(y_test, y_pred, constraintSetPairs_test, classes, pairs)
             RUG_EqualOpportunity = FC.binary_EqOpp(y_test, y_pred, constraintSetPairs_test, classes, pairs)
-            scores['Equalized Odds'] = [1-RUG_EqualizedOdds]
-            scores['Equal Opportunity'] = [1-RUG_EqualOpportunity]
+            scores['Equalized Odds'] = [1 - RUG_EqualizedOdds]
+            scores['Equal Opportunity'] = [1 - RUG_EqualOpportunity]
+            constraintSetPairs_test, pairs = FC.create_setsPI(X_test, y_test, groups, metric='odm')
+            RUG_unfairness = FC.fairnessEvaluation(y_test, y_pred, constraintSetPairs_test, classes, pairs)
+            scores['Fairness ODM'] = [1 - RUG_unfairness]
+        else:
+            # dmc
+            RUG_unfairness = FC.fairnessEvaluation(y_test, y_pred, constraintSetPairs_test, classes, pairs)
+            scores['Fairness DMC'] = [1 - RUG_unfairness]
+
+            # odm
             constraintSetPairs_test, pairs = FC.create_setsPI(X_test, y_test, groups, metric='odm')
             RUG_unfairness = FC.fairnessEvaluation(y_test, y_pred, constraintSetPairs_test, classes, pairs)
             scores['Fairness ODM'] = [1 - RUG_unfairness]
