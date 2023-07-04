@@ -1,0 +1,53 @@
+--->
+ATTRITION
+FairRUG
+Rule length cost: False
+Threshold rule weights: None
+Fairness metric used: dmc
+Binary file used: False
+Dataset shape (train+test): (1470, 35) 
+
+Parameters tried for grid search: 
+ {'pen_par': [0.1, 1.0, 10.0], 'max_depth': [3, 5], 'max_RMP_calls': [5, 10, 15], 'fair_eps': [0, 0.01, 0.025, 0.05]} 
+
+Best parameters: 
+ {'pen_par': 10.0, 'max_depth': 3, 'max_RMP_calls': 5, 'fair_eps': 0.05} 
+
+Accuracy: 	 0.8673 (0.0000)
+F1-score: 	 0.9268 (0.0000)
+MCC: 	 0.3834 (0.0000)
+Nr of Rules: 	 16.0000 (0.0000)
+Avg. Rule Length: 	 2.6875 (0.0000)
+Avg. Nr. Rules per Sample: 	 4.0850 (0.0000)
+Avg. Rule Length per Sample: 	 2.5000 (0.0000)
+Fit Time: 	 0.2897 (0.0000)
+Equalized Odds: 	 0.9667 (0.0000)
+Equal Opportunity: 	 1.0000 (0.0000)
+<---
+
+--->
+ATTRITION
+FairRUG
+Rule length cost: False
+Threshold rule weights: None
+Fairness metric used: odm
+Binary file used: False
+Dataset shape (train+test): (1470, 35) 
+
+Parameters tried for grid search: 
+ {'pen_par': [0.1, 1.0, 10.0], 'max_depth': [3, 5], 'max_RMP_calls': [5, 10, 15], 'fair_eps': [0, 0.01, 0.025, 0.05]} 
+
+Best parameters: 
+ {'pen_par': 0.1, 'max_depth': 5, 'max_RMP_calls': 15, 'fair_eps': 0.025} 
+
+Accuracy: 	 0.8401 (0.0000)
+F1-score: 	 0.9080 (0.0000)
+MCC: 	 0.3129 (0.0000)
+Nr of Rules: 	 88.0000 (0.0000)
+Avg. Rule Length: 	 4.3864 (0.0000)
+Avg. Nr. Rules per Sample: 	 2.2891 (0.0000)
+Avg. Rule Length per Sample: 	 4.0000 (0.0000)
+Fit Time: 	 0.6508 (0.0000)
+Fairness ODM: 	 0.7649 (0.0000)
+<---
+
