@@ -1,0 +1,50 @@
+---> HammingEqOdd
+COMPAS
+FairCG
+Binary file used: True
+Dataset shape (train+test): (3518, 11) 
+
+Parameters tried for grid search: 
+ {'epsilon': [0.025], 'complexity': [5, 10, 15]} 
+
+Best parameters: 
+ {'epsilon': 0.025, 'complexity': 5} 
+
+Accuracy: 	 0.5483 (0.0000)
+F1: 	 0.3263 (0.0000)
+MCC: 	 0.1144 (0.0000)
+fitRuleSet - Nr of Rules: 	 1.0000 (0.0000)
+fitRuleSet - Avg. Rule Length: 	 1.0000 (0.0000)
+fitRuleSet - Avg. Nr Rules per Sample: 	 1.0000 (0.0000)
+fitRuleSet - Avg. Rule Length per Sample: 	 1.0000 (0.0000)
+Fit Time: 	 300.5269 (0.0000)
+Equalized Odds: 	 0.9142 (0.0000)
+EqualOpportunity: 	 0.9162 (0.0000)
+ODM: 	 0.9874 (0.0000)
+<---
+
+---> EqOfOp
+COMPAS
+FairCG
+Binary file used: True
+Dataset shape (train+test): (3518, 11) 
+
+Parameters tried for grid search: 
+ {'epsilon': [0.025], 'complexity': [5, 10, 15]} 
+
+Best parameters: 
+ {'epsilon': 0.025, 'complexity': 5} 
+
+Accuracy: 	 0.5142 (0.0000)
+F1: 	 0.0447 (0.0000)
+MCC: 	 0.0591 (0.0000)
+fitRuleSet - Nr of Rules: 	 1.0000 (0.0000)
+fitRuleSet - Avg. Rule Length: 	 2.0000 (0.0000)
+fitRuleSet - Avg. Nr Rules per Sample: 	 1.0000 (0.0000)
+fitRuleSet - Avg. Rule Length per Sample: 	 2.0000 (0.0000)
+Fit Time: 	 300.0421 (0.0000)
+Equalized Odds: 	 0.9209 (0.0000)
+EqualOpportunity: 	 0.9604 (0.0000)
+ODM: 	 0.9874 (0.0000)
+<---
+

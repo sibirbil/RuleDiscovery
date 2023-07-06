@@ -19,6 +19,7 @@ Avg. Nr. Rules per Sample: 	 1.0826 (0.0000)
 Avg. Rule Length per Sample: 	 5.0000 (0.0000)
 Fit Time: 	 7.2239 (0.0000)
 <---
+
 --->
 ADULT
 RUG
@@ -45,3 +46,4 @@ Equalized Odds: 	 0.8652 (0.0000)
 Equal Opportunity: 	 0.8652 (0.0000)
 Fairness ODM: 	 0.9059 (0.0000)
 <---
+
