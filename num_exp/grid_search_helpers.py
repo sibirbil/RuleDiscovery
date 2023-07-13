@@ -346,10 +346,12 @@ def find_best_params(evaluation_parameters):
     for all other methods, we base it on accuracy – the higher, the better
     """
     if 'Unfairness' in evaluation_parameters.columns:
+        print('Best parameters are chosen based on unfairness.')
         evaluation_parameters = evaluation_parameters.drop('Accuracy', axis=1)
         idx = evaluation_parameters['Unfairness'].idxmin()
         best_params = evaluation_parameters.drop('Unfairness', axis=1).loc[idx]
     else:
+        print('Best parameters are chosen based on accuracy.')
         idx = evaluation_parameters['Accuracy'].idxmax()
         best_params = evaluation_parameters.drop('Accuracy', axis=1).loc[idx]
 
@@ -585,6 +587,9 @@ def run(problem, pgrid, save_path = None,
         scores['fitRuleSet - Avg. Rule Length'] = np.mean(np.sum(final_rule_set, axis=1))
         scores['fitRuleSet - Avg. Nr Rules per Sample'], scores['fitRuleSet - Avg. Rule Length per Sample'] = CG_rules_per_sample(X_test, final_rule_set)
         scores['Fit Time'] = res.res['times']
+        scores['Equalized Odds'] = [1-value for value in res.res['EqualizedOdds']]
+        scores['EqualOpportunity'] = [1-value for value in res.res['EqualOpportunity']]
+        scores['ODM'] = [1-value for value in res.res['ODM']]
     elif model == 'FairRUG':
         # Obtain classes and groups
         groups = pd.unique(X_train[:, 0])
