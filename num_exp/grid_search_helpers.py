@@ -8,7 +8,7 @@ import sys
 # sys.path.insert(1,'...')
 
 import os
-import Datasets as DS
+# import Datasets_binary as DS
 from ruxg import RUGClassifier
 import pandas as pd
 import numpy as np
@@ -33,7 +33,7 @@ import fairconstraints as FC
 
 
 def prep_data(problem, binary=True, randomState = 0, testSize = 0.3, target = 'y', numSplits=5,
-              save_splits=True, data_path='./prepped_data/'):
+              save_splits=True, data_path='./prepped_data/', datasets_path = './datasets/'):
     """
     Preps the data into train/test set.
 
@@ -54,7 +54,7 @@ def prep_data(problem, binary=True, randomState = 0, testSize = 0.3, target = 'y
     pname = problem.__name__.upper()
 
     if binary:
-        df = problem('./datasets/')
+        df = problem(datasets_path)
         df_c = pd.DataFrame()
         for column in df.columns:
             if len(df[column].unique()) > 2:
@@ -74,7 +74,18 @@ def prep_data(problem, binary=True, randomState = 0, testSize = 0.3, target = 'y
             print('Binary dataset too big')
             return
     else:
-        df = problem('./datasets/')
+        if 'FSDT' in datasets_path:
+            print(f'Data will be taken from {datasets_path}.')
+            import Datasets_binary as DS
+            df = problem(datasets_path)
+        elif 'CG' in datasets_path:
+            print(f'Data will be taken from {datasets_path}.')
+            import Datasets_binary as DS
+            df = problem(datasets_path)
+        else:
+            print(f'Data will be taken from "./datasets/".')
+            import Datasets as DS
+            df = problem(datasets_path)
         X = np.array(df.drop(target, axis=1))
         y = np.array(df[target])
 
@@ -446,7 +457,7 @@ def write_results(pname, scores, path, binary, shape, best_params, param_grid, m
             print(f'Threshold rule weights: {RUG_threshold}', file=f)
         if model == 'FairRUG' or model=='FairCG':
             print(f'Fairness metric used: {fairness_metric}', file=f)
-        print(f'Binary file used: {binary}', file=f)
+        print(f'Our Binarization used: {binary}', file=f)
         print(f'Dataset shape (train+test): {shape} \n', file=f)
         print(f'Parameters tried for grid search: \n {param_grid} \n', file=f)
         print(f'Best parameters: \n {best_params} \n' ,file=f)
@@ -464,10 +475,11 @@ def write_results(pname, scores, path, binary, shape, best_params, param_grid, m
 def run(problem, pgrid, save_path = None,
         randomState = 0, testSize=0.3, numSplits=5, binary = True, write=True,
         model = 'RUG', target = 'y', data_path='./prepped_data/',save_splits=True,
-        fairness_metric=None, RUG_rule_length_cost=False, RUG_threshold=None):
+        fairness_metric=None, RUG_rule_length_cost=False, RUG_threshold=None,
+        datasets_path = './datasets/'):
 
     if save_path is None:
-        save_path = f'./results_w_{model}_manual/'
+        save_path = f'./results_w_{model}/'
 
 
     pname = problem.__name__.upper()
@@ -475,7 +487,7 @@ def run(problem, pgrid, save_path = None,
     # get data using prep_data()
     X_train, X_test, y_train, y_test = prep_data(problem, binary=binary,
                                                  randomState=randomState, testSize=testSize, target=target,
-                                                 data_path=data_path, save_splits=save_splits)
+                                                 data_path=data_path, save_splits=save_splits, datasets_path=datasets_path)
 
     # get all combinations of hyperparameters using get_param_grid
     param_grid_list = get_param_grid(pgrid)

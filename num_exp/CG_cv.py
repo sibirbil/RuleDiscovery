@@ -1,7 +1,8 @@
 import grid_search_helpers as gs_helpers
-import Datasets as DS
+import Datasets_binary as DS
 
-binary = True
+# binary = True
+binary = False
 write = True
 numCV: int = 5
 testSize = 0.2
@@ -9,8 +10,14 @@ randomState = 21
 
 problems = [DS.banknote, DS.hearts, DS.ILPD, DS.ionosphere,
             DS.liver, DS.diabetes_pima, DS.tictactoe, DS.transfusion,
-            DS.wdbc, DS.adult, DS.bank_mkt, DS.magic, DS.mushroom, DS.musk,
+            DS.adult, DS.bank_mkt, DS.magic, DS.mushroom, DS.musk,
             DS.oilspill, DS.phoneme, DS.mammography, DS.skinnonskin]
+
+# problems = [DS.banknote, DS.hearts, DS.ILPD, DS.ionosphere,DS.musk,
+#             DS.oilspill, DS.phoneme, DS.mammography, DS.liver, DS.diabetes_pima,
+#             DS.tictactoe, DS.transfusion,DS.adult]
+
+# problems = [DS.adult]
 
 CG_pgrid = {'epsilon':[1]}
 
@@ -42,4 +49,4 @@ for problem in problems:
 
     gs_helpers.run(problem, CG_pgrid, model = 'CG',
                 randomState = randomState, testSize=testSize, numSplits=numCV, binary = binary, write=write,
-                   data_path='./prepped_data_CG/')
+                   data_path='./prepped_data_CG/', datasets_path = './CG_binarized/', save_path = './results_w_CG_binary/')
