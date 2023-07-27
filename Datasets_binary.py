@@ -7,7 +7,7 @@ def loan(wd):
     """
     https://www.kaggle.com/datasets/devanshi23/loan-data-2007-2014
     """
-    df = pd.read_csv(wd+'loan_data_2007_2014_prepped.csv')
+    df = pd.read_csv(wd+'loan_binary.csv')
     return df
 
 def banknote(wd): 
@@ -381,7 +381,7 @@ def adult(wd): # Two classes
     df.drop('y', axis=1, inplace=True)
     df.columns = ['X_' + str(i) for i in range(len(df.columns))]
     df['y'] = y
- 
+    df.dropna(inplace=True)
     return df
 
 def compas_whitevsnonwhite(wd):
@@ -420,11 +420,16 @@ def compas(wd): #0=negative class=has recommitted, 1=positive class=has not reco
     6172 x 7 after prepping
     https://github.com/propublica/compas-analysis/
     """
-    df = pd.read_csv(wd+'compas_blackvswhite.csv', header = 0, sep = '\;', engine = 'python')
-
-    df.columns = ['X_' + str(i) for i in range(len(df.columns)-1)] + ['y']
-    print('Size data set:' , len(df['y']))
-
+    # df = pd.read_csv(wd+'compas_blackvswhite.csv', header = 0, sep = '\;', engine = 'python')
+    #
+    # df.columns = ['X_' + str(i) for i in range(len(df.columns)-1)] + ['y']
+    # print('Size data set:' , len(df['y']))
+    df = pd.read_csv(wd + 'compas_binary.csv')
+    y = df['y']
+    df.drop('y', axis=1, inplace=True)
+    df.columns = ['X_' + str(i) for i in range(len(df.columns))]
+    df['y'] = y
+    df.dropna(inplace=True)
     return df
 
 def compas_fairlearnpackage(wd):
@@ -460,17 +465,21 @@ def default(wd):
     2 classes
     https://archive.ics.uci.edu/ml/datasets/default+of+credit+card+clients
     """
-    df = pd.read_csv(wd+'default.csv', sep = '\;', engine = 'python')
-    df.columns = ['X_' + str(i) for i in range(len(df.columns)-1)] + ['y']
-    sex = df['X_1']
-
-    df = df.drop(columns=['X_1'])
-    df.insert(loc=0, column='X_1', value=sex) #2=femaile, 1=male
-    print('Size data set:' , len(df['y'])) #1=to default payment, bad label, 0=positive label
+    # df = pd.read_csv(wd+'default.csv', sep = '\;', engine = 'python')
+    # df.columns = ['X_' + str(i) for i in range(len(df.columns)-1)] + ['y']
+    # sex = df['X_1']
+    #
+    # df = df.drop(columns=['X_1'])
+    # df.insert(loc=0, column='X_1', value=sex) #2=femaile, 1=male
+    # print('Size data set:' , len(df['y'])) #1=to default payment, bad label, 0=positive label
     # print(df['X_1'])
     # quit()
-    
-
+    df = pd.read_csv(wd + 'default_binary.csv')
+    y = df['y']
+    df.drop('y', axis=1, inplace=True)
+    df.columns = ['X_' + str(i) for i in range(len(df.columns))]
+    df['y'] = y
+    df.dropna(inplace=True)
     return df
 
 def law(wd): # Five classes
@@ -479,9 +488,15 @@ def law(wd): # Five classes
     5 classes
     http://www.seaphe.org/databases.php
     """
-    df = pd.read_csv(wd+'law.csv', header = None, sep = '\;', engine = 'python')
-    df.columns = ['X_' + str(i) for i in range(len(df.columns)-1)] + ['y']
-    print('Size data set:' , len(df['y']))
+    # df = pd.read_csv(wd+'law.csv', header = None, sep = '\;', engine = 'python')
+    # df.columns = ['X_' + str(i) for i in range(len(df.columns)-1)] + ['y']
+    # print('Size data set:' , len(df['y']))
+    df = pd.read_csv(wd + 'law_binary.csv')
+    y = df['y']
+    df.drop('y', axis=1, inplace=True)
+    df.columns = ['X_' + str(i) for i in range(len(df.columns))]
+    df['y'] = y
+    df.dropna(inplace=True)
     return df
 
 def attrition(wd): 
