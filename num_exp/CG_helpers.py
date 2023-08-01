@@ -215,29 +215,69 @@ class TestResults(object):
     def computeFairnessMetrics(self, classifier, test_data, groups):
         X_tr = classifier.ruleMod.X
         Y_tr = classifier.ruleMod.Y
-        
+
+        from sklearn.metrics import confusion_matrix
+
+        ## get true negatives (TN), false positives (FP), false negatives (FN) and true positives (TP) for both group1 and group2
+        # GROUP 1
+        # Adia
         pos_preds = classifier.predict(test_data[0][groups]) #predictions group 1 on testdata
+        # Tabea
+        preds_group1 = classifier.predict(test_data[0][groups])  # predictions group 1 on testdata
+        cm_group1 = confusion_matrix(test_data[1][groups], preds_group1)
+        TN_group1, FP_group1, FN_group1, TP_group1 = cm_group1.ravel()
+
+        # GROUP 2
+        # Adia
         neg_preds = classifier.predict(test_data[0][~groups]) #predictions group 2 on testdata
+        # Tabea
+        preds_group2 = classifier.predict(test_data[0][~groups]) #predictions group 2 on testdata
+        cm_group2 = confusion_matrix(test_data[1][~groups], preds_group2)
+        TN_group2, FP_group2, FN_group2, TP_group2 = cm_group2.ravel()
 
+        # TRUE POSITIVE RATE
+        # Adia
         TPR_Rate_1 = sum(pos_preds[test_data[1][groups]])/sum(test_data[1][groups])
-        TPR_Rate_2 = sum(neg_preds[test_data[1][~groups]])/sum(test_data[1][~groups])
+        TPR_Rate_2 = sum(neg_preds[test_data[1][~groups]]) / sum(test_data[1][~groups])
+        # Tabea
+        TPR_group1 = TP_group1/(TP_group1+FN_group1)
+        TPR_group2 = TP_group2 / (TP_group2 + FN_group2)
 
+        # TRUE NEGATIVE RATE
+        # Adia
         TNR_Rate_1 = sum((pos_preds == 0) & (test_data[1][groups] == 0)) / sum(test_data[1][groups] == 0)
-        TNR_Rate_2 = sum((neg_preds == 0) & (test_data[1][~groups] == 0)) / sum(test_data[1][~groups] == 0) 
-               
+        TNR_Rate_2 = sum((neg_preds == 0) & (test_data[1][~groups] == 0)) / sum(test_data[1][~groups] == 0)
+        # Tabea
+        TNR_group1 = TN_group1 / (TN_group1 + FP_group1)
+        TNR_group2 = TN_group2 / (TN_group2 + FP_group2)
+
+        # FALSE POSITIVE RATE
+        # Tabea
+        FPR_group1 = FP_group1 / (FP_group1 + TN_group1)
+        FPR_group2 = FP_group2 / (FP_group2 + TN_group2)
+
+        # FALSE NEGATIVE RATE
+        FNR_group1 = FN_group1 / (TP_group1 + FN_group1)
+        FNR_group2 = FN_group2 / (TP_group2 + FN_group2)
+
+        # add scores to results dictionary
         self.res['TPR1'].append(TPR_Rate_1) #TPR group 1?
         self.res['TPR2'].append(TPR_Rate_2) #TPR group 2
         self.res['TNR1'].append(TNR_Rate_1) #TNR group 1?
         self.res['TNR2'].append(TNR_Rate_2) #TNR group 2
 
         self.res['TPR-GAP'].append(abs(TPR_Rate_1-TPR_Rate_2))
-        self.res['TNR-GAP'].append(abs(TNR_Rate_1-TNR_Rate_2))   
+        self.res['TNR-GAP'].append(abs(TNR_Rate_1-TNR_Rate_2))
+        self.res['FPR-GAP'] = abs(FPR_group1 - FPR_group2)
+        self.res['FNR-GAP'] = abs(FNR_group1 - FNR_group2)
 
         #-------- EqualOpportunity
         self.res['EqualOpportunity'] = self.res['TPR-GAP']
 
         #-------- EqualizedOdds
-        self.res['EqualizedOdds'] = sum(self.res['TPR-GAP'],self.res['TNR-GAP']) #Adia: FNR=1-TPR and FPR=1-TNR. So no adjustment to FNR and FPR needed for the gap
+        self.res['EqualizedOdds'] = sum(self.res['TPR-GAP'],self.res['TNR-GAP'])
+        self.res['EqualizedOdds_v2'] = self.res['FPR-GAP'] + self.res['FNR-GAP']
+        #Adia: FNR=1-TPR and FPR=1-TNR. So no adjustment to FNR and FPR needed for the gap
 
         #-------- ODM
         odm_count1 = 0
