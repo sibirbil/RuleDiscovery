@@ -336,7 +336,17 @@ def compas_fairlearn(wd):
     
     return df
 
-def compas(wd): #0=negative class=has recommitted, 1=positive class=has not recommitted, group 0=white, group1 = black
+def compas(wd):
+    df = pd.read_csv(wd + 'compas.csv', sep=';')
+    y = df['Two_yr_Recidivism']
+    df.drop('Two_yr_Recidivism', axis=1, inplace=True)
+    df.columns = ['X_' + str(i) for i in range(len(df.columns))]
+    df['y'] = y
+    df.dropna(inplace=True)
+    return df
+
+'''
+def compas_(wd): #0=negative class=has recommitted, 1=positive class=has not recommitted, group 0=white, group1 = black
     """
     2 classes
     6172 x 7 after prepping
@@ -348,6 +358,7 @@ def compas(wd): #0=negative class=has recommitted, 1=positive class=has not reco
     print('Size data set:' , len(df['y']))
 
     return df
+'''
 
 def compas_fairlearnpackage(wd):
     """
@@ -377,6 +388,16 @@ def nursery(wd):
     return df
 
 def default(wd):
+    df = pd.read_csv(wd + 'default.csv')
+    y = df['y']
+    df.drop('y', axis=1, inplace=True)
+    df.columns = ['X_' + str(i) for i in range(len(df.columns))]
+    df['y'] = y
+    df.dropna(inplace=True)
+    return df
+
+'''
+def default(wd):
     """
     30000 x 24
     2 classes
@@ -394,7 +415,7 @@ def default(wd):
     
 
     return df
-
+'''
 def law(wd): # Five classes
     """
     22387 x 5
