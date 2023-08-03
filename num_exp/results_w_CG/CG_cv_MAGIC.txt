@@ -1,0 +1,25 @@
+--->
+MAGIC
+CG
+Our Binarization used: False
+Dataset shape (train+test): (19020, 181) 
+
+Parameters tried for grid search: 
+ {'epsilon': [1], 'complexity': [90, 95, 100]} 
+
+Best parameters: 
+ {'epsilon': 1, 'complexity': 95} 
+
+Accuracy: 	 0.7894 (0.0000)
+F1: 	 0.8427 (0.0000)
+MCC: 	 0.5276 (0.0000)
+fitRuleSet - Nr of Rules: 	 3.0000 (0.0000)
+fitRuleSet - Avg. Rule Length: 	 4.6667 (0.0000)
+fitRuleSet - Avg. Nr Rules per Sample: 	 1.2383 (0.0000)
+fitRuleSet - Avg. Rule Length per Sample: 	 4.7402 (0.0000)
+Fit Time: 	 303.8213 (0.0000)
+Equalized Odds: 	 0.3241 (0.0000)
+EqualOpportunity: 	 0.8767 (0.0000)
+ODM: 	 0.9465 (0.0000)
+<---
+

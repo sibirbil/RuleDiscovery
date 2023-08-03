@@ -1,0 +1,25 @@
+--->
+BANK_MKT
+CG
+Our Binarization used: False
+Dataset shape (train+test): (11162, 175) 
+
+Parameters tried for grid search: 
+ {'epsilon': [1], 'complexity': [5, 10, 15]} 
+
+Best parameters: 
+ {'epsilon': 1, 'complexity': 15} 
+
+Accuracy: 	 0.7774 (0.0000)
+F1: 	 0.7798 (0.0000)
+MCC: 	 0.5610 (0.0000)
+fitRuleSet - Nr of Rules: 	 3.0000 (0.0000)
+fitRuleSet - Avg. Rule Length: 	 3.3333 (0.0000)
+fitRuleSet - Avg. Nr Rules per Sample: 	 1.2560 (0.0000)
+fitRuleSet - Avg. Rule Length per Sample: 	 2.5156 (0.0000)
+Fit Time: 	 300.4858 (0.0000)
+Equalized Odds: 	 0.9495 (0.0000)
+EqualOpportunity: 	 0.9583 (0.0000)
+ODM: 	 0.9751 (0.0000)
+<---
+

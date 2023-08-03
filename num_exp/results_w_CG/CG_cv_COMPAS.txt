@@ -1,0 +1,25 @@
+--->
+COMPAS
+CG
+Our Binarization used: False
+Dataset shape (train+test): (3518, 27) 
+
+Parameters tried for grid search: 
+ {'epsilon': [1], 'complexity': [5, 10, 15]} 
+
+Best parameters: 
+ {'epsilon': 1, 'complexity': 15} 
+
+Accuracy: 	 0.6548 (0.0000)
+F1: 	 0.6335 (0.0000)
+MCC: 	 0.3099 (0.0000)
+fitRuleSet - Nr of Rules: 	 3.0000 (0.0000)
+fitRuleSet - Avg. Rule Length: 	 3.6667 (0.0000)
+fitRuleSet - Avg. Nr Rules per Sample: 	 1.0000 (0.0000)
+fitRuleSet - Avg. Rule Length per Sample: 	 3.4747 (0.0000)
+Fit Time: 	 300.1365 (0.0000)
+Equalized Odds: 	 0.3727 (0.0000)
+EqualOpportunity: 	 0.7344 (0.0000)
+ODM: 	 0.9874 (0.0000)
+<---
+

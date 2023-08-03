@@ -1,0 +1,25 @@
+--->
+DEFAULT
+CG
+Our Binarization used: False
+Dataset shape (train+test): (30000, 317) 
+
+Parameters tried for grid search: 
+ {'epsilon': [1], 'complexity': [5, 10, 15]} 
+
+Best parameters: 
+ {'epsilon': 1, 'complexity': 10} 
+
+Accuracy: 	 0.8267 (0.0000)
+F1: 	 0.4600 (0.0000)
+MCC: 	 0.4160 (0.0000)
+fitRuleSet - Nr of Rules: 	 1.0000 (0.0000)
+fitRuleSet - Avg. Rule Length: 	 4.0000 (0.0000)
+fitRuleSet - Avg. Nr Rules per Sample: 	 1.0000 (0.0000)
+fitRuleSet - Avg. Rule Length per Sample: 	 4.0000 (0.0000)
+Fit Time: 	 300.9689 (0.0000)
+Equalized Odds: 	 0.9818 (0.0000)
+EqualOpportunity: 	 0.9879 (0.0000)
+ODM: 	 0.9883 (0.0000)
+<---
+
