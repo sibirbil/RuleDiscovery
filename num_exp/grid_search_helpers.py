@@ -33,7 +33,7 @@ import fairconstraints as FC
 
 
 def prep_data(problem, binary=True, randomState = 0, testSize = 0.3, target = 'y', numSplits=5,
-              save_splits=True, data_path='./prepped_data/', datasets_path = './datasets/'):
+              save_splits=True, data_path='./prepped_data/', datasets_path = '.datasets/datasets_continuous/'):
     """
     Preps the data into train/test set.
 
@@ -54,6 +54,7 @@ def prep_data(problem, binary=True, randomState = 0, testSize = 0.3, target = 'y
     pname = problem.__name__.upper()
 
     if binary:
+        print(f'Data will be taken from {datasets_path} and will be binarized by binning and then one-hot encoding.')
         df = problem(datasets_path)
         df_c = pd.DataFrame()
         for column in df.columns:
@@ -74,18 +75,19 @@ def prep_data(problem, binary=True, randomState = 0, testSize = 0.3, target = 'y
             print('Binary dataset too big')
             return
     else:
-        if 'FSDT' in datasets_path:
+        if 'FSDT' in datasets_path: # we need to import Datasets_binary rather than Datasets
             print(f'Data will be taken from {datasets_path}.')
             import Datasets_binary as DS
             df = problem(datasets_path)
-        elif 'CG' in datasets_path:
+        elif 'CG' in datasets_path: # we need to import Datasets_binary rather than Datasets
             print(f'Data will be taken from {datasets_path}.')
             import Datasets_binary as DS
             df = problem(datasets_path)
         else:
-            print(f'Data will be taken from "./datasets/".')
+            print(f'Data will be taken from {datasets_path}.')
             import Datasets as DS
             df = problem(datasets_path)
+
         X = np.array(df.drop(target, axis=1))
         y = np.array(df[target])
 
@@ -476,7 +478,7 @@ def run(problem, pgrid, save_path = None,
         randomState = 0, testSize=0.3, numSplits=5, binary = True, write=True,
         model = 'RUG', target = 'y', data_path='./prepped_data/',save_splits=True,
         fairness_metric=None, RUG_rule_length_cost=False, RUG_threshold=None,
-        datasets_path = './datasets/'):
+        datasets_path = './datasets/', RUG_record_fairness=False):
 
     if save_path is None:
         save_path = f'./results_w_{model}/'
@@ -526,31 +528,32 @@ def run(problem, pgrid, save_path = None,
         scores = get_results(y_test, y_pred, clf_final, X_test=X_test, model=model)
 
         ## calculate fairness scores for RUG
-        # # Obtain classes and groups
-        groups = pd.unique(X_train[:, 0])
-        groups.sort()
-        classes = pd.unique(y_train)
-        classes.sort()
+        if RUG_record_fairness:
+            # # Obtain classes and groups
+            groups = pd.unique(X_train[:, 0])
+            groups.sort()
+            classes = pd.unique(y_train)
+            classes.sort()
 
-        # # For each pair of groups, create sets P (list of vectors/np.array)
-        constraintSetPairs_test, pairs = FC.create_setsPI(X_test, y_test, groups, metric='dmc')
-        if len(classes) == 2:
-            RUG_EqualizedOdds = FC.binary_EqOdds(y_test, y_pred, constraintSetPairs_test, classes, pairs)
-            RUG_EqualOpportunity = FC.binary_EqOpp(y_test, y_pred, constraintSetPairs_test, classes, pairs)
-            scores['Equalized Odds'] = [1 - RUG_EqualizedOdds]
-            scores['Equal Opportunity'] = [1 - RUG_EqualOpportunity]
-            constraintSetPairs_test, pairs = FC.create_setsPI(X_test, y_test, groups, metric='odm')
-            RUG_unfairness = FC.fairnessEvaluation(y_test, y_pred, constraintSetPairs_test, classes, pairs)
-            scores['Fairness ODM'] = [1 - RUG_unfairness]
-        else:
-            # dmc
-            RUG_unfairness = FC.fairnessEvaluation(y_test, y_pred, constraintSetPairs_test, classes, pairs)
-            scores['Fairness DMC'] = [1 - RUG_unfairness]
+            # # For each pair of groups, create sets P (list of vectors/np.array)
+            constraintSetPairs_test, pairs = FC.create_setsPI(X_test, y_test, groups, metric='dmc')
+            if len(classes) == 2:
+                RUG_EqualizedOdds = FC.binary_EqOdds(y_test, y_pred, constraintSetPairs_test, classes, pairs)
+                RUG_EqualOpportunity = FC.binary_EqOpp(y_test, y_pred, constraintSetPairs_test, classes, pairs)
+                scores['Equalized Odds'] = [1 - RUG_EqualizedOdds]
+                scores['Equal Opportunity'] = [1 - RUG_EqualOpportunity]
+                constraintSetPairs_test, pairs = FC.create_setsPI(X_test, y_test, groups, metric='odm')
+                RUG_unfairness = FC.fairnessEvaluation(y_test, y_pred, constraintSetPairs_test, classes, pairs)
+                scores['Fairness ODM'] = [1 - RUG_unfairness]
+            else:
+                # dmc
+                RUG_unfairness = FC.fairnessEvaluation(y_test, y_pred, constraintSetPairs_test, classes, pairs)
+                scores['Fairness DMC'] = [1 - RUG_unfairness]
 
-            # odm
-            constraintSetPairs_test, pairs = FC.create_setsPI(X_test, y_test, groups, metric='odm')
-            RUG_unfairness = FC.fairnessEvaluation(y_test, y_pred, constraintSetPairs_test, classes, pairs)
-            scores['Fairness ODM'] = [1 - RUG_unfairness]
+                # odm
+                constraintSetPairs_test, pairs = FC.create_setsPI(X_test, y_test, groups, metric='odm')
+                RUG_unfairness = FC.fairnessEvaluation(y_test, y_pred, constraintSetPairs_test, classes, pairs)
+                scores['Fairness ODM'] = [1 - RUG_unfairness]
 
     elif model == 'FSDT':
         clf_final = DL85Classifier(time_limit=300, desc=True)
@@ -581,11 +584,6 @@ def run(problem, pgrid, save_path = None,
         scores['Avg. Rule Length per Sample'] = [np.mean(path_lengths)]
         scores['Fit Time'] = [predictTime]
     elif model == 'CG':
-        # create folder to save files generated by CG
-        path = './results_w_CG_manual/res/'
-        if not os.path.exists(path):
-            os.makedirs(path)
-
         res, classif = run_CG(pname, X_train, X_test, y_train, y_test, best_params)
 
         final_rule_set = classif.fitRuleSet
@@ -636,11 +634,6 @@ def run(problem, pgrid, save_path = None,
             else:
                 scores['Fairness ODM'] = [1 - RUG_unfairness]
     elif model == 'FairCG':
-        # create folder to save files generated by CG
-        path = './results_w_FairCG_manual/res/'
-        if not os.path.exists(path):
-            os.makedirs(path)
-
         res, classif = run_CG(pname, X_train, X_test, y_train, y_test, best_params, fairness_metric=fairness_metric)
 
         final_rule_set = classif.fitRuleSet
