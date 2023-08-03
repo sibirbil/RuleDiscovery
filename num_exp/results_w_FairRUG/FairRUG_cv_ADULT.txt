@@ -1,0 +1,27 @@
+--->
+ADULT
+FairRUG
+Rule length cost: False
+Threshold rule weights: None
+Fairness metric used: dmc
+Our Binarization used: False
+Dataset shape (train+test): (32561, 107) 
+
+Parameters tried for grid search: 
+ {'pen_par': [0.1, 1.0, 10.0], 'max_depth': [3, 5], 'max_RMP_calls': [5, 10, 15], 'fair_eps': [0.01, 0.025, 0.05, 0.1]} 
+
+Best parameters: 
+ {'pen_par': 1.0, 'max_depth': 5, 'max_RMP_calls': 15, 'fair_eps': 0.05} 
+
+Accuracy: 	 0.8544 (0.0000)
+F1-score: 	 0.6417 (0.0000)
+MCC: 	 0.5696 (0.0000)
+Nr of Rules: 	 89.0000 (0.0000)
+Avg. Rule Length: 	 4.0562 (0.0000)
+Avg. Nr. Rules per Sample: 	 1.8081 (0.0000)
+Avg. Rule Length per Sample: 	 5.0000 (0.0000)
+Fit Time: 	 13.3486 (0.0000)
+Equalized Odds: 	 0.9599 (0.0000)
+Equal Opportunity: 	 0.9599 (0.0000)
+<---
+
