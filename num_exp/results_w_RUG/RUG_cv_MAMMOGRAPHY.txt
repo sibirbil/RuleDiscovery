@@ -1,0 +1,24 @@
+--->
+MAMMOGRAPHY
+RUG
+Rule length cost: True
+Threshold rule weights: 0.05
+Our Binarization used: False
+Dataset shape (train+test): (11183, 7) 
+
+Parameters tried for grid search: 
+ {'pen_par': [0.1, 1.0, 10.0], 'max_depth': [3, 5], 'max_RMP_calls': [5, 10, 15]} 
+
+Best parameters: 
+ {'pen_par': 1.0, 'max_depth': 3, 'max_RMP_calls': 15} 
+
+Accuracy: 	 0.9884 (0.0000)
+F1-score: 	 0.7045 (0.0000)
+MCC: 	 0.7111 (0.0000)
+Nr of Rules: 	 39.0000 (0.0000)
+Avg. Rule Length: 	 2.4103 (0.0000)
+Avg. Nr. Rules per Sample: 	 4.0921 (0.0000)
+Avg. Rule Length per Sample: 	 2.5000 (0.0000)
+Fit Time: 	 2.6533 (0.0000)
+<---
+

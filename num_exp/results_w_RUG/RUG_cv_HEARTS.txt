@@ -1,0 +1,24 @@
+--->
+HEARTS
+RUG
+Rule length cost: True
+Threshold rule weights: 0.05
+Our Binarization used: False
+Dataset shape (train+test): (303, 14) 
+
+Parameters tried for grid search: 
+ {'pen_par': [0.1, 1.0, 10.0], 'max_depth': [3, 5], 'max_RMP_calls': [5, 10, 15]} 
+
+Best parameters: 
+ {'pen_par': 10.0, 'max_depth': 3, 'max_RMP_calls': 5} 
+
+Accuracy: 	 0.7705 (0.0000)
+F1-score: 	 0.8056 (0.0000)
+MCC: 	 0.5413 (0.0000)
+Nr of Rules: 	 7.0000 (0.0000)
+Avg. Rule Length: 	 3.0000 (0.0000)
+Avg. Nr. Rules per Sample: 	 1.7213 (0.0000)
+Avg. Rule Length per Sample: 	 3.0000 (0.0000)
+Fit Time: 	 0.0388 (0.0000)
+<---
+

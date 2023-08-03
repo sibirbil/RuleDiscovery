@@ -1,0 +1,24 @@
+--->
+LIVER
+RUG
+Rule length cost: True
+Threshold rule weights: 0.05
+Our Binarization used: False
+Dataset shape (train+test): (345, 7) 
+
+Parameters tried for grid search: 
+ {'pen_par': [0.1, 1.0, 10.0], 'max_depth': [3, 5], 'max_RMP_calls': [5, 10, 15]} 
+
+Best parameters: 
+ {'pen_par': 10.0, 'max_depth': 5, 'max_RMP_calls': 10} 
+
+Accuracy: 	 0.5072 (0.0000)
+F1-score: 	 0.5641 (0.0000)
+MCC: 	 -0.0017 (0.0000)
+Nr of Rules: 	 33.0000 (0.0000)
+Avg. Rule Length: 	 3.2727 (0.0000)
+Avg. Nr. Rules per Sample: 	 3.8696 (0.0000)
+Avg. Rule Length per Sample: 	 3.6000 (0.0000)
+Fit Time: 	 0.1103 (0.0000)
+<---
+
