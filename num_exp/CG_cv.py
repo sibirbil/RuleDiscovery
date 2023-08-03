@@ -1,8 +1,6 @@
 import grid_search_helpers as gs_helpers
 import Datasets_binary as DS
 
-# binary = True
-binary = False
 write = True
 numCV: int = 5
 testSize = 0.2
@@ -13,11 +11,9 @@ problems = [DS.banknote, DS.hearts, DS.ILPD, DS.ionosphere,
             DS.adult, DS.bank_mkt, DS.magic, DS.mushroom, DS.musk,
             DS.oilspill, DS.phoneme, DS.mammography, DS.skinnonskin]
 
-# problems = [DS.banknote, DS.hearts, DS.ILPD, DS.ionosphere,DS.musk,
-#             DS.oilspill, DS.phoneme, DS.mammography, DS.liver, DS.diabetes_pima,
-#             DS.tictactoe, DS.transfusion,DS.adult]
 
-# problems = [DS.adult]
+# for fairness
+# problems = [DS.adult, DS.compas, DS.default]
 
 CG_pgrid = {'epsilon':[1]}
 
@@ -39,7 +35,9 @@ complexities = {
     'oilspill':[10,20,30],
     'phoneme':[10,20,30],
     'mammography':[10,20,30],
-    'skinnonskin':[10,20,30]
+    'skinnonskin':[10,20,30],
+    'compas':[5,10,15],
+    'default':[5,10,15]
 }
 
 for problem in problems:
@@ -48,5 +46,5 @@ for problem in problems:
     print(CG_pgrid)
 
     gs_helpers.run(problem, CG_pgrid, model = 'CG',
-                randomState = randomState, testSize=testSize, numSplits=numCV, binary = binary, write=write,
-                   data_path='./prepped_data_CG/', datasets_path = './CG_binarized/', save_path = './results_w_CG_binary/')
+                randomState = randomState, testSize=testSize, numSplits=numCV, binary = False, write=write,
+                   data_path='./prepped_data_CG/', datasets_path = './datasets/CG_binarized/', save_path = './results_w_CG/')
