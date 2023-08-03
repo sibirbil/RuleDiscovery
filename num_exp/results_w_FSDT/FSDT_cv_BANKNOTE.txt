@@ -1,0 +1,22 @@
+--->
+BANKNOTE
+FSDT
+Our Binarization used: False
+Dataset shape (train+test): (1372, 73) 
+
+Parameters tried for grid search: 
+ {'max_depth': [3, 5, 10]} 
+
+Best parameters: 
+ {'max_depth': 5} 
+
+Accuracy: 	 0.9927 (0.0000)
+F1-score: 	 0.9917 (0.0000)
+MCC: 	 0.9854 (0.0000)
+Nr of Rules: 	 25.0000 (0.0000)
+Avg. Rule Length: 	 4.7600 (0.0000)
+Avg. Nr. Rules per Sample: 	 1.0000 (0.0000)
+Avg. Rule Length per Sample: 	 4.4073 (0.0000)
+Fit Time: 	 3.2375 (0.0000)
+<---
+

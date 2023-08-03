@@ -1,0 +1,22 @@
+--->
+SKINNONSKIN
+FSDT
+Our Binarization used: False
+Dataset shape (train+test): (245057, 55) 
+
+Parameters tried for grid search: 
+ {'max_depth': [3, 5, 10]} 
+
+Best parameters: 
+ {'max_depth': 5} 
+
+Accuracy: 	 0.9864 (0.0000)
+F1-score: 	 0.9914 (0.0000)
+MCC: 	 0.9584 (0.0000)
+Nr of Rules: 	 25.0000 (0.0000)
+Avg. Rule Length: 	 4.7600 (0.0000)
+Avg. Nr. Rules per Sample: 	 1.0000 (0.0000)
+Avg. Rule Length per Sample: 	 4.4980 (0.0000)
+Fit Time: 	 300.0519 (0.0000)
+<---
+

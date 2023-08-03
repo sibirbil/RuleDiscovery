@@ -1,0 +1,22 @@
+--->
+TRANSFUSION
+FSDT
+Our Binarization used: False
+Dataset shape (train+test): (748, 65) 
+
+Parameters tried for grid search: 
+ {'max_depth': [3, 5, 10]} 
+
+Best parameters: 
+ {'max_depth': 3} 
+
+Accuracy: 	 0.7733 (0.0000)
+F1-score: 	 0.4848 (0.0000)
+MCC: 	 0.3434 (0.0000)
+Nr of Rules: 	 8.0000 (0.0000)
+Avg. Rule Length: 	 3.0000 (0.0000)
+Avg. Nr. Rules per Sample: 	 1.0000 (0.0000)
+Avg. Rule Length per Sample: 	 3.0000 (0.0000)
+Fit Time: 	 0.6201 (0.0000)
+<---
+

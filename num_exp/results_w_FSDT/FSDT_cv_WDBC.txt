@@ -1,0 +1,22 @@
+--->
+WDBC
+FSDT
+Our Binarization used: False
+Dataset shape (train+test): (569, 541) 
+
+Parameters tried for grid search: 
+ {'max_depth': [3, 5, 10]} 
+
+Best parameters: 
+ {'max_depth': 10} 
+
+Accuracy: 	 0.8947 (0.0000)
+F1-score: 	 0.8696 (0.0000)
+MCC: 	 0.7908 (0.0000)
+Nr of Rules: 	 62.0000 (0.0000)
+Avg. Rule Length: 	 7.2258 (0.0000)
+Avg. Nr. Rules per Sample: 	 1.0000 (0.0000)
+Avg. Rule Length per Sample: 	 6.6754 (0.0000)
+Fit Time: 	 3.4734 (0.0000)
+<---
+
