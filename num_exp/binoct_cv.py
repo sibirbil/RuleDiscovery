@@ -17,5 +17,6 @@ binoct_pgrid = {'max_depth':[3,5,10]}
 for problem in problems:
     gs_helpers.run(problem, binoct_pgrid, model = 'binoct',
                    randomState = randomState, testSize=testSize, numSplits=numCV,
-                   binary = binary, write=write, data_path='./prepped_data_binoct/')
+                   binary = binary, write=write, data_path='./prepped_data_binoct/',
+                   datasets_path='./datasets/datasets/', save_path='./results_w_binoct/')
 
