@@ -6,13 +6,12 @@ write = True
 numCV: int = 5
 testSize = 0.2
 randomState = 21
-fairness_metric = 'odm'
+# fairness_metric = 'odm'
 fairness_metric = 'dmc'
 
 # CLASSIFICATION
 
-problems = [DS.compas, DS.default, DS.law, DS.attrition, DS.recruitment, DS.student, DS.nursery]
-
+problems = [DS.adult, DS.compas, DS.default, DS.attrition, DS.nursery, DS.student, DS.law]
 
 RUG_pgrid = {'pen_par': [0.1, 1.0, 10.0],
              'max_depth': [3, 5],
@@ -25,4 +24,5 @@ RUG_pgrid = {'pen_par': [0.1, 1.0, 10.0],
 for problem in problems:
     gs_helpers.run(problem, RUG_pgrid, model = 'FairRUG',
                    randomState = randomState, testSize=testSize, numSplits=numCV,
-                   binary = binary, write=write, fairness_metric = fairness_metric)
+                   binary = binary, write=write, fairness_metric = fairness_metric,
+                   datasets_path='./datasets/datasets/', save_path='./results_w_FairRUG/')
