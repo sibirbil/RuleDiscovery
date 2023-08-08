@@ -8,19 +8,19 @@ Our Binarization used: False
 Dataset shape (train+test): (22386, 6) 
 
 Parameters tried for grid search: 
- {'pen_par': [0.1, 1.0, 10.0], 'max_depth': [3, 5], 'max_RMP_calls': [5, 10, 15], 'fair_eps': [0.01, 0.025, 0.05, 0.1]} 
+ {'pen_par': [0.1, 1.0, 10.0], 'max_depth': [3, 5], 'max_RMP_calls': [5, 10, 15], 'fair_eps': [0, 0.01, 0.025, 0.05]} 
 
 Best parameters: 
- {'pen_par': 0.1, 'max_depth': 5, 'max_RMP_calls': 5, 'fair_eps': 0.01} 
+ {'pen_par': 0.1, 'max_depth': 5, 'max_RMP_calls': 5, 'fair_eps': 0.0} 
 
 Accuracy: 	 1.0000 (0.0000)
 F1-score: 	 nan (nan)
 MCC: 	 1.0000 (0.0000)
-Nr of Rules: 	 8.0000 (0.0000)
-Avg. Rule Length: 	 1.2500 (0.0000)
-Avg. Nr. Rules per Sample: 	 1.0011 (0.0000)
+Nr of Rules: 	 7.0000 (0.0000)
+Avg. Rule Length: 	 1.0000 (0.0000)
+Avg. Nr. Rules per Sample: 	 1.0000 (0.0000)
 Avg. Rule Length per Sample: 	 1.0000 (0.0000)
-Fit Time: 	 1.5012 (0.0000)
+Fit Time: 	 1.0626 (0.0000)
 F1-score-macro: 	 1.0000 (0.0000)
 F1-score-weighted: 	 1.0000 (0.0000)
 Fairness: 	 1.0000 (0.0000)
@@ -36,10 +36,10 @@ Our Binarization used: False
 Dataset shape (train+test): (22386, 6) 
 
 Parameters tried for grid search: 
- {'pen_par': [0.1, 1.0, 10.0], 'max_depth': [3, 5], 'max_RMP_calls': [5, 10, 15], 'fair_eps': [0.01, 0.025, 0.05, 0.1]} 
+ {'pen_par': [0.1, 1.0, 10.0], 'max_depth': [3, 5], 'max_RMP_calls': [5, 10, 15], 'fair_eps': [0, 0.01, 0.025, 0.05]} 
 
 Best parameters: 
- {'pen_par': 0.1, 'max_depth': 5, 'max_RMP_calls': 5, 'fair_eps': 0.01} 
+ {'pen_par': 0.1, 'max_depth': 5, 'max_RMP_calls': 5, 'fair_eps': 0.0} 
 
 Accuracy: 	 1.0000 (0.0000)
 F1-score: 	 nan (nan)
@@ -48,7 +48,7 @@ Nr of Rules: 	 7.0000 (0.0000)
 Avg. Rule Length: 	 1.0000 (0.0000)
 Avg. Nr. Rules per Sample: 	 1.0000 (0.0000)
 Avg. Rule Length per Sample: 	 1.0000 (0.0000)
-Fit Time: 	 1.2790 (0.0000)
+Fit Time: 	 1.3162 (0.0000)
 F1-score-macro: 	 1.0000 (0.0000)
 F1-score-weighted: 	 1.0000 (0.0000)
 Fairness: 	 1.0000 (0.0000)
