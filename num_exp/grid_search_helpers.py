@@ -292,7 +292,18 @@ def cv(param_grid, X, y, pname, numSplits = 5, randomState = 0, model = 'RUG', d
             clf.fit(X_train, y_train, groups=constraintSetPairs_train)
             y_pred = clf.predict(X_val)
 
-            RUG_unfairness = FC.fairnessEvaluation(y_val, y_pred, constraintSetPairs_test, classes, pairs)
+            # RUG_unfairness = FC.fairnessEvaluation(y_val, y_pred, constraintSetPairs_test, classes, pairs)
+            if len(classes) > 2:
+                RUG_unfairness = FC.fairnessEvaluation(y_val, y_pred, constraintSetPairs_test, classes, pairs)
+            elif len(classes)==2 :
+                if fairness_metric=='odm':
+                    #RUG_unfairness = FC.binary_odm(y_val, y_pred, constraintSetPairs_test, classes, pairs)
+                    RUG_unfairness = FC.fairnessEvaluation(y_val, y_pred, constraintSetPairs_test, classes, pairs)
+                if fairness_metric=='EqOpp':
+                    RUG_unfairness = FC.binary_EqOpp(y_val, y_pred, constraintSetPairs_test, classes, pairs)
+                if fairness_metric=='dmc':
+                    RUG_unfairness = FC.binary_EqOdds(y_val, y_pred, constraintSetPairs_test, classes, pairs)
+
             unfairness.append(RUG_unfairness) # save unfairness values of fold
 
             # save accuracy of fold
@@ -536,17 +547,25 @@ def run(problem, pgrid, save_path = None,
             classes.sort()
 
             # # For each pair of groups, create sets P (list of vectors/np.array)
-            constraintSetPairs_test, pairs = FC.create_setsPI(X_test, y_test, groups, metric='dmc')
             if len(classes) == 2:
+                print('-------DMC------')
+                constraintSetPairs_test, pairs = FC.create_setsPI(X_test, y_test, groups, metric='dmc')
                 RUG_EqualizedOdds = FC.binary_EqOdds(y_test, y_pred, constraintSetPairs_test, classes, pairs)
+                scores['Fairness DMC'] = [1 - RUG_EqualizedOdds]
+
+                print('-------EqOpp------')
+                constraintSetPairs_test, pairs = FC.create_setsPI(X_test, y_test, groups, metric='EqOpp')
                 RUG_EqualOpportunity = FC.binary_EqOpp(y_test, y_pred, constraintSetPairs_test, classes, pairs)
-                scores['Equalized Odds'] = [1 - RUG_EqualizedOdds]
-                scores['Equal Opportunity'] = [1 - RUG_EqualOpportunity]
+                scores['Fairness Equal Opportunity'] = [1 - RUG_EqualOpportunity]
+
+                print('-------ODM------')
                 constraintSetPairs_test, pairs = FC.create_setsPI(X_test, y_test, groups, metric='odm')
                 RUG_unfairness = FC.fairnessEvaluation(y_test, y_pred, constraintSetPairs_test, classes, pairs)
                 scores['Fairness ODM'] = [1 - RUG_unfairness]
+
             else:
                 # dmc
+                constraintSetPairs_test, pairs = FC.create_setsPI(X_test, y_test, groups, metric='dmc')
                 RUG_unfairness = FC.fairnessEvaluation(y_test, y_pred, constraintSetPairs_test, classes, pairs)
                 scores['Fairness DMC'] = [1 - RUG_unfairness]
 
@@ -597,9 +616,9 @@ def run(problem, pgrid, save_path = None,
         scores['fitRuleSet - Avg. Rule Length'] = np.mean(np.sum(final_rule_set, axis=1))
         scores['fitRuleSet - Avg. Nr Rules per Sample'], scores['fitRuleSet - Avg. Rule Length per Sample'] = CG_rules_per_sample(X_test, final_rule_set)
         scores['Fit Time'] = res.res['times']
-        scores['Equalized Odds'] = [1-value for value in res.res['EqualizedOdds']]
-        scores['EqualOpportunity'] = [1-value for value in res.res['EqualOpportunity']]
-        scores['ODM'] = [1-value for value in res.res['ODM']]
+        scores['Fairness DMC'] = [1-value for value in res.res['EqualizedOdds']]
+        scores['Fairness EqualOpportunity'] = [1-value for value in res.res['EqualOpportunity']]
+        scores['Fairness ODM'] = [1-value for value in res.res['ODM']]
     elif model == 'FairRUG':
         # Obtain classes and groups
         groups = pd.unique(X_train[:, 0])
@@ -622,16 +641,25 @@ def run(problem, pgrid, save_path = None,
 
         scores = get_results(y_test, y_pred, clf_final, X_test=X_test, model=model)
 
-        if len(classes)==2 and fairness_metric=='dmc':
-            RUG_EqualizedOdds = FC.binary_EqOdds(y_test, y_pred, constraintSetPairs_test, classes, pairs)
-            RUG_EqualOpportunity = FC.binary_EqOpp(y_test, y_pred, constraintSetPairs_test, classes, pairs)
-            scores['Equalized Odds'] = [1-RUG_EqualizedOdds]
-            scores['Equal Opportunity'] = [1-RUG_EqualOpportunity]
-        else:  # this includes odm, should be run separately from dmc
+        if len(classes) > 2:
             RUG_unfairness = FC.fairnessEvaluation(y_test, y_pred, constraintSetPairs_test, classes, pairs)
-            if len(classes) > 2:
-                scores['Fairness'] = [1 - RUG_unfairness]
+            if fairness_metric == 'dmc':
+                scores['Fairness DMC'] = [1 - RUG_unfairness]
             else:
+                scores['Fairness ODM'] = [1 - RUG_unfairness]
+
+        elif len(classes) == 2:
+            if fairness_metric == 'dmc':
+                RUG_EqualizedOdds = FC.binary_EqOdds(y_test, y_pred, constraintSetPairs_test, classes, pairs)
+                scores['Fairness DMC'] = [1 - RUG_EqualizedOdds]
+
+            if fairness_metric == 'EqOpp':
+                RUG_EqualOpportunity = FC.binary_EqOpp(y_test, y_pred, constraintSetPairs_test, classes, pairs)
+                scores['Fairness Equal Opportunity'] = [1 - RUG_EqualOpportunity]
+
+            if fairness_metric == 'odm':
+                # RUG_unfairness = FC.binary_odm(y_test, y_pred, constraintSetPairs_train, classes, pairs)
+                RUG_unfairness = FC.fairnessEvaluation(y_test, y_pred, constraintSetPairs_test, classes, pairs)
                 scores['Fairness ODM'] = [1 - RUG_unfairness]
     elif model == 'FairCG':
         res, classif = run_CG(pname, X_train, X_test, y_train, y_test, best_params, fairness_metric=fairness_metric)
@@ -647,9 +675,9 @@ def run(problem, pgrid, save_path = None,
         scores['fitRuleSet - Avg. Rule Length'] = np.mean(np.sum(final_rule_set, axis=1))
         scores['fitRuleSet - Avg. Nr Rules per Sample'], scores['fitRuleSet - Avg. Rule Length per Sample'] = CG_rules_per_sample(X_test, final_rule_set)
         scores['Fit Time'] = res.res['times']
-        scores['Equalized Odds'] = [1-value for value in res.res['EqualizedOdds']]
-        scores['EqualOpportunity'] = [1-value for value in res.res['EqualOpportunity']]
-        scores['ODM'] = [1-value for value in res.res['ODM']]
+        scores['Fairness DMC'] = [1-value for value in res.res['EqualizedOdds']]
+        scores['Fairness EqualOpportunity'] = [1-value for value in res.res['EqualOpportunity']]
+        scores['Fairness ODM'] = [1-value for value in res.res['ODM']]
 
     else:
         return
