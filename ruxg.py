@@ -257,7 +257,7 @@ class RUXG(BaseEstimator, SklearnEstimator):
         if self.fair_metric==None:
             modprimal.optimize()
 
-        if self.fair_metric == 'dmc' or self.fair_metric == 'odm':
+        elif self.fair_metric == 'dmc' or self.fair_metric == 'odm' or self.fair_metric=='EqOpp':
             for pair in groups: # groups is a pair of groups
                 setgroup1 = pair[0]
                 setgroup2 = pair[1]
