@@ -18,15 +18,15 @@ from sklearn.model_selection import KFold
 from sklearn.metrics import accuracy_score, f1_score, matthews_corrcoef
 import time
 
-# for FSDT
-import FSDT_helpers as FSDT_helpers
-from dl85 import DL85Classifier
+# # for FSDT
+# import FSDT_helpers as FSDT_helpers
+# from dl85 import DL85Classifier
 
-# for BinOCT
-# import learn_class_bin as lcb
+# # for BinOCT
+# # import learn_class_bin as lcb
 
-# for CG and FairCG
-from CG_helpers import *
+# # for CG and FairCG
+# from CG_helpers import *
 
 # For FairRUG
 import fairconstraints as FC
@@ -295,7 +295,7 @@ def cv(param_grid, X, y, pname, numSplits = 5, randomState = 0, model = 'RUG', d
             # RUG_unfairness = FC.fairnessEvaluation(y_val, y_pred, constraintSetPairs_test, classes, pairs)
             if len(classes) > 2:
                 RUG_unfairness = FC.fairnessEvaluation(y_val, y_pred, constraintSetPairs_test, classes, pairs)
-            elif len(classes)==2 :
+            elif len(classes)==2 and len(groups)==2:
                 if fairness_metric=='odm':
                     #RUG_unfairness = FC.binary_odm(y_val, y_pred, constraintSetPairs_test, classes, pairs)
                     RUG_unfairness = FC.fairnessEvaluation(y_val, y_pred, constraintSetPairs_test, classes, pairs)
@@ -303,6 +303,9 @@ def cv(param_grid, X, y, pname, numSplits = 5, randomState = 0, model = 'RUG', d
                     RUG_unfairness = FC.binary_EqOpp(y_val, y_pred, constraintSetPairs_test, classes, pairs)
                 if fairness_metric=='dmc':
                     RUG_unfairness = FC.binary_EqOdds(y_val, y_pred, constraintSetPairs_test, classes, pairs)
+            elif len(classes)==2 and len(groups)>2:
+                "here for attrition"
+                RUG_unfairness = FC.fairnessEvaluation(y_val, y_pred, constraintSetPairs_test, classes, pairs)
 
             unfairness.append(RUG_unfairness) # save unfairness values of fold
 
@@ -648,7 +651,7 @@ def run(problem, pgrid, save_path = None,
             else:
                 scores['Fairness ODM'] = [1 - RUG_unfairness]
 
-        elif len(classes) == 2:
+        elif len(classes) == 2 and len(groups)==2:
             if fairness_metric == 'dmc':
                 RUG_EqualizedOdds = FC.binary_EqOdds(y_test, y_pred, constraintSetPairs_test, classes, pairs)
                 scores['Fairness DMC'] = [1 - RUG_EqualizedOdds]
@@ -661,6 +664,16 @@ def run(problem, pgrid, save_path = None,
                 # RUG_unfairness = FC.binary_odm(y_test, y_pred, constraintSetPairs_train, classes, pairs)
                 RUG_unfairness = FC.fairnessEvaluation(y_test, y_pred, constraintSetPairs_test, classes, pairs)
                 scores['Fairness ODM'] = [1 - RUG_unfairness]
+        elif len(classes)==2 and len(groups)>2:
+                "here for attrition3"
+                RUG_unfairness = FC.fairnessEvaluation(y_test, y_pred, constraintSetPairs_test, classes, pairs)
+                if fairness_metric == 'dmc':
+                    scores['Fairness DMC'] = [1 - RUG_unfairness]
+                else:
+                    scores['Fairness ODM'] = [1 - RUG_unfairness]
+
+            
+
     elif model == 'FairCG':
         res, classif = run_CG(pname, X_train, X_test, y_train, y_test, best_params, fairness_metric=fairness_metric)
 
