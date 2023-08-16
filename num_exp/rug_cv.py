@@ -8,11 +8,12 @@ testSize = 0.2
 randomState = 21
 RUG_rule_length_cost = True
 RUG_threshold = 0.05
+RUG_record_fairness = False
 
 # for fairness results
-# RUG_rule_length_cost = False
-# RUG_threshold = None
-# RUG_record_fairness = True
+RUG_rule_length_cost = False
+RUG_threshold = None
+RUG_record_fairness = True
 
 # CLASSIFICATION
 # binary
@@ -22,10 +23,10 @@ problems = [DS.banknote, DS.hearts, DS.ILPD, DS.ionosphere,
             DS.oilspill, DS.phoneme, DS.mammography, DS.skinnonskin]
 
 # multiclass
-# problems = [DS.wine, DS.glass, DS.ecoli, DS.sensorless, DS.seeds]
+problems = [DS.wine, DS.glass, DS.ecoli, DS.sensorless, DS.seeds]
 
 # fairness results
-# problems = [DS.adult, DS.compas, DS.default, DS.attrition, DS.nursery, DS.student, DS.law]
+problems = [DS.adult, DS.compas, DS.default, DS.attrition, DS.nursery, DS.student, DS.law]
 
 RUG_pgrid = {'pen_par': [0.1, 1.0, 10.0],
              'max_depth': [3, 5],
@@ -38,4 +39,5 @@ for problem in problems:
     gs_helpers.run(problem, RUG_pgrid, model = 'RUG',
                    randomState = randomState, testSize=testSize, numSplits=numCV,
                    binary = binary, write=write, RUG_rule_length_cost=RUG_rule_length_cost,
-                   RUG_threshold=RUG_threshold, datasets_path='./datasets/datasets/', save_path='./results_w_RUG/')
+                   RUG_threshold=RUG_threshold, datasets_path='./datasets/datasets/', save_path='./results_w_RUG/',
+                   RUG_record_fairness=RUG_record_fairness)

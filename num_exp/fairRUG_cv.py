@@ -6,17 +6,24 @@ write = True
 numCV: int = 5
 testSize = 0.2
 randomState = 21
-# fairness_metric = 'odm'
-fairness_metric = 'dmc'
+fairness_metric = 'odm'
+# fairness_metric = 'dmc'
+fairness_metric = 'EqOpp'
 
 # CLASSIFICATION
 
-problems = [DS.adult, DS.compas, DS.default, DS.attrition, DS.nursery, DS.student, DS.law]
+# dmc and EqOpp (for binary classification)
+# problems = [DS.adult, DS.compas, DS.default, DS.attrition, DS.nursery, DS.student, DS.law]
+
+# dmc and odm (for multiclass and multiple groups)
+problems = [DS.attrition, DS.nursery, DS.student, DS.law]
+
 
 RUG_pgrid = {'pen_par': [0.1, 1.0, 10.0],
              'max_depth': [3, 5],
              'max_RMP_calls': [5, 10, 15],
-             'fair_eps':[0.01, 0.025, 0.05, 0.1]}
+             'fair_eps':[0, 0.01, 0.025, 0.05]}
+             # 'fair_eps':[0.01, 0.025, 0.05, 0.1]}
 
 ####################
 # Solve all problems
