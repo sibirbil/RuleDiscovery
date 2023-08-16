@@ -219,7 +219,8 @@ def fairnessEvaluation(y_actual, y_pred, setsP, classes, pairs): #Only for multi
 
     return unfairness
 
-def binary_EqOdds(y_actual, y_pred, setsP, classes, pairs):
+
+
     if len(classes)==2: # For Binary Class
         # Assume that the second class of binary class is the advantageous one, so 0 = negative, 1 = positive
 
@@ -244,6 +245,124 @@ def binary_EqOdds(y_actual, y_pred, setsP, classes, pairs):
             for idx in range(0, len(set_group1)): 
                 if set_group1[idx] == 1: #if in group 1
                     if y_actual[idx] != y_pred[idx]: #if misclassified
+                        u1[idx] = 1  #set counting vector idx to 1
+                
+            # MISCLASSIFCAITON COUTNING VECTOR FOR GROUP G'=2
+            for idx in range(0, len(set_group2)): 
+                if set_group2[idx] == 1:
+                    if y_actual[idx] != y_pred[idx]:
+                        u2[idx] = 1
+
+            alpha = abs((1/setsize_group1)*sum(u1)-(1/setsize_group2)*sum(u2))
+        unfairness = alpha
+    return unfairness
+
+def binary_EqOdds(y_actual, y_pred, setsP, classes, pairs):
+    if len(classes)==2: # For Binary Class
+        # Assume that the second class of binary class is the advantageous one, so 0 = negative, 1 = positive
+
+        #GROUP 1 AND 2 WITH LABEL 0 
+        pair_label0 = setsP[0] 
+        label0_group0 = pair_label0[0]
+        label0_group1 = pair_label0[1]
+        label0_group0_size = int(sum(label0_group0)) #number of samples with label0 belonging to group 1
+        label0_group1_size = int(sum(label0_group1)) #number of samples with label0 belonging to group 2
+
+        #GROUP 1 AND 2 WITH LABEL 1 
+        pair_label1 = setsP[1] 
+        label1_group0 = pair_label1[0]
+        label1_group1 = pair_label1[1]
+        label1_group0_size = int(sum(label1_group0)) #number of samples with label0 belonging to group 1
+        label1_group1_size = int(sum(label1_group1)) #number of samples with label0 belonging to group 2
+ 
+        if label0_group0_size==0 or label0_group1_size==0 or label1_group0_size==0 or label1_group1_size==0:                
+            alpha=0
+        else:
+            
+            #CREATING TERM FOR GAP BETWEEN FALSE POSITIVES BETWEEN GROUPS
+            FP_u0 = np.zeros(len(y_actual)) #Vector with index 1 if group 0 with label 0 is falsely, positively classified as 1
+            FP_u1 = np.zeros(len(y_actual)) #Vector with index 1 if group 1 with label 0 is falsely, positively classified as 1
+
+            #MISCLASSIFICATION COUNTING VECTOR FOR LABEL=0, GROUP=0,1
+            for idx in range(0, len(label0_group0)):
+                if label0_group0[idx]==1: #if in group 0, with label 0
+                    if y_actual[idx] != y_pred[idx]: #if misclassified
+                        FP_u0[idx] = 1
+            
+            for idx in range(0, len(label0_group1)):
+                if label0_group1[idx]==1: #if in group 1, with label 0
+                    if y_actual[idx] != y_pred[idx]: #if misclassified
+                        FP_u1[idx] = 1
+            FPR0 = (1/label0_group0_size)*sum(FP_u0)
+            FPR1 = (1/label0_group1_size)*sum(FP_u1)
+            FPR_gap = abs(FPR0-FPR1)
+
+
+            #CREATING TERM FOR GAP BETWEEN FALSE POSITIVES BETWEEN GROUPS
+            FN_u0 = np.zeros(len(y_actual)) #Vector with index 1 if group 0 with label 1 is falsely, negatively classified as 0
+            FN_u1 = np.zeros(len(y_actual)) #Vector with index 1 if group 1 with label 1 is falsely, negatively classified as 0
+
+            #MISCLASSIFICATION COUNTING VECTOR FOR LABEL=1, GROUP=0,1
+            for idx in range(0, len(label1_group0)):
+                if label1_group0[idx]==1: #if in group 0, with label 1
+                    if y_actual[idx] != y_pred[idx]: #if misclassified
+                        FN_u0[idx] = 1
+            
+            for idx in range(0, len(label1_group1)):
+                if label1_group1[idx]==1: #if in group 1, with label 1
+                    if y_actual[idx] != y_pred[idx]: #if misclassified
+                        FN_u1[idx] = 1
+            FNR0 = (1/label1_group0_size)*sum(FN_u0)
+            FNR1 = (1/label1_group1_size)*sum(FN_u1)
+            FNR_gap = abs(FNR0-FNR1)
+
+            alpha = FPR_gap + FNR_gap
+
+        unfairness=alpha
+
+           # # MISSCLASSIFCATION COUNTING VECTOR FOR GROUP G=1
+            # for idx in range(0, len(set1_group1)): 
+            #     if set0_group1[idx]==1 or set1_group1[idx]==1: #if in group 1 
+            #         if y_actual[idx] != y_pred[idx]: #if misclassified
+            #             u1[idx] = 1  #set counting vector idx to 1
+                
+            # # MISCLASSIFCAITON COUTNING VECTOR FOR GROUP G'=2
+            # for idx in range(0, len(set0_group2)): 
+            #     if set0_group2[idx] == 1 or set1_group2[idx]==1: #if in group 2 
+            #         if y_actual[idx] != y_pred[idx]:
+            #             u2[idx] = 1
+
+            
+            # alpha = abs((1/setsize_group1)*sum(u1)-(1/setsize_group2)*sum(u2))
+        #     alpha = abs((1/(setsize_group1)*sum(u1)-(1/setsize_group2)*sum(u2)))
+            
+        # unfairness = alpha
+    return unfairness
+
+def binary_EqOdds_original(y_actual, y_pred, setsP, classes, pairs):
+    if len(classes)==2: # For Binary Class
+        # Assume that the second class of binary class is the advantageous one, so 0 = negative, 1 = positive
+        pair = setsP[1] 
+        set_group1 = pair[0]
+        set_group2 = pair[1]
+        setsize_group1 = int(sum(set_group1))
+        setsize_group2 = int(sum(set_group2))
+
+        # print(setsize_group1)
+        # print(setsize_group2)
+ 
+        if setsize_group1==0:                
+            alpha=0
+        elif setsize_group2==0:
+            alpha=0
+        else:
+            u1 = np.zeros(len(y_actual)) #misclassification counting vectors for group 1 and 2 below.
+            u2 = np.zeros(len(y_actual))
+
+            # MISSCLASSIFCATION COUNTING VECTOR FOR GROUP G=1
+            for idx in range(0, len(set_group1)): 
+                if set_group1[idx] == 1: #if in group 1 with label 1
+                    if y_actual[idx] != y_pred[idx]: #if misclassified, so classified as falsely negative
                         u1[idx] = 1  #set counting vector idx to 1
                 
             # MISCLASSIFCAITON COUTNING VECTOR FOR GROUP G'=2
@@ -295,7 +414,6 @@ def binary_EqOpp(y_actual, y_pred, setsP, classes, pairs):
         unfairness = alpha
     return unfairness
 
-
 def binary_odm(y_actual, y_pred, setsP, classes, pairs):
     #Assume that the second class of binary class is the advantageous one, so 0 = negative, 1 = positive
     pair = setsP[1] 
@@ -334,7 +452,6 @@ def binary_odm(y_actual, y_pred, setsP, classes, pairs):
         alpha = abs((1/setsize_group1)*sum(u1)-(1/setsize_group2)*sum(u2))
     unfairness = alpha   
     return unfairness 
-
 
 def unfairnessLevel_multiclass(unfairness_array, classes, group_pairs):
     sizeK = len(classes)
