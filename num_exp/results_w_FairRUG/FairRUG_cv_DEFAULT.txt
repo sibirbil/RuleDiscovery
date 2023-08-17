@@ -20,8 +20,33 @@ Nr of Rules: 	 10.0000 (0.0000)
 Avg. Rule Length: 	 3.0000 (0.0000)
 Avg. Nr. Rules per Sample: 	 1.0410 (0.0000)
 Avg. Rule Length per Sample: 	 3.0000 (0.0000)
-Fit Time: 	 8.8647 (0.0000)
-Equalized Odds: 	 0.9943 (0.0000)
-Equal Opportunity: 	 0.9943 (0.0000)
+Fit Time: 	 8.8669 (0.0000)
+Fairness DMC: 	 0.9857 (0.0000)
+<---
+
+--->
+DEFAULT
+FairRUG
+Rule length cost: False
+Threshold rule weights: None
+Fairness metric used: EqOpp
+Our Binarization used: False
+Dataset shape (train+test): (30000, 24) 
+
+Parameters tried for grid search: 
+ {'pen_par': [0.1, 1.0, 10.0], 'max_depth': [3, 5], 'max_RMP_calls': [5, 10, 15], 'fair_eps': [0, 0.01, 0.025, 0.05]} 
+
+Best parameters: 
+ {'pen_par': 0.1, 'max_depth': 3, 'max_RMP_calls': 15, 'fair_eps': 0.0} 
+
+Accuracy: 	 0.8250 (0.0000)
+F1-score: 	 0.4526 (0.0000)
+MCC: 	 0.4087 (0.0000)
+Nr of Rules: 	 21.0000 (0.0000)
+Avg. Rule Length: 	 2.8095 (0.0000)
+Avg. Nr. Rules per Sample: 	 2.3977 (0.0000)
+Avg. Rule Length per Sample: 	 3.0000 (0.0000)
+Fit Time: 	 17.4332 (0.0000)
+Fairness Equal Opportunity: 	 0.9759 (0.0000)
 <---
 

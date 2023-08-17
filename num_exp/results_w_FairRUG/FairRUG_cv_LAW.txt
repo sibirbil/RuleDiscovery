@@ -20,10 +20,10 @@ Nr of Rules: 	 7.0000 (0.0000)
 Avg. Rule Length: 	 1.0000 (0.0000)
 Avg. Nr. Rules per Sample: 	 1.0000 (0.0000)
 Avg. Rule Length per Sample: 	 1.0000 (0.0000)
-Fit Time: 	 1.0626 (0.0000)
+Fit Time: 	 1.0427 (0.0000)
 F1-score-macro: 	 1.0000 (0.0000)
 F1-score-weighted: 	 1.0000 (0.0000)
-Fairness: 	 1.0000 (0.0000)
+Fairness DMC: 	 1.0000 (0.0000)
 <---
 
 --->
@@ -48,9 +48,9 @@ Nr of Rules: 	 7.0000 (0.0000)
 Avg. Rule Length: 	 1.0000 (0.0000)
 Avg. Nr. Rules per Sample: 	 1.0000 (0.0000)
 Avg. Rule Length per Sample: 	 1.0000 (0.0000)
-Fit Time: 	 1.3162 (0.0000)
+Fit Time: 	 1.2873 (0.0000)
 F1-score-macro: 	 1.0000 (0.0000)
 F1-score-weighted: 	 1.0000 (0.0000)
-Fairness: 	 1.0000 (0.0000)
+Fairness ODM: 	 1.0000 (0.0000)
 <---
 

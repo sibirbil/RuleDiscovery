@@ -23,7 +23,7 @@ Avg. Rule Length per Sample: 	 4.1667 (0.0000)
 Fit Time: 	 0.3431 (0.0000)
 F1-score-macro: 	 0.6674 (0.0000)
 F1-score-weighted: 	 0.6696 (0.0000)
-Fairness: 	 0.8974 (0.0000)
+Fairness DMC: 	 0.8974 (0.0000)
 <---
 
 --->
@@ -53,4 +53,6 @@ F1-score-macro: 	 0.6922 (0.0000)
 F1-score-weighted: 	 0.6965 (0.0000)
 Fairness: 	 0.9963 (0.0000)
 <---
+
+
 
