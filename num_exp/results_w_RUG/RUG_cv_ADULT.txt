@@ -1,33 +1,6 @@
 --->
 ADULT
 RUG
-Rule length cost: False
-Threshold rule weights: None
-Our Binarization used: False
-Dataset shape (train+test): (32561, 107) 
-
-Parameters tried for grid search: 
- {'pen_par': [0.1, 1.0, 10.0], 'max_depth': [3, 5], 'max_RMP_calls': [5, 10, 15]} 
-
-Best parameters: 
- {'pen_par': 0.1, 'max_depth': 3, 'max_RMP_calls': 15} 
-
-Accuracy: 	 0.8566 (0.0000)
-F1-score: 	 0.6419 (0.0000)
-MCC: 	 0.5751 (0.0000)
-Nr of Rules: 	 22.0000 (0.0000)
-Avg. Rule Length: 	 2.5455 (0.0000)
-Avg. Nr. Rules per Sample: 	 1.2088 (0.0000)
-Avg. Rule Length per Sample: 	 3.0000 (0.0000)
-Fit Time: 	 7.5445 (0.0000)
-Equalized Odds: 	 0.9174 (0.0000)
-Equal Opportunity: 	 0.9174 (0.0000)
-Fairness ODM: 	 0.8983 (0.0000)
-<---
-
---->
-ADULT
-RUG
 Rule length cost: True
 Threshold rule weights: 0.05
 Our Binarization used: False

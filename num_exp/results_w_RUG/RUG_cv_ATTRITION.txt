@@ -19,9 +19,9 @@ Nr of Rules: 	 45.0000 (0.0000)
 Avg. Rule Length: 	 4.4667 (0.0000)
 Avg. Nr. Rules per Sample: 	 6.8503 (0.0000)
 Avg. Rule Length per Sample: 	 4.4000 (0.0000)
-Fit Time: 	 0.5810 (0.0000)
-Equalized Odds: 	 0.9667 (0.0000)
-Equal Opportunity: 	 1.0000 (0.0000)
+Fit Time: 	 0.5599 (0.0000)
+Fairness DMC: 	 0.9333 (0.0000)
+Fairness Equal Opportunity: 	 0.8959 (0.0000)
 Fairness ODM: 	 0.7577 (0.0000)
 <---
 
