@@ -2,3 +2,4 @@
 old/
 rulediscovery_venv/
 num_exp/prepped_data/
+__pycache__/
