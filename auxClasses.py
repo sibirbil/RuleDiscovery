@@ -39,22 +39,48 @@ class Clause:
         self.ub = ub # upper bound
         self.lb = lb # lower bound
         
-    def _toText(self):
+    def _toText(self, feature_names=None):
+#         returnString = ''
+#         if (self.lb != -np.inf and self.ub != np.inf):
+#             returnString += '{:.2f}'.format(self.lb) + ' < ' + \
+#                 'x[' + str(self.feature) + ']' + ' <= ' + '{:.2f}'.format(self.ub)
+#         else:
+#             if (self.lb != -np.inf):
+#                 returnString += 'x[' + str(self.feature) + ']' + \
+#                     ' > ' + '{:.2f}'.format(self.lb)
+#             if (self.ub != np.inf):
+#                 returnString += 'x[' + str(self.feature) + ']' + \
+#                     ' <= ' + '{:.2f}'.format(self.ub)
+#         return returnString
+        
         returnString = ''
-        if (self.lb != -np.inf and self.ub != np.inf):
-            returnString += '{:.2f}'.format(self.lb) + ' < ' + \
-                'x[' + str(self.feature) + ']' + ' <= ' + '{:.2f}'.format(self.ub)
+        if feature_names is None:
+            if (self.lb != -np.inf and self.ub != np.inf):
+                returnString += '{:.2f}'.format(self.lb) + ' < ' + \
+                    'x[' + str(self.feature) + ']' + ' <= ' + '{:.2f}'.format(self.ub)
+            else:
+                if (self.lb != -np.inf):
+                    returnString += 'x[' + str(self.feature) + ']' + \
+                        ' > ' + '{:.2f}'.format(self.lb)
+                if (self.ub != np.inf):
+                    returnString += 'x[' + str(self.feature) + ']' + \
+                        ' <= ' + '{:.2f}'.format(self.ub)
         else:
-            if (self.lb != -np.inf):
-                returnString += 'x[' + str(self.feature) + ']' + \
-                    ' > ' + '{:.2f}'.format(self.lb)
-            if (self.ub != np.inf):
-                returnString += 'x[' + str(self.feature) + ']' + \
-                    ' <= ' + '{:.2f}'.format(self.ub)
+            if (self.lb != -np.inf and self.ub != np.inf):
+                returnString += '{:.2f}'.format(self.lb) + ' < ' + \
+                    feature_names[self.feature] + ' <= ' + '{:.2f}'.format(self.ub)
+            else:
+                if (self.lb != -np.inf):
+                    returnString += feature_names[self.feature] + \
+                        ' > ' + '{:.2f}'.format(self.lb)
+                if (self.ub != np.inf):
+                    returnString += feature_names[self.feature] + \
+                        ' <= ' + '{:.2f}'.format(self.ub)
         return returnString
     
     def printClause(self):
         print(self._toText())
+#         print(self._toText(feature_names))
     
     def _checkArray(self, X):
         # Converts input to a double array
@@ -92,10 +118,10 @@ class Rule:
         self.weight = weight # weight
         self.cleaned = False
 
-    def _toText(self):
+    def _toText(self, feature_names=None):
         returnString = ''
         for clause in self.clauses:
-            returnString += clause._toText() + '\n'
+            returnString += clause._toText(feature_names) + '\n'
         if (len(self.clauses) == 0): # No Rule
             returnString += '# No Rule #'
         return returnString
@@ -113,12 +139,12 @@ class Rule:
             
         return len(self.clauses)
         
-    def printRule(self):
+    def printRule(self, feature_names=None):
         if (~self.cleaned):
             self._cleanRule()
             self.cleaned = True        
 
-        print(self._toText())
+        print(self._toText(feature_names))
 
     def _checkArray(self, X):
         # Converts input to a double array        

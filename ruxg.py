@@ -276,7 +276,7 @@ class RUXG(BaseEstimator, SklearnEstimator):
         
         return ws.X, vs.X, betas
     
-    def print_rules(self, indices=[]):
+    def print_rules(self, feature_names=None, indices=[]):
         
         if (len(indices) == 0):
             indices = self.rules.keys()
@@ -290,7 +290,7 @@ class RUXG(BaseEstimator, SklearnEstimator):
             if (rule.length() == 0):
                 print('==> No Rule: Set Majority Class')
             else:
-                rule.printRule()
+                rule.printRule(feature_names)
             print('Class: %.0f' % rule.label)
             print('Scaled rule weight: %.4f\n' % rule.weight)
 
@@ -318,11 +318,11 @@ class RUXG(BaseEstimator, SklearnEstimator):
         return x_id_to_rule_ids_dict, x_id_to_rule_num_dict
 
 
-    def print_rules_for_instances(self, IDs, x_id_to_rule_ids_dict):
+    def print_rules_for_instances(self, IDs, x_id_to_rule_ids_dict, feature_names=None):
         for x0_id in IDs:
             print('Rules for the instance:\n')
             rule_ids = x_id_to_rule_ids_dict[x0_id]
-            self.print_rules(indices=rule_ids)
+            self.print_rules(indices=rule_ids, feature_names=feature_names)
             print('\n \n')
 
     def print_weights(self, indices=[]):
