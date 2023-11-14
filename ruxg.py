@@ -410,7 +410,7 @@ class RUXG(BaseEstimator, SklearnEstimator):
                     self.rulesPerSample[sindx] += 1.0
                     rule_lengths.append(rule.length())
             if len(rule_lengths) > 0:
-                self.ruleLengthPerSample = np.mean(rule_lengths)
+                self.ruleLengthPerSample[sindx] = np.mean(rule_lengths)
             
             if (np.sum(sumClassWeights) == 0):
                 # Unclassified test sample
@@ -426,7 +426,7 @@ class RUXG(BaseEstimator, SklearnEstimator):
 
         endTime = time.time()
         self.predictTime = endTime - startTime
-        
+
         return returnPrediction
 
 class RUXClassifier(RUXG, ClassifierMixin):
