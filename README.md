@@ -6,7 +6,7 @@
 We introduce a new rule-based optimization method for classification with constraints. The proposed method
 takes advantage of linear programming and column generation, and hence, is scalable to large datasets. Moreover, the method returns a set of rules along with their optimal weights indicating the importance of each rule for learning. Through assigning cost coefficients to the rules and introducing additional constraints, we show that one can also consider inter pretability and fairness of the results. We test the performance of the proposed method on a collection of datasets and present two case studies to elaborate its different aspects. Our results show that a good compromise between interpretability and fairness on the one side, and accuracy on the other side, can be obtained by the proposed rule-based learning method.
 
-You can find the details of both algorithms in [our manuscript](https://arxiv.org/abs/2104.10751).
+You can find the details in [our manuscript](https://arxiv.org/abs/2104.10751).
 
 This [notebook](RuleDiscovery.ipynb) illustrates how to use RUX and RUG.
 
