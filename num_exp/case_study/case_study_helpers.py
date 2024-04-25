@@ -3,8 +3,42 @@ from sklearn.tree import DecisionTreeClassifier
 import warnings
 warnings.filterwarnings("ignore")
 
-# helpers for decision trees
+
 def average_depth(clf):
+    n_nodes = clf.tree_.node_count
+    children_left = clf.tree_.children_left
+    children_right = clf.tree_.children_right
+
+    node_depth = np.zeros(shape=n_nodes, dtype=np.int64)
+    is_leaves = np.zeros(shape=n_nodes, dtype=bool)
+    stack = [(0, 0)]  # start with the root node id (0) and its depth (0)
+    while len(stack) > 0:
+        # `pop` ensures each node is only visited once
+        node_id, depth = stack.pop()
+        node_depth[node_id] = depth
+
+        # If the left and right child of a node is not the same we have a split node
+        is_split_node = children_left[node_id] != children_right[node_id]
+        # If a split node, append left and right children and depth to `stack` so we can loop through them
+        if is_split_node:
+            stack.append((children_left[node_id], depth + 1))
+            stack.append((children_right[node_id], depth + 1))
+        else:
+            is_leaves[node_id] = True
+
+    # Convert lists to numpy arrays for easy manipulation
+    is_leaves = np.array(is_leaves)
+    node_depth = np.array(node_depth)
+
+    # Filter node_depth based on the indices where is_leaves is True
+    node_depth_leaves = node_depth[is_leaves]
+
+    # return the mean of node_depth_leaves
+    return np.mean(node_depth_leaves)
+
+'''
+# helpers for decision trees
+def average_depth1(clf):
     """
     Returns the average depth of the decision tree classifier.
 
@@ -32,6 +66,7 @@ def average_depth(clf):
         return max(left_depth, right_depth)
 
     return _get_depth(0, 0)
+'''
 
 def average_path_length(clf, X_test):
     """
