@@ -1,0 +1,22 @@
+--->
+IONOSPHERE
+FSDT
+Binarization used: True
+Dataset shape (train+test): (351, 567) 
+
+Parameters tried for grid search: 
+ {'max_depth': [3, 5, 10]} 
+
+Best parameters: 
+ {'max_depth': 5} 
+
+Accuracy: 	 0.8732 (0.0000)
+F1-score: 	 0.9053 (0.0000)
+MCC: 	 0.7176 (0.0000)
+Nr of Rules: 	 13.0000 (0.0000)
+Avg. Rule Length: 	 4.3846 (0.0000)
+Avg. Nr. Rules per Sample: 	 1.0000 (0.0000)
+Avg. Rule Length per Sample: 	 4.2958 (0.0000)
+Fit Time: 	 300.0050 (0.0000)
+<---
+

@@ -1,0 +1,56 @@
+--->
+STUDENT
+FairRUG
+Rule length cost: False
+Threshold rule weights: None
+Fairness metric used: odm
+Binarization used: False
+Dataset shape (train+test): (649, 114) 
+
+Parameters tried for grid search: 
+ {'pen_par': [0.1, 1.0, 10.0], 'max_depth': [3, 5], 'max_RMP_calls': [5, 10, 15], 'fair_eps': [0, 0.01, 0.025, 0.05]} 
+
+Best parameters: 
+ {'pen_par': 0.1, 'max_depth': 3, 'max_RMP_calls': 10, 'fair_eps': 0.0} 
+
+Accuracy: 	 0.7077 (0.0000)
+F1-score: 	 nan (nan)
+MCC: 	 0.6248 (0.0000)
+Nr of Rules: 	 11.0000 (0.0000)
+Avg. Rule Length: 	 3.0000 (0.0000)
+Avg. Nr. Rules per Sample: 	 2.3154 (0.0000)
+Avg. Rule Length per Sample: 	 3.0000 (0.0000)
+Fit Time: 	 0.1293 (0.0000)
+F1-score-macro: 	 0.7075 (0.0000)
+F1-score-weighted: 	 0.7031 (0.0000)
+Fairness ODM: 	 0.8496 (0.0000)
+<---
+
+--->
+STUDENT
+FairRUG
+Rule length cost: False
+Threshold rule weights: None
+Fairness metric used: dmc
+Binarization used: False
+Dataset shape (train+test): (649, 114) 
+
+Parameters tried for grid search: 
+ {'pen_par': [0.1, 1.0, 10.0], 'max_depth': [3, 5], 'max_RMP_calls': [5, 10, 15], 'fair_eps': [0, 0.01, 0.025, 0.05]} 
+
+Best parameters: 
+ {'pen_par': 1.0, 'max_depth': 5, 'max_RMP_calls': 10, 'fair_eps': 0.05} 
+
+Accuracy: 	 0.6077 (0.0000)
+F1-score: 	 nan (nan)
+MCC: 	 0.5017 (0.0000)
+Nr of Rules: 	 46.0000 (0.0000)
+Avg. Rule Length: 	 4.7826 (0.0000)
+Avg. Nr. Rules per Sample: 	 3.3308 (0.0000)
+Avg. Rule Length per Sample: 	 4.9435 (0.0000)
+Fit Time: 	 0.2898 (0.0000)
+F1-score-macro: 	 0.6185 (0.0000)
+F1-score-weighted: 	 0.6115 (0.0000)
+Fairness DMC: 	 0.8154 (0.0000)
+<---
+

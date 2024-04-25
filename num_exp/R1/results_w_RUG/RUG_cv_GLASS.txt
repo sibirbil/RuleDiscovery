@@ -1,0 +1,26 @@
+--->
+GLASS
+RUG
+Rule length cost: True
+Threshold rule weights: 0.05
+Binarization used: False
+Dataset shape (train+test): (214, 10) 
+
+Parameters tried for grid search: 
+ {'pen_par': [0.1, 1.0, 10.0], 'max_depth': [3, 5], 'max_RMP_calls': [5, 10, 15]} 
+
+Best parameters: 
+ {'pen_par': 1.0, 'max_depth': 3, 'max_RMP_calls': 5} 
+
+Accuracy: 	 0.6279 (0.0000)
+F1-score: 	 nan (nan)
+MCC: 	 0.5204 (0.0000)
+Nr of Rules: 	 17.0000 (0.0000)
+Avg. Rule Length: 	 2.4706 (0.0000)
+Avg. Nr. Rules per Sample: 	 2.3488 (0.0000)
+Avg. Rule Length per Sample: 	 2.3605 (0.0000)
+Fit Time: 	 0.0282 (0.0000)
+F1-score-macro: 	 0.5183 (0.0000)
+F1-score-weighted: 	 0.6057 (0.0000)
+<---
+

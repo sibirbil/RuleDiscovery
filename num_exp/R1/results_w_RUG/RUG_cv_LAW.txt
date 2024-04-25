@@ -1,0 +1,28 @@
+--->
+LAW
+RUG
+Rule length cost: False
+Threshold rule weights: None
+Binarization used: False
+Dataset shape (train+test): (22386, 6) 
+
+Parameters tried for grid search: 
+ {'pen_par': [0.1, 1.0, 10.0], 'max_depth': [3, 5], 'max_RMP_calls': [5, 10, 15]} 
+
+Best parameters: 
+ {'pen_par': 0.1, 'max_depth': 5, 'max_RMP_calls': 5} 
+
+Accuracy: 	 1.0000 (0.0000)
+F1-score: 	 nan (nan)
+MCC: 	 1.0000 (0.0000)
+Nr of Rules: 	 7.0000 (0.0000)
+Avg. Rule Length: 	 1.0000 (0.0000)
+Avg. Nr. Rules per Sample: 	 1.0000 (0.0000)
+Avg. Rule Length per Sample: 	 1.0000 (0.0000)
+Fit Time: 	 0.4445 (0.0000)
+F1-score-macro: 	 1.0000 (0.0000)
+F1-score-weighted: 	 1.0000 (0.0000)
+Fairness DMC: 	 1.0000 (0.0000)
+Fairness ODM: 	 1.0000 (0.0000)
+<---
+

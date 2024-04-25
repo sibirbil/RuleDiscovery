@@ -1,0 +1,24 @@
+--->
+TICTACTOE
+RUG
+Rule length cost: False
+Threshold rule weights: 0.05
+Binarization used: True
+Dataset shape (train+test): (958, 55) 
+
+Parameters tried for grid search: 
+ {'pen_par': [0.1, 1.0, 10.0], 'max_depth': [3, 5], 'max_RMP_calls': [5, 10, 15]} 
+
+Best parameters: 
+ {'pen_par': 1.0, 'max_depth': 5, 'max_RMP_calls': 15} 
+
+Accuracy: 	 0.9792 (0.0000)
+F1-score: 	 0.9843 (0.0000)
+MCC: 	 0.9545 (0.0000)
+Nr of Rules: 	 57.0000 (0.0000)
+Avg. Rule Length: 	 4.5614 (0.0000)
+Avg. Nr. Rules per Sample: 	 3.2031 (0.0000)
+Avg. Rule Length per Sample: 	 4.3209 (0.0000)
+Fit Time: 	 0.2762 (0.0000)
+<---
+

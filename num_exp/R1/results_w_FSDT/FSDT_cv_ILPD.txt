@@ -1,0 +1,22 @@
+--->
+ILPD
+FSDT
+Binarization used: True
+Dataset shape (train+test): (579, 159) 
+
+Parameters tried for grid search: 
+ {'max_depth': [3, 5, 10]} 
+
+Best parameters: 
+ {'max_depth': 10} 
+
+Accuracy: 	 0.7069 (0.0000)
+F1-score: 	 0.3929 (0.0000)
+MCC: 	 0.2136 (0.0000)
+Nr of Rules: 	 30.0000 (0.0000)
+Avg. Rule Length: 	 8.7333 (0.0000)
+Avg. Nr. Rules per Sample: 	 1.0000 (0.0000)
+Avg. Rule Length per Sample: 	 5.0172 (0.0000)
+Fit Time: 	 300.0021 (0.0000)
+<---
+

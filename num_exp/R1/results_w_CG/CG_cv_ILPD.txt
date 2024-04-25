@@ -1,0 +1,25 @@
+--->
+ILPD
+CG
+Binarization used: True
+Dataset shape (train+test): (579, 159) 
+
+Parameters tried for grid search: 
+ {'epsilon': [1], 'complexity': [5, 10, 15]} 
+
+Best parameters: 
+ {'epsilon': 1, 'complexity': 10} 
+
+Accuracy: 	 0.6897 (0.0000)
+F1: 	 0.3571 (0.0000)
+MCC: 	 0.1657 (0.0000)
+fitRuleSet - Nr of Rules: 	 2.0000 (0.0000)
+fitRuleSet - Avg. Rule Length: 	 4.0000 (0.0000)
+fitRuleSet - Avg. Nr Rules per Sample: 	 1.0000 (0.0000)
+fitRuleSet - Avg. Rule Length per Sample: 	 4.0000 (0.0000)
+Fit Time: 	 300.0182 (0.0000)
+Fairness DMC: 	 0.8225 (0.0000)
+Fairness EqualOpportunity: 	 0.8333 (0.0000)
+Fairness ODM: 	 0.9776 (0.0000)
+<---
+

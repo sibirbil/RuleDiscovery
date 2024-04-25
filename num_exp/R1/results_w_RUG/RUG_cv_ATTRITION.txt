@@ -1,0 +1,27 @@
+--->
+ATTRITION
+RUG
+Rule length cost: False
+Threshold rule weights: None
+Binarization used: False
+Dataset shape (train+test): (1470, 55) 
+
+Parameters tried for grid search: 
+ {'pen_par': [0.1, 1.0, 10.0], 'max_depth': [3, 5], 'max_RMP_calls': [5, 10, 15]} 
+
+Best parameters: 
+ {'pen_par': 10.0, 'max_depth': 5, 'max_RMP_calls': 5} 
+
+Accuracy: 	 0.8605 (0.0000)
+F1-score: 	 0.3051 (0.0000)
+MCC: 	 0.3322 (0.0000)
+Nr of Rules: 	 25.0000 (0.0000)
+Avg. Rule Length: 	 4.5600 (0.0000)
+Avg. Nr. Rules per Sample: 	 3.3061 (0.0000)
+Avg. Rule Length per Sample: 	 4.5646 (0.0000)
+Fit Time: 	 0.1466 (0.0000)
+Fairness DMC: 	 0.9746 (0.0000)
+Fairness Equal Opportunity: 	 0.9006 (0.0000)
+Fairness ODM: 	 0.7204 (0.0000)
+<---
+

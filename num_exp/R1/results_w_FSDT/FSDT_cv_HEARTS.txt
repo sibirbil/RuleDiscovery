@@ -1,0 +1,22 @@
+--->
+HEARTS
+FSDT
+Binarization used: True
+Dataset shape (train+test): (303, 135) 
+
+Parameters tried for grid search: 
+ {'max_depth': [3, 5, 10]} 
+
+Best parameters: 
+ {'max_depth': 3} 
+
+Accuracy: 	 1.0000 (0.0000)
+F1-score: 	 1.0000 (0.0000)
+MCC: 	 1.0000 (0.0000)
+Nr of Rules: 	 4.0000 (0.0000)
+Avg. Rule Length: 	 2.2500 (0.0000)
+Avg. Nr. Rules per Sample: 	 1.0000 (0.0000)
+Avg. Rule Length per Sample: 	 1.8197 (0.0000)
+Fit Time: 	 0.0053 (0.0000)
+<---
+

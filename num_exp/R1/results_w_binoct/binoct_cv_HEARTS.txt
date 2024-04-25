@@ -1,0 +1,22 @@
+--->
+HEARTS
+binoct
+Binarization used: True
+Dataset shape (train+test): (303, 135) 
+
+Parameters tried for grid search: 
+ {'max_depth': [3, 5, 10]} 
+
+Best parameters: 
+ {'max_depth': 3} 
+
+Accuracy: 	 0.3934 (0.0000)
+F1: 	 0.3019 (0.0000)
+MCC: 	 -0.2291 (0.0000)
+Nr of Rules: 	 8.0000 (0.0000)
+Avg. Rule Length: 	 3.0000 (0.0000)
+Avg. Nr Rules per Sample: 	 1.0000 (0.0000)
+Avg. Rule Length per Sample: 	 3.0000 (0.0000)
+Fit Time: 	 29.4661 (0.0000)
+<---
+

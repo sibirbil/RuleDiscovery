@@ -1,0 +1,52 @@
+--->
+DEFAULT
+FairCG
+Fairness metric used: EqOfOp
+Binarization used: True
+Dataset shape (train+test): (30000, 317) 
+
+Parameters tried for grid search: 
+ {'epsilon': [0.025], 'complexity': [5, 10, 15]} 
+
+Best parameters: 
+ {'epsilon': 0.025, 'complexity': 10} 
+
+Accuracy: 	 0.8243 (0.0000)
+F1: 	 0.4482 (0.0000)
+MCC: 	 0.4055 (0.0000)
+fitRuleSet - Nr of Rules: 	 1.0000 (0.0000)
+fitRuleSet - Avg. Rule Length: 	 5.0000 (0.0000)
+fitRuleSet - Avg. Nr Rules per Sample: 	 1.0000 (0.0000)
+fitRuleSet - Avg. Rule Length per Sample: 	 5.0000 (0.0000)
+Fit Time: 	 301.0542 (0.0000)
+Fairness DMC: 	 0.8345 (0.0000)
+Fairness EqualOpportunity: 	 0.8940 (0.0000)
+Fairness ODM: 	 0.9107 (0.0000)
+<---
+
+--->
+DEFAULT
+FairCG
+Fairness metric used: HammingEqOdd
+Binarization used: True
+Dataset shape (train+test): (30000, 317) 
+
+Parameters tried for grid search: 
+ {'epsilon': [0.025], 'complexity': [5, 10, 15]} 
+
+Best parameters: 
+ {'epsilon': 0.025, 'complexity': 10} 
+
+Accuracy: 	 0.8208 (0.0000)
+F1: 	 0.4180 (0.0000)
+MCC: 	 0.3868 (0.0000)
+fitRuleSet - Nr of Rules: 	 1.0000 (0.0000)
+fitRuleSet - Avg. Rule Length: 	 5.0000 (0.0000)
+fitRuleSet - Avg. Nr Rules per Sample: 	 1.0000 (0.0000)
+fitRuleSet - Avg. Rule Length per Sample: 	 5.0000 (0.0000)
+Fit Time: 	 301.2500 (0.0000)
+Fairness DMC: 	 0.8773 (0.0000)
+Fairness EqualOpportunity: 	 0.9308 (0.0000)
+Fairness ODM: 	 0.9107 (0.0000)
+<---
+

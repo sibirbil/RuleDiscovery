@@ -1,0 +1,24 @@
+--->
+ILPD
+RUG
+Rule length cost: False
+Threshold rule weights: 0.05
+Binarization used: True
+Dataset shape (train+test): (579, 159) 
+
+Parameters tried for grid search: 
+ {'pen_par': [0.1, 1.0, 10.0], 'max_depth': [3, 5], 'max_RMP_calls': [5, 10, 15]} 
+
+Best parameters: 
+ {'pen_par': 0.1, 'max_depth': 5, 'max_RMP_calls': 15} 
+
+Accuracy: 	 0.6121 (0.0000)
+F1-score: 	 0.3662 (0.0000)
+MCC: 	 0.0891 (0.0000)
+Nr of Rules: 	 111.0000 (0.0000)
+Avg. Rule Length: 	 4.5856 (0.0000)
+Avg. Nr. Rules per Sample: 	 5.4569 (0.0000)
+Avg. Rule Length per Sample: 	 4.4263 (0.0000)
+Fit Time: 	 0.2053 (0.0000)
+<---
+

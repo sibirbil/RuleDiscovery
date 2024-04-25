@@ -1,0 +1,22 @@
+--->
+LIVER
+FSDT
+Binarization used: True
+Dataset shape (train+test): (345, 105) 
+
+Parameters tried for grid search: 
+ {'max_depth': [3, 5, 10]} 
+
+Best parameters: 
+ {'max_depth': 5} 
+
+Accuracy: 	 0.6377 (0.0000)
+F1-score: 	 0.7059 (0.0000)
+MCC: 	 0.2412 (0.0000)
+Nr of Rules: 	 31.0000 (0.0000)
+Avg. Rule Length: 	 4.9677 (0.0000)
+Avg. Nr. Rules per Sample: 	 1.0000 (0.0000)
+Avg. Rule Length per Sample: 	 4.9710 (0.0000)
+Fit Time: 	 300.0006 (0.0000)
+<---
+

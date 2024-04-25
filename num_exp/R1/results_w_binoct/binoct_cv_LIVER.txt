@@ -1,0 +1,22 @@
+--->
+LIVER
+binoct
+Binarization used: True
+Dataset shape (train+test): (345, 105) 
+
+Parameters tried for grid search: 
+ {'max_depth': [3, 5, 10]} 
+
+Best parameters: 
+ {'max_depth': 3} 
+
+Accuracy: 	 0.5942 (0.0000)
+F1: 	 0.5882 (0.0000)
+MCC: 	 0.2253 (0.0000)
+Nr of Rules: 	 8.0000 (0.0000)
+Avg. Rule Length: 	 3.0000 (0.0000)
+Avg. Nr Rules per Sample: 	 1.0000 (0.0000)
+Avg. Rule Length per Sample: 	 3.0000 (0.0000)
+Fit Time: 	 301.9031 (0.0000)
+<---
+

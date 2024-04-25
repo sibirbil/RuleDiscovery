@@ -1,0 +1,24 @@
+--->
+BANKNOTE
+RUG
+Rule length cost: False
+Threshold rule weights: 0.05
+Binarization used: True
+Dataset shape (train+test): (1372, 73) 
+
+Parameters tried for grid search: 
+ {'pen_par': [0.1, 1.0, 10.0], 'max_depth': [3, 5], 'max_RMP_calls': [5, 10, 15]} 
+
+Best parameters: 
+ {'pen_par': 1.0, 'max_depth': 3, 'max_RMP_calls': 15} 
+
+Accuracy: 	 1.0000 (0.0000)
+F1-score: 	 1.0000 (0.0000)
+MCC: 	 1.0000 (0.0000)
+Nr of Rules: 	 27.0000 (0.0000)
+Avg. Rule Length: 	 2.5556 (0.0000)
+Avg. Nr. Rules per Sample: 	 5.8073 (0.0000)
+Avg. Rule Length per Sample: 	 2.5693 (0.0000)
+Fit Time: 	 0.2718 (0.0000)
+<---
+

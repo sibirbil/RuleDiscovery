@@ -1,0 +1,25 @@
+--->
+TICTACTOE
+CG
+Binarization used: True
+Dataset shape (train+test): (958, 55) 
+
+Parameters tried for grid search: 
+ {'epsilon': [1], 'complexity': [30, 35, 40]} 
+
+Best parameters: 
+ {'epsilon': 1, 'complexity': 40} 
+
+Accuracy: 	 0.8854 (0.0000)
+F1: 	 0.9043 (0.0000)
+MCC: 	 0.7823 (0.0000)
+fitRuleSet - Nr of Rules: 	 9.0000 (0.0000)
+fitRuleSet - Avg. Rule Length: 	 3.4444 (0.0000)
+fitRuleSet - Avg. Nr Rules per Sample: 	 1.6286 (0.0000)
+fitRuleSet - Avg. Rule Length per Sample: 	 3.2849 (0.0000)
+Fit Time: 	 300.2352 (0.0000)
+Fairness DMC: 	 0.9660 (0.0000)
+Fairness EqualOpportunity: 	 0.9842 (0.0000)
+Fairness ODM: 	 0.9404 (0.0000)
+<---
+

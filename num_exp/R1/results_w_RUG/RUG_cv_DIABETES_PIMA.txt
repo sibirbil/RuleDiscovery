@@ -1,0 +1,24 @@
+--->
+DIABETES_PIMA
+RUG
+Rule length cost: True
+Threshold rule weights: 0.05
+Binarization used: False
+Dataset shape (train+test): (768, 9) 
+
+Parameters tried for grid search: 
+ {'pen_par': [0.1, 1.0, 10.0], 'max_depth': [3, 5], 'max_RMP_calls': [5, 10, 15]} 
+
+Best parameters: 
+ {'pen_par': 10.0, 'max_depth': 3, 'max_RMP_calls': 10} 
+
+Accuracy: 	 0.6883 (0.0000)
+F1-score: 	 0.4146 (0.0000)
+MCC: 	 0.2534 (0.0000)
+Nr of Rules: 	 21.0000 (0.0000)
+Avg. Rule Length: 	 2.6190 (0.0000)
+Avg. Nr. Rules per Sample: 	 3.4545 (0.0000)
+Avg. Rule Length per Sample: 	 2.7891 (0.0000)
+Fit Time: 	 0.1273 (0.0000)
+<---
+

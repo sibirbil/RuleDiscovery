@@ -1,0 +1,28 @@
+--->
+STUDENT
+RUG
+Rule length cost: False
+Threshold rule weights: None
+Binarization used: False
+Dataset shape (train+test): (649, 114) 
+
+Parameters tried for grid search: 
+ {'pen_par': [0.1, 1.0, 10.0], 'max_depth': [3, 5], 'max_RMP_calls': [5, 10, 15]} 
+
+Best parameters: 
+ {'pen_par': 10.0, 'max_depth': 5, 'max_RMP_calls': 5} 
+
+Accuracy: 	 0.7538 (0.0000)
+F1-score: 	 nan (nan)
+MCC: 	 0.6831 (0.0000)
+Nr of Rules: 	 6.0000 (0.0000)
+Avg. Rule Length: 	 5.0000 (0.0000)
+Avg. Nr. Rules per Sample: 	 0.9923 (0.0000)
+Avg. Rule Length per Sample: 	 4.4231 (0.0000)
+Fit Time: 	 0.0803 (0.0000)
+F1-score-macro: 	 0.7553 (0.0000)
+F1-score-weighted: 	 0.7504 (0.0000)
+Fairness DMC: 	 0.8922 (0.0000)
+Fairness ODM: 	 0.8826 (0.0000)
+<---
+

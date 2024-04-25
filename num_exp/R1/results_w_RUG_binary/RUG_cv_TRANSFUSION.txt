@@ -1,0 +1,24 @@
+--->
+TRANSFUSION
+RUG
+Rule length cost: False
+Threshold rule weights: 0.05
+Binarization used: True
+Dataset shape (train+test): (748, 65) 
+
+Parameters tried for grid search: 
+ {'pen_par': [0.1, 1.0, 10.0], 'max_depth': [3, 5], 'max_RMP_calls': [5, 10, 15]} 
+
+Best parameters: 
+ {'pen_par': 10.0, 'max_depth': 5, 'max_RMP_calls': 5} 
+
+Accuracy: 	 0.7667 (0.0000)
+F1-score: 	 0.4615 (0.0000)
+MCC: 	 0.3178 (0.0000)
+Nr of Rules: 	 9.0000 (0.0000)
+Avg. Rule Length: 	 4.6667 (0.0000)
+Avg. Nr. Rules per Sample: 	 0.6667 (0.0000)
+Avg. Rule Length per Sample: 	 3.2267 (0.0000)
+Fit Time: 	 0.0519 (0.0000)
+<---
+

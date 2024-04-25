@@ -1,0 +1,22 @@
+--->
+ADULT
+FSDT
+Binarization used: True
+Dataset shape (train+test): (32561, 263) 
+
+Parameters tried for grid search: 
+ {'max_depth': [3, 5, 10]} 
+
+Best parameters: 
+ {'max_depth': 5} 
+
+Accuracy: 	 0.8306 (0.0000)
+F1-score: 	 0.5913 (0.0000)
+MCC: 	 0.4984 (0.0000)
+Nr of Rules: 	 17.0000 (0.0000)
+Avg. Rule Length: 	 4.7647 (0.0000)
+Avg. Nr. Rules per Sample: 	 1.0000 (0.0000)
+Avg. Rule Length per Sample: 	 2.8560 (0.0000)
+Fit Time: 	 300.0256 (0.0000)
+<---
+
