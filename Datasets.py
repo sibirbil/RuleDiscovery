@@ -73,7 +73,8 @@ def tictactoe(wd):
     """
     df = pd.read_csv(wd+'tictactoe.csv', header = None)
     df.columns = ['X_' + str(i) for i in range(len(df.columns)-1)] + ['y']
-    df1 = pd.get_dummies(df.iloc[:,:-1], drop_first=True)
+    # df1 = pd.get_dummies(df.iloc[:,:-1], drop_first=True)
+    df1 = pd.get_dummies(df.iloc[:, :-1], drop_first=False)
     df1['y'] = (df['y'] == 'positive') *1
     return df1
 
@@ -201,7 +202,8 @@ def mushroom(wd):
     import pandas as pd
     df = pd.read_csv(wd+'agaricus-lepiota.csv', header = None)
     df.columns = ['y'] + ['X_' + str(i) for i in range(len(df.columns)-1)] 
-    df1 = pd.get_dummies(df.iloc[:,1:], drop_first=True)
+    # df1 = pd.get_dummies(df.iloc[:,1:], drop_first=True)
+    df1 = pd.get_dummies(df.iloc[:, 1:], drop_first=False)
     df1['y'] = (df['y'] == 'e') * 1
     return df1
 
@@ -224,12 +226,14 @@ def bank_mkt(wd):
     https://archive.ics.uci.edu/ml/datasets/bank+marketing
     """
     
-    df = pd.read_csv(wd+'bank_mkt.csv', header = None)
-    y = df.iloc[:,-1]
-    df.drop(16,inplace=True, axis=1)
-    cols_to_encode = [1,2,3,4,6,7,8,10,15]
-    df = pd.get_dummies(data = df, columns= cols_to_encode, drop_first=True)
-    df['y'] = (y == 'yes')*1
+    df = pd.read_csv(wd + 'bank_mkt.csv', header=None)
+    y = df.iloc[:, -1]
+    df.drop(16, inplace=True, axis=1)
+    cols_to_encode = [1, 2, 3, 4, 6, 7, 8, 10, 15]
+    # df = pd.get_dummies(data=df, columns=cols_to_encode, drop_first=True)
+    df = pd.get_dummies(data=df, columns=cols_to_encode, drop_first=False)
+    df.columns = ['X_' + str(i) for i in range(len(df.columns))]
+    df['y'] = (y == 'yes') * 1
     return df
 
 def hearts(wd): 
@@ -238,8 +242,12 @@ def hearts(wd):
     2 classes
     https://archive.ics.uci.edu/ml/datasets/heart+disease
     """
-    df = pd.read_csv(wd+'hearts.csv', header = None)
-    df.columns = ['X_' + str(i) for i in range(len(df.columns)-1)] + ['y']
+    df = pd.read_csv(wd + 'hearts.csv', header=None)
+    cols_to_encode = [1, 2, 5, 6, 8, 10, 11, 12]
+    # cols_to_encode = [2, 6, 10, 11, 12]
+    # df = pd.get_dummies(data=df, columns=cols_to_encode, drop_first=True)
+    df = pd.get_dummies(data=df, columns=cols_to_encode, drop_first=False)
+    df.columns = ['X_' + str(i) for i in range(len(df.columns) - 1)] + ['y']
     return df
 
 def musk(wd): 
@@ -267,15 +275,37 @@ def magic(wd): # Two classes
 
 # Fairness Datasets
 
-def student(wd): # Five classes and two groups, sensitive attribute in the first column
+def student(wd):  # Five classes and two groups, sensitive attribute in the first column
     """
     649 x 33
     The sensitive attribute sex is to be put as the first column.
     https://archive.ics.uci.edu/ml/datasets/student+performance
     """
-    df = pd.read_csv(wd+'student.csv', header = 1, sep = '\;', engine = 'python')
-    df.columns = ['X_' + str(i) for i in range(len(df.columns)-1)] + ['y']
-    print('Size data set:' , len(df['y']))
+    df = pd.read_csv(wd + 'student.csv', header=None, sep='\;', engine='python')
+    df.columns = ['X_' + str(i) for i in range(len(df.columns) - 1)] + ['y']
+    print('Size data set:', len(df['y']))
+
+    address = df['X_3']
+    df = df.drop(columns=['X_3'])
+    df.insert(loc=0, column='X_3', value=address)
+
+    cols_to_encode=list(df.columns)
+    cols_to_encode.remove('X_3') # sensitive attribute in 1st column
+    cols_to_encode.remove('X_29')
+    cols_to_encode.remove('y')
+    df = pd.get_dummies(data=df, columns=cols_to_encode, drop_first=False)
+
+    return df
+
+def student_old(wd):  # Five classes and two groups, sensitive attribute in the first column
+    """
+    649 x 33
+    The sensitive attribute sex is to be put as the first column.
+    https://archive.ics.uci.edu/ml/datasets/student+performance
+    """
+    df = pd.read_csv(wd + 'student.csv', header=1, sep='\;', engine='python')
+    df.columns = ['X_' + str(i) for i in range(len(df.columns) - 1)] + ['y']
+    print('Size data set:', len(df['y']))
 
     address = df['X_3']
     df = df.drop(columns=['X_3'])
@@ -289,17 +319,29 @@ def adult(wd): # Two classes
     The sensitive attribute sex is to be put as the first column.
     https://archive.ics.uci.edu/ml/datasets/adult
     """
-    df = pd.read_csv(wd+'adult.csv', header = None)
-    y = df.iloc[:,-1]
-    df.drop(14,inplace=True, axis=1)
-    cols_to_encode = [1,3,5,6,7,8,13]
-
+    df = pd.read_csv(wd + 'adult.csv', header=None)
+    y = df.iloc[:, -1]
+    df.drop(14, inplace=True, axis=1)
     sex = df[9]
-    df=df.drop(columns=[9])
-    df.insert(loc=1, column='sex', value=sex)
-    df = pd.get_dummies(data = df, columns= cols_to_encode, drop_first=False)
-    df=df.drop(columns=[0])
-    df['y'] = (y == ' >50K')*1
+    df = df.drop(columns=[9])
+    cols_to_encode = [1, 3, 5, 6, 7, 8, 13]
+    # df = pd.get_dummies(data=df, columns=cols_to_encode, drop_first=True)
+    df = pd.get_dummies(data=df, columns=cols_to_encode, drop_first=False)
+    df.insert(loc=0, column='sex', value=sex)
+    df['y'] = (y == ' >50K') * 1
+    df.columns = ['X_' + str(i) for i in range(len(df.columns) - 1)] + ['y']
+    # df = pd.read_csv(wd+'adult.csv', header = None)
+    # y = df.iloc[:,-1]
+    # df.drop(14,inplace=True, axis=1)
+    # cols_to_encode = [1,3,5,6,7,8,13]
+    #
+    # sex = df[9]
+    # df=df.drop(columns=[9])
+    # df.insert(loc=1, column='sex', value=sex)
+    # df = pd.get_dummies(data = df, columns= cols_to_encode, drop_first=False)
+    # df=df.drop(columns=[0])
+    # df['y'] = (y == ' >50K')*1
+
     # print(df['sex']) #1 = male
     # quit()
     print('Size data set:' , len(df['y']))
@@ -372,9 +414,21 @@ def compas_fairlearnpackage(wd):
 
     return df
 
+def nursery(wd):
+    """
+    12960 x 8
+    5 classes
+    https://archive.ics.uci.edu/ml/datasets/nursery
+    """
+    df = pd.read_csv(wd+'nursery.csv', header = None, sep = '\;', engine = 'python')
+    # one-hot encoding for categorical variables
+    cols_to_encode = [1, 2, 3, 4, 5, 7] # not for target (8) & sensitive attribute (0)
+    df = pd.get_dummies(data=df, columns=cols_to_encode, drop_first=False)
+    df.columns = ['X_' + str(i) for i in range(len(df.columns)-1)] + ['y']
+    print('Size data set:' , len(df['y']))
+    return df
 
-
-def nursery(wd): 
+def nursery_old(wd):
     """
     12960 x 8
     5 classes
@@ -383,17 +437,19 @@ def nursery(wd):
     df = pd.read_csv(wd+'nursery.csv', header = None, sep = '\;', engine = 'python')
     df.columns = ['X_' + str(i) for i in range(len(df.columns)-1)] + ['y']
     print('Size data set:' , len(df['y']))
-    
-
     return df
 
 def default(wd):
+    """
+    30000 x 24
+    2 classes
+    https://archive.ics.uci.edu/ml/datasets/default+of+credit+card+clients
+    """
     df = pd.read_csv(wd + 'default.csv')
-    y = df['y']
-    df.drop('y', axis=1, inplace=True)
-    df.columns = ['X_' + str(i) for i in range(len(df.columns))]
-    df['y'] = y
     df.dropna(inplace=True)
+    cols_to_encode = ['X_2', 'X_3']
+    # df = pd.get_dummies(data=df, columns=cols_to_encode, drop_first=True)
+    df = pd.get_dummies(data=df, columns=cols_to_encode, drop_first=False)
     return df
 
 '''
@@ -412,10 +468,10 @@ def default(wd):
     print('Size data set:' , len(df['y'])) #1=to default payment, bad label, 0=positive label
     # print(df['X_1'])
     # quit()
-    
 
     return df
 '''
+
 def law(wd): # Five classes
     """
     22387 x 5
@@ -424,10 +480,11 @@ def law(wd): # Five classes
     """
     df = pd.read_csv(wd+'law.csv', header = None, sep = '\;', engine = 'python')
     df.columns = ['X_' + str(i) for i in range(len(df.columns)-1)] + ['y']
+    df['X_0'] = df['X_0'].apply(lambda x: 0 if x == 0 else 1) # recode sensitive attribute into two groups only (white vs. others)
     print('Size data set:' , len(df['y']))
     return df
 
-def attrition(wd): 
+def attrition(wd):
     """
     1469 x 34
     2 classes
@@ -435,17 +492,38 @@ def attrition(wd):
     """
     # Dataset IBM HR analytics employee attrition and performance. 0 = positive class (no attrition), 1=negative class(attrition)
     df = pd.read_csv(wd+'attrition.csv', header=0, sep = '\;', engine = 'python')
+
+    # put sensitive attribute in first column
+    workLifeBalance = df['WorkLifeBalance']
+    df = df.drop(columns=['WorkLifeBalance'])
+    df.insert(loc=0, column='X_0', value=workLifeBalance)
+    y = df['Attrition']
     df.columns = ['X_' + str(i) for i in range(len(df.columns)-1)] + ['y']
-    print('Size data set:' , len(df['y']))
-    string_headers = [2, 4, 7, 14, 16, 20, 21]
-    for i in string_headers:
-        df['X_'+str(i)] = pd.factorize(df['X_'+str(i)])[0] 
+    cols_to_encode = ['X_3', 'X_5', 'X_8', 'X_15', 'X_17', 'X_21', 'X_22']
+    df = pd.get_dummies(data=df, columns=cols_to_encode, drop_first=False)
+    df['y'] = (y == 'Yes') * 1
 
-    df['y'] = pd.factorize(df['y'])[0]
+    return df
 
-    workLifeBalance = df['X_29']
-    df = df.drop(columns=['X_29'])
-    df.insert(loc=0, column='X_29', value=workLifeBalance)
+def attrition_old(wd):
+    """
+    1469 x 34
+    2 classes
+    https://www.kaggle.com/datasets/pavansubhasht/ibm-hr-analytics-attrition-dataset
+    """
+    # Dataset IBM HR analytics employee attrition and performance. 0 = positive class (no attrition), 1=negative class(attrition)
+    df = pd.read_csv(wd+'attrition.csv', header=0, sep = '\;', engine = 'python')
+    workLifeBalance = df['WorkLifeBalance']
+    df = df.drop(columns=['WorkLifeBalance'])
+    df.insert(loc=0, column='X_0', value=workLifeBalance)
+    y = df['Attrition']
+    df.columns = ['X_' + str(i) for i in range(len(df.columns)-1)] + ['y']
+    cols_to_encode = ['X_0', 'X_3', 'X_5', 'X_8', 'X_15', 'X_17', 'X_21', 'X_22']
+    # df = pd.get_dummies(data=df, columns=cols_to_encode, drop_first=True)
+    df = pd.get_dummies(data=df, columns=cols_to_encode, drop_first=False)
+    # df['y'] = pd.factorize(df['y'])[0]
+    df['y'] = (y == 'Yes') * 1
+    # df.columns = ['X_' + str(i) for i in range(len(df.columns) - 1)] + ['y']
 
     return df
 
@@ -460,7 +538,6 @@ def recruitment(wd):
     print('Size data set:' , len(df['y']))
 
     return df
-
 
 ## Large Classification
 
