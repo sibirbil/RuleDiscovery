@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-from binerizer import *
+# from binerizer import *
 from DNFRuleModel import DNFRuleModel
 from Classifier import Classifier
 from sklearn.model_selection import train_test_split
@@ -224,7 +224,8 @@ class TestResults(object):
         pos_preds = classifier.predict(test_data[0][groups]) #predictions group 1 on testdata
         # Tabea
         preds_group1 = classifier.predict(test_data[0][groups])  # predictions group 1 on testdata
-        cm_group1 = confusion_matrix(test_data[1][groups], preds_group1)
+        # cm_group1 = confusion_matrix(test_data[1][groups], preds_group1)
+        cm_group1 = confusion_matrix(test_data[1][groups], preds_group1, labels=[0,1])
         TN_group1, FP_group1, FN_group1, TP_group1 = cm_group1.ravel()
 
         # GROUP 2
@@ -232,7 +233,8 @@ class TestResults(object):
         neg_preds = classifier.predict(test_data[0][~groups]) #predictions group 2 on testdata
         # Tabea
         preds_group2 = classifier.predict(test_data[0][~groups]) #predictions group 2 on testdata
-        cm_group2 = confusion_matrix(test_data[1][~groups], preds_group2)
+        # cm_group2 = confusion_matrix(test_data[1][~groups], preds_group2)
+        cm_group2 = confusion_matrix(test_data[1][~groups], preds_group2, labels=[0,1])
         TN_group2, FP_group2, FN_group2, TP_group2 = cm_group2.ravel()
 
         # TRUE POSITIVE RATE
