@@ -1,0 +1,334 @@
+---------------------------------------------------------------------
+--->
+WINE
+
+--Decision Tree--
+Parameters grid search: {'max_depth': [3, 5, 7, 9, 11, 13, 15]}
+Best parameters: {'max_depth': 3}
+Accuracy: 0.9444
+weighted F1-score: 0.9445
+MCC-score: 0.9172
+Nr of rules: 5
+Average rule length: 2.6
+Average nr of rules per sample: 1.0
+Average rule length per sample: 2.4444
+Fit time: 0.0005
+
+
+--Random Forest--
+Parameters grid search: {'max_depth': [3, 5, 7, 9, 11, 13, 15], 'n_estimators': [100, 150, 200, 250, 300]}
+Best parameters: {'n_estimators': 100, 'max_depth': 3}
+Accuracy: 0.9722
+weighted F1-score: 0.9724
+MCC-score: 0.9593
+Nr of rules: 639
+Average rule length: 2.7421
+Average nr of rules per sample: 100
+Average rule length per sample: 2.7292
+Fit time: 0.061
+
+
+--AdaBoost--
+Parameters grid search: {'n_estimators': [100, 150, 200, 250, 300]}
+Best parameters: {'n_estimators': 100}
+Accuracy: 0.8889
+weighted F1-score: 0.8849
+MCC-score: 0.8464
+Nr of rules: 200
+Average rule length: 1.0
+Average nr of rules per sample: 100
+Average rule length per sample: 1.0
+Fit time: 0.0651
+
+
+--Gradient Boosting--
+Parameters grid search: {'max_depth': [3, 5, 7, 9, 11, 13, 15], 'n_estimators': [100, 150, 200, 250, 300]}
+Best parameters: {'n_estimators': 100, 'max_depth': 3}
+Accuracy: 0.9444
+weighted F1-score: 0.9444
+MCC-score: 0.9159
+Nr of rules: 2286
+Average rule length: 2.9971
+Average nr of rules per sample: 100
+Average rule length per sample: 3.0
+Fit time: 0.1623
+
+
+--LightGBM--
+Parameters grid search: {'max_depth': [3, 5, 7, 9, 11, 13, 15], 'n_estimators': [100, 150, 200, 250, 300]}
+Best parameters: {'max_depth': 3, 'n_estimators': 100}
+Accuracy: 0.9722
+weighted F1-score: 0.9724
+MCC-score: 0.9593
+Nr of rules: 1573
+Average rule length: 2.5099
+Average nr of rules per sample: 300
+Average rule length per sample: 2.6218
+Fit time: 0.1937
+
+
+---------------------------------------------------------------------
+--->
+GLASS
+
+--Decision Tree--
+Parameters grid search: {'max_depth': [3, 5, 7, 9, 11, 13, 15]}
+Best parameters: {'max_depth': 7}
+Accuracy: 0.6279
+weighted F1-score: 0.6384
+MCC-score: 0.5222
+Nr of rules: 32
+Average rule length: 5.8125
+Average nr of rules per sample: 1.0
+Average rule length per sample: 5.7907
+Fit time: 0.0007
+
+
+--Random Forest--
+Parameters grid search: {'max_depth': [3, 5, 7, 9, 11, 13, 15], 'n_estimators': [100, 150, 200, 250, 300]}
+Best parameters: {'n_estimators': 100, 'max_depth': 7}
+Accuracy: 0.7674
+weighted F1-score: 0.7742
+MCC-score: 0.6908
+Nr of rules: 2717
+Average rule length: 5.5052
+Average nr of rules per sample: 100
+Average rule length per sample: 5.5698
+Fit time: 0.0694
+
+
+--AdaBoost--
+Parameters grid search: {'n_estimators': [100, 150, 200, 250, 300]}
+Best parameters: {'n_estimators': 100}
+Accuracy: 0.3256
+weighted F1-score: 0.2434
+MCC-score: 0.0146
+Nr of rules: 200
+Average rule length: 1.0
+Average nr of rules per sample: 100
+Average rule length per sample: 1.0
+Fit time: 0.0641
+
+
+--Gradient Boosting--
+Parameters grid search: {'max_depth': [3, 5, 7, 9, 11, 13, 15], 'n_estimators': [100, 150, 200, 250, 300]}
+Best parameters: {'n_estimators': 300, 'max_depth': 3}
+Accuracy: 0.814
+weighted F1-score: 0.8094
+MCC-score: 0.7502
+Nr of rules: 11860
+Average rule length: 2.9257
+Average nr of rules per sample: 300
+Average rule length per sample: 2.9975
+Fit time: 0.7782
+
+
+--LightGBM--
+Parameters grid search: {'max_depth': [3, 5, 7, 9, 11, 13, 15], 'n_estimators': [100, 150, 200, 250, 300]}
+Best parameters: {'n_estimators': 200, 'max_depth': 7}
+Accuracy: 0.814
+weighted F1-score: 0.8157
+MCC-score: 0.7526
+Nr of rules: 7677
+Average rule length: 3.485
+Average nr of rules per sample: 1200
+Average rule length per sample: 3.0833
+Fit time: 0.65
+
+
+---------------------------------------------------------------------
+--->
+ECOLI
+
+--Decision Tree--
+Parameters grid search: {'max_depth': [3, 5, 7, 9, 11, 13, 15]}
+Best parameters: {'max_depth': 3}
+Accuracy: 0.7941
+weighted F1-score: 0.7836
+MCC-score: 0.7191
+Nr of rules: 8
+Average rule length: 3.0
+Average nr of rules per sample: 1.0
+Average rule length per sample: 3.0
+Fit time: 0.0005
+
+
+--Random Forest--
+Parameters grid search: {'max_depth': [3, 5, 7, 9, 11, 13, 15], 'n_estimators': [100, 150, 200, 250, 300]}
+Best parameters: {'n_estimators': 150, 'max_depth': 7}
+Accuracy: 0.8824
+weighted F1-score: 0.8816
+MCC-score: 0.8393
+Nr of rules: 5060
+Average rule length: 5.7112
+Average nr of rules per sample: 150
+Average rule length per sample: 5.6097
+Fit time: 0.0986
+
+
+--AdaBoost--
+Parameters grid search: {'n_estimators': [100, 150, 200, 250, 300]}
+Best parameters: {'n_estimators': 150}
+Accuracy: 0.6618
+weighted F1-score: 0.5391
+MCC-score: 0.5255
+Nr of rules: 200
+Average rule length: 1.0
+Average nr of rules per sample: 100
+Average rule length per sample: 1.0
+Fit time: 0.0654
+
+
+--Gradient Boosting--
+Parameters grid search: {'max_depth': [3, 5, 7, 9, 11, 13, 15], 'n_estimators': [100, 150, 200, 250, 300]}
+Best parameters: {'n_estimators': 150, 'max_depth': 5}
+Accuracy: 0.8382
+weighted F1-score: 0.8312
+MCC-score: 0.7776
+Nr of rules: 22988
+Average rule length: 4.7354
+Average nr of rules per sample: 150
+Average rule length per sample: 4.9083
+Fit time: 0.8883
+
+
+--LightGBM--
+Parameters grid search: {'max_depth': [3, 5, 7, 9, 11, 13, 15], 'n_estimators': [100, 150, 200, 250, 300]}
+Best parameters: {'n_estimators': 300, 'max_depth': 9}
+Accuracy: 0.8824
+weighted F1-score: 0.873
+MCC-score: 0.8381
+Nr of rules: 14097
+Average rule length: 4.0982
+Average nr of rules per sample: 2400
+Average rule length per sample: 2.3126
+Fit time: 1.2892
+
+
+---------------------------------------------------------------------
+--->
+SEEDS
+
+--Decision Tree--
+Parameters grid search: {'max_depth': [3, 5, 7, 9, 11, 13, 15]}
+Best parameters: {'max_depth': 7}
+Accuracy: 0.9286
+weighted F1-score: 0.9277
+MCC-score: 0.8998
+Nr of rules: 11
+Average rule length: 3.9091
+Average nr of rules per sample: 1.0
+Average rule length per sample: 3.3095
+Fit time: 0.0005
+
+
+--Random Forest--
+Parameters grid search: {'max_depth': [3, 5, 7, 9, 11, 13, 15], 'n_estimators': [100, 150, 200, 250, 300]}
+Best parameters: {'n_estimators': 200, 'max_depth': 5}
+Accuracy: 0.9048
+weighted F1-score: 0.9043
+MCC-score: 0.8601
+Nr of rules: 2337
+Average rule length: 3.9212
+Average nr of rules per sample: 200
+Average rule length per sample: 3.3745
+Fit time: 0.1194
+
+
+--AdaBoost--
+Parameters grid search: {'n_estimators': [100, 150, 200, 250, 300]}
+Best parameters: {'n_estimators': 200}
+Accuracy: 0.7143
+weighted F1-score: 0.65
+MCC-score: 0.6576
+Nr of rules: 200
+Average rule length: 1.0
+Average nr of rules per sample: 100
+Average rule length per sample: 1.0
+Fit time: 0.0623
+
+
+--Gradient Boosting--
+Parameters grid search: {'max_depth': [3, 5, 7, 9, 11, 13, 15], 'n_estimators': [100, 150, 200, 250, 300]}
+Best parameters: {'n_estimators': 100, 'max_depth': 5}
+Accuracy: 0.9048
+weighted F1-score: 0.9043
+MCC-score: 0.8601
+Nr of rules: 5872
+Average rule length: 4.5251
+Average nr of rules per sample: 100
+Average rule length per sample: 4.7683
+Fit time: 0.228
+
+
+--LightGBM--
+Parameters grid search: {'max_depth': [3, 5, 7, 9, 11, 13, 15], 'n_estimators': [100, 150, 200, 250, 300]}
+Best parameters: {'n_estimators': 100, 'max_depth': 3}
+Accuracy: 0.9286
+weighted F1-score: 0.9277
+MCC-score: 0.8998
+Nr of rules: 1699
+Average rule length: 2.6286
+Average nr of rules per sample: 300
+Average rule length per sample: 2.7264
+Fit time: 0.1744
+
+
+---------------------------------------------------------------------
+--->
+SENSORLESS
+
+--Decision Tree--
+Parameters grid search: {'max_depth': [3, 5, 7, 9, 11, 13, 15]}
+Best parameters: {'max_depth': 15}
+Accuracy: 0.9828
+weighted F1-score: 0.9828
+MCC-score: 0.9811
+Nr of rules: 425
+Average rule length: 11.6941
+Average nr of rules per sample: 1.0
+Average rule length per sample: 11.4186
+Fit time: 2.0628
+
+
+--Random Forest--
+Parameters grid search: {'max_depth': [3, 5, 7, 9, 11, 13, 15], 'n_estimators': [100, 150, 200, 250, 300]}
+Best parameters: {'n_estimators': 100, 'max_depth': 15}
+Accuracy: 0.9984
+weighted F1-score: 0.9984
+MCC-score: 0.9982
+Nr of rules: 56664
+Average rule length: 12.0958
+Average nr of rules per sample: 100
+Average rule length per sample: 11.0634
+Fit time: 17.5649
+
+
+--AdaBoost--
+Parameters grid search: {'n_estimators': [100, 150, 200, 250, 300]}
+Best parameters: {'n_estimators': 100}
+Accuracy: 0.4536
+weighted F1-score: 0.3254
+MCC-score: 0.4409
+Nr of rules: 300
+Average rule length: 1.0
+Average nr of rules per sample: 150
+Average rule length per sample: 1.0
+Fit time: 33.2983
+
+--Gradient Boosting--
+took too long
+
+
+--LightGBM--
+Parameters grid search: {'max_depth': [3, 5, 7, 9, 11, 13, 15], 'n_estimators': [100, 150, 200, 250, 300]}
+Best parameters: {'n_estimators': 300, 'max_depth': 5}
+Accuracy: 0.9997
+weighted F1-score: 0.9997
+MCC-score: 0.9997
+Nr of rules: 48414
+Average rule length: 4.5439
+Average nr of rules per sample: 3300
+Average rule length per sample: 3.3774
+Fit time: 42.5224
+
