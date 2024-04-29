@@ -5,9 +5,10 @@ We need to be able to access the code of other repo, specifically:
 - ./FairCG/src      # for FairCG and CG
 """
 import sys
-sys.path.insert(1,'/Users/tabearober/OneDrive - UvA/Interpretable ML/13_MPinXAI/Code/pydl8.5-lbguess')
-sys.path.insert(1,'/Users/tabearober/OneDrive - UvA/Interpretable ML/13_MPinXAI/Code/FairCG/src')
-sys.path.insert(1,'/Users/tabearober/OneDrive - UvA/Interpretable ML/13_MPinXAI/Code/binoct')
+# sys.path.insert(1,'./pydl8.5-lbguess')
+# sys.path.insert(1,'./FairCG/src')
+# sys.path.insert(1,'./binoct')
+# sys.path.insert(1, './num_exp/helpers')
 
 import os
 # import Datasets_binary as DS
@@ -19,6 +20,7 @@ import itertools
 from sklearn.model_selection import KFold
 from sklearn.metrics import accuracy_score, f1_score, matthews_corrcoef
 import time
+from sklearn.tree import DecisionTreeClassifier
 
 # # for FSDT
 import FSDT_helpers as FSDT_helpers

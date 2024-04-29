@@ -24,7 +24,7 @@ def binarize_data(problem, target = 'y', quant=10, save=False):
 
     pname = problem.__name__.upper()
     print(f'---{pname}---')
-    df = problem('./datasets/original/') # at this point the data is already one-hot encoded
+    df = problem('../datasets/original/') # at this point the data is already one-hot encoded
     df = df.reset_index(drop=True)
     df = df.dropna(subset=[target])
     df[target] = df[target].astype(int)
@@ -80,7 +80,7 @@ def binarize_data(problem, target = 'y', quant=10, save=False):
 
     # save df
     if save:
-        path = './datasets/binary/'
+        path = '../datasets/binary/'
         if not os.path.exists(path):
             os.makedirs(path)
 
@@ -197,9 +197,9 @@ for problem in problems:
 
     # get dataset info
     pname = problem.__name__.upper()
-    df = problem('./datasets/original/')
-    df_bin = pd.read_csv(f'./datasets/binary/{pname}_binary.csv')
-    with open('./datasets/datasets_info.txt', 'a') as f:
+    df = problem('../datasets/original/')
+    df_bin = pd.read_csv(f'../datasets/binary/{pname}_binary.csv')
+    with open('../datasets/datasets_info.txt', 'a') as f:
         print(f'---{pname}---', file=f)
         print(f'Nr of classes in target: {len(df["y"].unique())}', file=f)
         print(f'Nr of rows: {df.shape[0]}', file=f)
