@@ -1,6 +1,6 @@
 import Datasets as DS
 import sys
-sys.path.insert(1, '/Users/tabearober/OneDrive - UvA/Interpretable ML/03_RuleDiscovery/github/RuleDiscovery/num_exp')
+# sys.path.insert(1, './num_exp/helpers')
 import grid_search_helpers as gs_helpers
 
 '''
@@ -12,12 +12,7 @@ Hence, please check the options for each model in their section down below.
 # -----------
 # specify which model to run
 # -----------
-# model = 'RUG'
-# model = 'FairCG'
-# model = 'FairRUG'
-# model = 'FSDT'
-# model = 'CG'
-model = 'binoct'
+model = 'RUG'
 # any of 'RUG', 'FairRUG', 'FSDT', 'CG', 'FairCG', 'binoct'
 
 # -----------
@@ -38,27 +33,29 @@ if model == 'RUG':
     # RUG_rule_length_cost = False
 
     # for interpretability results (Table 9)
+    # binary = False
+    # RUG_rule_length_cost = True
+    # RUG_threshold = 0.05
+    # RUG_record_fairness = False
+
+    # fairness results (Table 5)
     binary = False
-    RUG_rule_length_cost = True
-    RUG_threshold = 0.05
-    RUG_record_fairness = False
+    RUG_rule_length_cost = False
+    RUG_threshold = None
+    RUG_record_fairness = True
 
     # datasets
     # binary
-    # problems = [DS.banknote, DS.hearts, DS.ILPD, DS.ionosphere,
-    #             DS.liver, DS.diabetes_pima, DS.tictactoe, DS.transfusion,
-    #             DS.wdbc, DS.adult, DS.bank_mkt, DS.magic, DS.mushroom, DS.musk,
-    #             DS.oilspill, DS.phoneme, DS.mammography, DS.skinnonskin]
+    problems = [DS.banknote, DS.hearts, DS.ILPD, DS.ionosphere,
+                DS.liver, DS.diabetes_pima, DS.tictactoe, DS.transfusion,
+                DS.wdbc, DS.adult, DS.bank_mkt, DS.magic, DS.mushroom, DS.musk,
+                DS.oilspill, DS.phoneme, DS.mammography, DS.skinnonskin]
 
     # multiclass (Table 2)
     # problems = [DS.wine, DS.glass, DS.ecoli, DS.sensorless, DS.seeds]
 
-
-    # fairness results (Table 5)
-    problems = [DS.attrition, DS.student, DS.nursery, DS.law]
-    RUG_rule_length_cost = False
-    RUG_threshold = None
-    RUG_record_fairness = True
+    # fairness (Table 5)
+    # problems = [DS.attrition, DS.student, DS.nursery, DS.law]
 
     # specify parameters for grid search
     RUG_pgrid = {'pen_par': [0.1, 1.0, 10.0],
@@ -71,8 +68,7 @@ if model == 'RUG':
                        randomState = randomState, testSize=testSize, numSplits=numCV,
                        binary = binary, write=write, RUG_rule_length_cost=RUG_rule_length_cost,
                        RUG_threshold=RUG_threshold,
-                       # save_path='./R1/results_w_RUG_binary/',
-                       save_path='./R1/results_w_RUG/',
+                       save_path='./results/results_w_RUG/',
                        RUG_record_fairness=RUG_record_fairness)
 
 
@@ -83,7 +79,7 @@ elif model == 'FairRUG':
     binary = False
 
     # for fairness results
-    # fairness_metric = 'odm'
+    fairness_metric = 'odm'
     # fairness_metric = 'dmc'
     # fairness_metric = 'EqOpp'
     RUG_rule_length_cost = False
@@ -96,7 +92,6 @@ elif model == 'FairRUG':
 
     # dmc and odm (for multiclass and multiple groups)
     problems = [DS.attrition, DS.nursery, DS.student, DS.law]
-    # problems = [DS.student]
 
     # specify parameters for grid search
     RUG_pgrid = {'pen_par': [0.1, 1.0, 10.0],
@@ -104,29 +99,12 @@ elif model == 'FairRUG':
                  'max_RMP_calls': [5, 10, 15],
                  'fair_eps': [0, 0.01, 0.025, 0.05]}
 
-    fairness_metric = 'odm'
-    # problems = [DS.attrition, DS.nursery, DS.student, DS.law]
     for problem in problems:
         gs_helpers.run(problem, RUG_pgrid, model='FairRUG',
                        randomState=randomState, testSize=testSize, numSplits=numCV,
                        binary=binary, write=write, fairness_metric=fairness_metric,
-                       save_path='./R1/results_w_FairRUG/')
+                       save_path='./results/results_w_FairRUG/')
 
-    fairness_metric = 'dmc'
-    # problems = [DS.adult, DS.compas, DS.default, DS.attrition, DS.nursery, DS.student, DS.law]
-    for problem in problems:
-        gs_helpers.run(problem, RUG_pgrid, model='FairRUG',
-                       randomState=randomState, testSize=testSize, numSplits=numCV,
-                       binary=binary, write=write, fairness_metric=fairness_metric,
-                       save_path='./R1/results_w_FairRUG/')
-
-    # fairness_metric = 'EqOpp'
-    # problems = [DS.adult, DS.compas, DS.default]
-    # for problem in problems:
-    #     gs_helpers.run(problem, RUG_pgrid, model='FairRUG',
-    #                    randomState=randomState, testSize=testSize, numSplits=numCV,
-    #                    binary=binary, write=write, fairness_metric=fairness_metric,
-    #                    save_path='./R1/results_w_FairRUG/')
 # -----------
 # FSDT
 # -----------
@@ -140,21 +118,13 @@ elif model == 'FSDT':
                 DS.wdbc, DS.adult, DS.bank_mkt, DS.magic, DS.mushroom, DS.musk,
                 DS.oilspill, DS.phoneme, DS.mammography, DS.skinnonskin]
 
-    problems = [DS.ionosphere,
-                DS.liver, DS.diabetes_pima, DS.tictactoe, DS.transfusion,
-                DS.wdbc, DS.adult, DS.bank_mkt, DS.magic, DS.mushroom, DS.musk,
-                DS.oilspill, DS.phoneme, DS.mammography, DS.skinnonskin]
-    problems = [DS.adult, DS.bank_mkt, DS.magic, DS.mushroom, DS.musk,
-                DS.oilspill, DS.phoneme, DS.mammography, DS.skinnonskin]
-
-    problems = [DS.hearts]
     # parameters for grid search
     DL85_pgrid = {'max_depth': [3, 5, 10]}
 
     # solve problems
     for problem in problems:
         gs_helpers.run(problem, DL85_pgrid, model='FSDT', randomState=randomState, testSize=testSize,
-                       numSplits=numCV, binary=binary, write=write, save_path='./R1/results_w_FSDT/')
+                       numSplits=numCV, binary=binary, write=write, save_path='./results/results_w_FSDT/')
 
 # -----------
 # CG
@@ -168,8 +138,6 @@ elif model == 'CG':
                 DS.liver, DS.diabetes_pima, DS.tictactoe, DS.transfusion,
                 DS.wdbc, DS.adult, DS.bank_mkt, DS.magic, DS.mushroom, DS.musk,
                 DS.oilspill, DS.phoneme, DS.mammography, DS.skinnonskin]
-
-    problems = [DS.mushroom, DS.musk, DS.oilspill, DS.phoneme, DS.mammography, DS.skinnonskin]
 
     # parameters for grid search
     CG_pgrid = {'epsilon': [1]}
@@ -204,7 +172,7 @@ elif model == 'CG':
         CG_pgrid['complexity'] = complexities[pname]
 
         gs_helpers.run(problem, CG_pgrid, model='CG', randomState=randomState, testSize=testSize,
-                       numSplits=numCV, binary=binary, write=write, save_path='./R1/results_w_CG/')
+                       numSplits=numCV, binary=binary, write=write, save_path='./results/results_w_CG/')
 
 # -----------
 # FairCG
@@ -213,7 +181,7 @@ elif model == 'FairCG':
     binary = True
 
     # adjust fairness metric if desired
-    # fairness_metric = 'EqOfOp'
+    fairness_metric = 'EqOfOp'
     # fairness_metric = 'HammingEqOdd'
 
     # datasets
@@ -230,27 +198,13 @@ elif model == 'FairCG':
     }
 
     # solve problems
-    fairness_metric = 'EqOfOp'
-
     for problem in problems:
         pname = problem.__name__
         CG_pgrid['complexity'] = complexities[pname]
 
         gs_helpers.run(problem, CG_pgrid, model='FairCG', randomState=randomState, testSize=testSize,
                        numSplits=numCV, binary=binary, write=write, fairness_metric=fairness_metric,
-                       save_path='./R1/results_w_FairCG/')
-
-    # solve problems
-    fairness_metric = 'HammingEqOdd'
-
-    for problem in problems:
-        pname = problem.__name__
-        CG_pgrid['complexity'] = complexities[pname]
-
-        gs_helpers.run(problem, CG_pgrid, model='FairCG', randomState=randomState, testSize=testSize,
-                       numSplits=numCV, binary=binary, write=write, fairness_metric=fairness_metric,
-                       save_path='./R1/results_w_FairCG/')
-
+                       save_path='./results/results_w_FairCG/')
 
 # -----------
 # binoct
@@ -265,15 +219,9 @@ elif model == 'binoct':
                 DS.wdbc, DS.adult, DS.bank_mkt, DS.magic, DS.mushroom, DS.musk,
                 DS.oilspill, DS.phoneme, DS.mammography, DS.skinnonskin]
 
-    problems = [DS.adult, DS.bank_mkt, DS.magic, DS.mushroom, DS.musk,
-                DS.oilspill, DS.phoneme, DS.mammography, DS.skinnonskin]
-
-    # wdbc without 10
-
-    # parameters for grid search
-    binoct_pgrid = {'max_depth': [3, 5, 10]}
+    binoct_pgrid = {'max_depth': [3, 5]}
 
     # solve problems
     for problem in problems:
         gs_helpers.run(problem, binoct_pgrid, model='binoct', randomState=randomState, testSize=testSize,
-                       numSplits=numCV, binary=binary, write=write, save_path='./R1/results_w_binoct/')
+                       numSplits=numCV, binary=binary, write=write, save_path='./results/results_w_binoct/')
