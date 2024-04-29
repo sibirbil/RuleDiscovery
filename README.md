@@ -31,10 +31,7 @@ The code contains the following files to reproduce the results of our manuscript
 
 1. In the jupyter notebook `RuleDiscovery.ipynb` we demonstrate how to use RUG and RUX in single fold on the ecoli dataset. The code will produce the results of RF, ADA and GB, along with RUX(RF), RUX(ADA), RUX(GB), and RUG.
  
-2. The folder `num_exp` contains all files for the numerical experiments reported in the manuscript. Please see the `README.md` in that directory for more details.
-
-3. The folder `num_exp/case_study` contains the files for reproducing results of the case study reported in the manuscript. 
-
+2. The folder `num_exp` contains all files for the numerical experiments and the case study reported in the manuscript. Please see the `README.md` in that directory for more details.
 
 ## Solvers
 
