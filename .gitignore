@@ -5,3 +5,6 @@ num_exp/prepped_data/
 __pycache__/
 /num_exp/scripts-results-08-2023
 /num_exp/results-04-2024
+/datasets/train-test-splits
+/datasets_original
+/datasets/binary
