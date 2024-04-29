@@ -12,8 +12,9 @@ After running this file, this folder should have the following structure:
 
      .
     ├── datasets/     # datasets used for tutorials and assignments will be made available here
-        ├── original/
-        ├── binary/
-        └── train-test-splits/
-            ├── original/
-            └── binary/
+    |   ├── original/
+    |   ├── binary/
+    |   └── train-test-splits/
+    |       ├── original/
+    |       └── binary/
+    └── datasets_info.txt
