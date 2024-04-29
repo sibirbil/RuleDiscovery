@@ -10,7 +10,11 @@ Running this file creates a binary version of each dataset and creates splits us
 
 After running this file, this folder should have the following structure: 
 
- .
-├── datasets/     
-|├── original
-|   └── original/   
+     .
+    ├── datasets/     # datasets used for tutorials and assignments will be made available here
+    |   ├── original/
+    |   ├── binary/
+    |   └── train-test-splits/
+    |       ├── original/
+    |       └── binary/
+    └── datasets_info.txt
