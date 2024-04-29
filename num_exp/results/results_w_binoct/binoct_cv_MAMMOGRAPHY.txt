@@ -1,0 +1,22 @@
+--->
+MAMMOGRAPHY
+binoct
+Binarization used: True
+Dataset shape (train+test): (11183, 71) 
+
+Parameters tried for grid search: 
+ {'max_depth': [3, 5]} 
+
+Best parameters: 
+ {'max_depth': 3} 
+
+Accuracy: 	 0.9799 (0.0000)
+F1: 	 0.3077 (0.0000)
+MCC: 	 0.3785 (0.0000)
+Nr of Rules: 	 8.0000 (0.0000)
+Avg. Rule Length: 	 3.0000 (0.0000)
+Avg. Nr Rules per Sample: 	 1.0000 (0.0000)
+Avg. Rule Length per Sample: 	 3.0000 (0.0000)
+Fit Time: 	 315.0544 (0.0000)
+<---
+

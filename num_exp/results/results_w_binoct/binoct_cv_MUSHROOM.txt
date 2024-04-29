@@ -1,0 +1,22 @@
+--->
+MUSHROOM
+binoct
+Binarization used: True
+Dataset shape (train+test): (8124, 235) 
+
+Parameters tried for grid search: 
+ {'max_depth': [3]} 
+
+Best parameters: 
+ {'max_depth': 3} 
+
+Accuracy: 	 0.4818 (0.0000)
+F1: 	 0.0000 (0.0000)
+MCC: 	 0.0000 (0.0000)
+Nr of Rules: 	 8.0000 (0.0000)
+Avg. Rule Length: 	 3.0000 (0.0000)
+Avg. Nr Rules per Sample: 	 1.0000 (0.0000)
+Avg. Rule Length per Sample: 	 3.0000 (0.0000)
+Fit Time: 	 339.2677 (0.0000)
+<---
+

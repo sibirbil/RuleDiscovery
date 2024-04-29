@@ -1,0 +1,22 @@
+--->
+OILSPILL
+binoct
+Binarization used: True
+Dataset shape (train+test): (937, 773) 
+
+Parameters tried for grid search: 
+ {'max_depth': [3, 5]} 
+
+Best parameters: 
+ {'max_depth': 3} 
+
+Accuracy: 	 0.9574 (0.0000)
+F1: 	 0.0000 (0.0000)
+MCC: 	 0.0000 (0.0000)
+Nr of Rules: 	 8.0000 (0.0000)
+Avg. Rule Length: 	 3.0000 (0.0000)
+Avg. Nr Rules per Sample: 	 1.0000 (0.0000)
+Avg. Rule Length per Sample: 	 3.0000 (0.0000)
+Fit Time: 	 321.3372 (0.0000)
+<---
+

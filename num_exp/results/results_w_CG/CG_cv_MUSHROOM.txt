@@ -1,0 +1,25 @@
+--->
+MUSHROOM
+CG
+Binarization used: True
+Dataset shape (train+test): (8124, 235) 
+
+Parameters tried for grid search: 
+ {'epsilon': [1], 'complexity': [5, 10]} 
+
+Best parameters: 
+ {'epsilon': 1, 'complexity': 10} 
+
+Accuracy: 	 0.9600 (0.0000)
+F1: 	 0.9599 (0.0000)
+MCC: 	 0.9231 (0.0000)
+fitRuleSet - Nr of Rules: 	 1.0000 (0.0000)
+fitRuleSet - Avg. Rule Length: 	 4.0000 (0.0000)
+fitRuleSet - Avg. Nr Rules per Sample: 	 1.0000 (0.0000)
+fitRuleSet - Avg. Rule Length per Sample: 	 4.0000 (0.0000)
+Fit Time: 	 301.7695 (0.0000)
+Fairness DMC: 	 0.9155 (0.0000)
+Fairness EqualOpportunity: 	 0.9155 (0.0000)
+Fairness ODM: 	 0.9321 (0.0000)
+<---
+

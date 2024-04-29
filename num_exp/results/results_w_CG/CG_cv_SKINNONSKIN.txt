@@ -1,0 +1,25 @@
+--->
+SKINNONSKIN
+CG
+Binarization used: True
+Dataset shape (train+test): (245057, 55) 
+
+Parameters tried for grid search: 
+ {'epsilon': [1], 'complexity': [10, 20, 30]} 
+
+Best parameters: 
+ {'epsilon': 1, 'complexity': 20} 
+
+Accuracy: 	 0.9283 (0.0000)
+F1: 	 0.9553 (0.0000)
+MCC: 	 0.7757 (0.0000)
+fitRuleSet - Nr of Rules: 	 3.0000 (0.0000)
+fitRuleSet - Avg. Rule Length: 	 2.6667 (0.0000)
+fitRuleSet - Avg. Nr Rules per Sample: 	 1.3340 (0.0000)
+fitRuleSet - Avg. Rule Length per Sample: 	 2.3198 (0.0000)
+Fit Time: 	 439.0134 (0.0000)
+Fairness DMC: 	 0.1987 (0.0000)
+Fairness EqualOpportunity: 	 0.9813 (0.0000)
+Fairness ODM: 	 0.8589 (0.0000)
+<---
+
