@@ -1,0 +1,252 @@
+---BANKNOTE---
+Nr of classes in target: 2
+Nr of rows: 1372
+Nr of features one-hot-encoded version: 4
+Nr of features binary version: 72
+
+
+---HEARTS---
+Nr of classes in target: 2
+Nr of rows: 303
+Nr of features one-hot-encoded version: 27
+Nr of features binary version: 128
+
+
+---ILPD---
+Nr of classes in target: 2
+Nr of rows: 579
+Nr of features one-hot-encoded version: 10
+Nr of features binary version: 158
+
+
+---IONOSPHERE---
+Nr of classes in target: 2
+Nr of rows: 351
+Nr of features one-hot-encoded version: 34
+Nr of features binary version: 566
+
+
+---LIVER---
+Nr of classes in target: 2
+Nr of rows: 345
+Nr of features one-hot-encoded version: 6
+Nr of features binary version: 104
+
+
+---DIABETES_PIMA---
+Nr of classes in target: 2
+Nr of rows: 768
+Nr of features one-hot-encoded version: 8
+Nr of features binary version: 134
+
+
+---TICTACTOE---
+Nr of classes in target: 2
+Nr of rows: 958
+Nr of features one-hot-encoded version: 27
+Nr of features binary version: 54
+
+
+---TRANSFUSION---
+Nr of classes in target: 2
+Nr of rows: 748
+Nr of features one-hot-encoded version: 4
+Nr of features binary version: 64
+
+
+---WDBC---
+Nr of classes in target: 2
+Nr of rows: 569
+Nr of features one-hot-encoded version: 30
+Nr of features binary version: 540
+
+
+---ADULT---
+Nr of classes in target: 2
+Nr of rows: 32561
+Nr of features one-hot-encoded version: 107
+Nr of features binary version: 262
+
+
+---BANK_MKT---
+Nr of classes in target: 2
+Nr of rows: 11162
+Nr of features one-hot-encoded version: 51
+Nr of features binary version: 180
+
+
+---MAGIC---
+Nr of classes in target: 2
+Nr of rows: 19020
+Nr of features one-hot-encoded version: 10
+Nr of features binary version: 180
+
+
+---MUSHROOM---
+Nr of classes in target: 2
+Nr of rows: 8124
+Nr of features one-hot-encoded version: 117
+Nr of features binary version: 234
+
+
+---MUSK---
+Nr of classes in target: 2
+Nr of rows: 6598
+Nr of features one-hot-encoded version: 166
+Nr of features binary version: 2922
+
+
+---OILSPILL---
+Nr of classes in target: 2
+Nr of rows: 937
+Nr of features one-hot-encoded version: 48
+Nr of features binary version: 772
+
+
+---PHONEME---
+Nr of classes in target: 2
+Nr of rows: 5404
+Nr of features one-hot-encoded version: 5
+Nr of features binary version: 90
+
+
+---MAMMOGRAPHY---
+Nr of classes in target: 2
+Nr of rows: 11183
+Nr of features one-hot-encoded version: 6
+Nr of features binary version: 70
+
+
+---SKINNONSKIN---
+Nr of classes in target: 2
+Nr of rows: 245057
+Nr of features one-hot-encoded version: 3
+Nr of features binary version: 54
+
+
+---WINE---
+Nr of classes in target: 3
+Nr of rows: 178
+Nr of features one-hot-encoded version: 13
+Nr of features binary version: 234
+
+
+---GLASS---
+Nr of classes in target: 6
+Nr of rows: 214
+Nr of features one-hot-encoded version: 9
+Nr of features binary version: 138
+
+
+---ECOLI---
+Nr of classes in target: 8
+Nr of rows: 336
+Nr of features one-hot-encoded version: 7
+Nr of features binary version: 94
+
+
+---SENSORLESS---
+Nr of classes in target: 11
+Nr of rows: 58509
+Nr of features one-hot-encoded version: 48
+Nr of features binary version: 864
+
+
+---SEEDS---
+Nr of classes in target: 3
+Nr of rows: 210
+Nr of features one-hot-encoded version: 7
+Nr of features binary version: 126
+
+
+---DEFAULT---
+Nr of classes in target: 2
+Nr of rows: 30000
+Nr of features one-hot-encoded version: 32
+Nr of features binary version: 316
+
+
+---ATTRITION---
+Nr of classes in target: 2
+Nr of rows: 1470
+Nr of features one-hot-encoded version: 57
+Nr of features binary version: 354
+
+
+---STUDENT---
+Nr of classes in target: 5
+Nr of rows: 647
+Nr of features one-hot-encoded version: 32
+Nr of features binary version: 164
+
+
+---LAW---
+Nr of classes in target: 4
+Nr of rows: 22386
+Nr of features one-hot-encoded version: 5
+Nr of features binary version: 44
+
+
+---NURSERY---
+Nr of classes in target: 5
+Nr of rows: 12960
+Nr of features one-hot-encoded version: 8
+Nr of features binary version: 52
+
+
+---COMPAS---
+Nr of classes in target: 2
+Nr of rows: 3518
+Nr of features one-hot-encoded version: 7
+Nr of features binary version: 26
+
+
+---HEARTS---
+Nr of classes in target: 2
+Nr of rows: 303
+Nr of features one-hot-encoded version: 30
+Nr of features binary version: 134
+
+
+---DEFAULT---
+Nr of classes in target: 2
+Nr of rows: 30000
+Nr of features one-hot-encoded version: 32
+Nr of features binary version: 316
+
+
+---ATTRITION---
+Nr of classes in target: 2
+Nr of rows: 1470
+Nr of features one-hot-encoded version: 54
+Nr of features binary version: 352
+
+
+---STUDENT---
+Nr of classes in target: 5
+Nr of rows: 649
+Nr of features one-hot-encoded version: 113
+Nr of features binary version: 234
+
+
+---NURSERY---
+Nr of classes in target: 2
+Nr of rows: 12960
+Nr of features one-hot-encoded version: 24
+Nr of features binary version: 56
+
+
+---COMPAS---
+Nr of classes in target: 2
+Nr of rows: 3518
+Nr of features one-hot-encoded version: 7
+Nr of features binary version: 26
+
+
+---LOAN---
+Nr of classes in target: 2
+Nr of rows: 395492
+Nr of features one-hot-encoded version: 42
+Nr of features binary version: 302
+
+
