@@ -2,13 +2,13 @@
 
 **Adia Lumadjeng, Tabea Röber, M. Hakan Akyüz, and Ş. Ilker Birbil**
 
-
-We introduce a new rule-based optimization method for classification with constraints. The proposed method
-takes advantage of linear programming and column generation, and hence, is scalable to large datasets. Moreover, the method returns a set of rules along with their optimal weights indicating the importance of each rule for learning. Through assigning cost coefficients to the rules and introducing additional constraints, we show that one can also consider inter pretability and fairness of the results. We test the performance of the proposed method on a collection of datasets and present two case studies to elaborate its different aspects. Our results show that a good compromise between interpretability and fairness on the one side, and accuracy on the other side, can be obtained by the proposed rule-based learning method.
+We introduce a new rule-based optimization method for classification with constraints. The proposed method leverages column generation for linear programming, and hence, is scalable to large datasets. The resulting pricing subproblem is shown to be NP-Hard. We recourse to a decision tree-based heuristic and solve a proxy pricing subproblem for acceleration. The method returns a set of rules along with their optimal weights indicating the importance of each rule for learning. We address interpretability and fairness by assigning cost coefficients to the rules and introducing additional constraints. In particular, we focus on local interpretability and generalize separation criterion in fairness to multiple sensitive attributes and classes. We test the performance of the proposed methodology on a collection of datasets and present a case study to elaborate on its different aspects. The proposed rule-based learning method exhibits a good compromise between local interpretability and fairness on the one side, and accuracy on the other side.
 
 You can find the details in [our manuscript](https://arxiv.org/abs/2104.10751).
 
 This [notebook](RuleDiscovery.ipynb) illustrates how to use RUX and RUG.
+
+This repository contains all script files necessary to reproduce the results reported in the manuscript. However, our method has recently been implemented in the python package [`ruleopt`](https://github.com/sametcopur/ruleopt). 
 
 ## Installation
 
