@@ -1,0 +1,22 @@
+--->
+HEARTS
+DT-heuristic
+Binarization used: False
+Dataset shape (train+test): (303, 31) 
+
+Parameters tried for grid search: 
+ {'max_depth': [3, 5, 10]} 
+
+Best parameters: 
+ {'max_depth': 3} 
+
+Accuracy: 	 1.0000 (0.0000)
+F1-score: 	 1.0000 (0.0000)
+MCC: 	 1.0000 (0.0000)
+Nr of Rules: 	 8.0000 (0.0000)
+Avg. Rule Length: 	 3.0000 (0.0000)
+Avg. Nr. Rules per Sample: 	 1.0000 (0.0000)
+Avg. Rule Length per Sample: 	 3.0000 (0.0000)
+Fit Time: 	 0.3344 (0.0000)
+<---
+

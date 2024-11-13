@@ -1,0 +1,22 @@
+--->
+MUSHROOM
+DT-heuristic
+Binarization used: False
+Dataset shape (train+test): (8124, 118) 
+
+Parameters tried for grid search: 
+ {'max_depth': [3, 5, 10]} 
+
+Best parameters: 
+ {'max_depth': 10} 
+
+Accuracy: 	 1.0000 (0.0000)
+F1-score: 	 1.0000 (0.0000)
+MCC: 	 1.0000 (0.0000)
+Nr of Rules: 	 1024.0000 (0.0000)
+Avg. Rule Length: 	 10.0000 (0.0000)
+Avg. Nr. Rules per Sample: 	 1.0000 (0.0000)
+Avg. Rule Length per Sample: 	 10.0000 (0.0000)
+Fit Time: 	 24.5862 (0.0000)
+<---
+

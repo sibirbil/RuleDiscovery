@@ -1,0 +1,22 @@
+--->
+BANKNOTE
+DT-heuristic
+Binarization used: False
+Dataset shape (train+test): (1372, 5) 
+
+Parameters tried for grid search: 
+ {'max_depth': [3, 10]} 
+
+Best parameters: 
+ {'max_depth': 10} 
+
+Accuracy: 	 0.9891 (0.0000)
+F1-score: 	 0.9878 (0.0000)
+MCC: 	 0.9779 (0.0000)
+Nr of Rules: 	 1024.0000 (0.0000)
+Avg. Rule Length: 	 10.0000 (0.0000)
+Avg. Nr. Rules per Sample: 	 1.0000 (0.0000)
+Avg. Rule Length per Sample: 	 10.0000 (0.0000)
+Fit Time: 	 311.6990 (0.0000)
+<---
+

@@ -1,0 +1,22 @@
+--->
+ILPD
+DT-heuristic
+Binarization used: False
+Dataset shape (train+test): (579, 11) 
+
+Parameters tried for grid search: 
+ {'max_depth': [3, 5, 10]} 
+
+Best parameters: 
+ {'max_depth': 3} 
+
+Accuracy: 	 0.6638 (0.0000)
+F1-score: 	 0.3810 (0.0000)
+MCC: 	 0.1512 (0.0000)
+Nr of Rules: 	 8.0000 (0.0000)
+Avg. Rule Length: 	 3.0000 (0.0000)
+Avg. Nr. Rules per Sample: 	 1.0000 (0.0000)
+Avg. Rule Length per Sample: 	 3.0000 (0.0000)
+Fit Time: 	 299.9692 (0.0000)
+<---
+

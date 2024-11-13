@@ -1,0 +1,24 @@
+--->
+SENSORLESS
+DT-heuristic
+Binarization used: False
+Dataset shape (train+test): (58509, 49) 
+
+Parameters tried for grid search: 
+ {'max_depth': [3, 5]} 
+
+Best parameters: 
+ {'max_depth': 5} 
+
+Accuracy: 	 0.7115 (0.0000)
+F1-score: 	 nan (nan)
+MCC: 	 0.7036 (0.0000)
+Nr of Rules: 	 32.0000 (0.0000)
+Avg. Rule Length: 	 5.0000 (0.0000)
+Avg. Nr. Rules per Sample: 	 1.0000 (0.0000)
+Avg. Rule Length per Sample: 	 5.0000 (0.0000)
+Fit Time: 	 192.4904 (0.0000)
+F1-score-macro: 	 0.6669 (0.0000)
+F1-score-weighted: 	 0.6669 (0.0000)
+<---
+

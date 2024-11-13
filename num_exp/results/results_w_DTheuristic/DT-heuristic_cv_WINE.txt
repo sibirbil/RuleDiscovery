@@ -1,0 +1,24 @@
+--->
+WINE
+DT-heuristic
+Binarization used: False
+Dataset shape (train+test): (178, 14) 
+
+Parameters tried for grid search: 
+ {'max_depth': [3, 5, 10]} 
+
+Best parameters: 
+ {'max_depth': 3} 
+
+Accuracy: 	 0.9722 (0.0000)
+F1-score: 	 nan (nan)
+MCC: 	 0.9593 (0.0000)
+Nr of Rules: 	 8.0000 (0.0000)
+Avg. Rule Length: 	 3.0000 (0.0000)
+Avg. Nr. Rules per Sample: 	 1.0000 (0.0000)
+Avg. Rule Length per Sample: 	 3.0000 (0.0000)
+Fit Time: 	 79.6493 (0.0000)
+F1-score-macro: 	 0.9718 (0.0000)
+F1-score-weighted: 	 0.9724 (0.0000)
+<---
+

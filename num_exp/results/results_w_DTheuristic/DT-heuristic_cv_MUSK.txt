@@ -1,0 +1,22 @@
+--->
+MUSK
+DT-heuristic
+Binarization used: False
+Dataset shape (train+test): (6598, 167) 
+
+Parameters tried for grid search: 
+ {'max_depth': [3, 5, 10]} 
+
+Best parameters: 
+ {'max_depth': 10} 
+
+Accuracy: 	 0.9629 (0.0000)
+F1-score: 	 0.8772 (0.0000)
+MCC: 	 0.8555 (0.0000)
+Nr of Rules: 	 1024.0000 (0.0000)
+Avg. Rule Length: 	 10.0000 (0.0000)
+Avg. Nr. Rules per Sample: 	 1.0000 (0.0000)
+Avg. Rule Length per Sample: 	 10.0000 (0.0000)
+Fit Time: 	 185.5305 (0.0000)
+<---
+
