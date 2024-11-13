@@ -1,5 +1,5 @@
 import sys
-sys.path.insert(1,'/Users/tabearober/OneDrive - UvA/Interpretable ML/03_RuleDiscovery/github/RuleDiscovery/num_exp')
+# sys.path.insert(1,'./num_exp/helpers')
 import pandas as pd
 import grid_search_helpers as gs_helpers
 import Datasets as DS

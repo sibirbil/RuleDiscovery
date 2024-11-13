@@ -12,7 +12,8 @@ Hence, please check the options for each model in their section down below.
 # -----------
 # specify which model to run
 # -----------
-model = 'RUG'
+# model = 'RUG'
+model = 'DT-heuristic'
 # any of 'RUG', 'FairRUG', 'FSDT', 'CG', 'FairCG', 'binoct'
 
 # -----------
@@ -33,16 +34,16 @@ if model == 'RUG':
     # RUG_rule_length_cost = False
 
     # for interpretability results (Table 9)
-    # binary = False
-    # RUG_rule_length_cost = True
-    # RUG_threshold = 0.05
-    # RUG_record_fairness = False
+    binary = False
+    RUG_rule_length_cost = True
+    RUG_threshold = 0.05
+    RUG_record_fairness = False
 
     # fairness results (Table 5)
-    binary = False
-    RUG_rule_length_cost = False
-    RUG_threshold = None
-    RUG_record_fairness = True
+    # binary = False
+    # RUG_rule_length_cost = False
+    # RUG_threshold = None
+    # RUG_record_fairness = True
 
     # datasets
     # binary
@@ -50,6 +51,7 @@ if model == 'RUG':
                 DS.liver, DS.diabetes_pima, DS.tictactoe, DS.transfusion,
                 DS.wdbc, DS.adult, DS.bank_mkt, DS.magic, DS.mushroom, DS.musk,
                 DS.oilspill, DS.phoneme, DS.mammography, DS.skinnonskin]
+    problems = [DS.banknote]
 
     # multiclass (Table 2)
     # problems = [DS.wine, DS.glass, DS.ecoli, DS.sensorless, DS.seeds]
@@ -225,3 +227,28 @@ elif model == 'binoct':
     for problem in problems:
         gs_helpers.run(problem, binoct_pgrid, model='binoct', randomState=randomState, testSize=testSize,
                        numSplits=numCV, binary=binary, write=write, save_path='./results/results_w_binoct/')
+
+elif model == 'DT-heuristic':
+    binary=False
+
+    # datasets
+    # binary
+    problems = [DS.banknote, DS.hearts, DS.ILPD, DS.ionosphere,
+                DS.liver, DS.diabetes_pima, DS.tictactoe, DS.transfusion,
+                DS.wdbc, DS.adult, DS.bank_mkt, DS.magic, DS.mushroom, DS.musk,
+                DS.oilspill, DS.phoneme, DS.mammography, DS.skinnonskin]
+    problems = [DS.ionosphere, DS.magic, DS.oilspill, DS.skinnonskin]
+    problems = [DS.skinnonskin]
+    # problems = [DS.wine, DS.glass, DS.ecoli, DS.sensorless, DS.seeds]
+    # problems = [DS.sensorless]
+
+    # parameters for grid search
+    DT_heuristic_pgrid = {'max_depth': [3, 5, 10]}
+    DT_heuristic_pgrid = {'max_depth': [3,5]}
+
+
+    # solve problems
+    for problem in problems:
+        try: gs_helpers.run(problem, DT_heuristic_pgrid, model='DT-heuristic', randomState=randomState, testSize=testSize,
+                       numSplits=numCV, binary=binary, write=write, save_path='./results/results_w_DTheuristic/')
+        except: continue

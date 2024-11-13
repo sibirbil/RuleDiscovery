@@ -35,6 +35,9 @@ from CG_helpers import *
 # For FairRUG
 import fairconstraints as FC
 
+# for DT-heuristic
+from DT_heuristic_helpers import *
+
 
 def prep_data(problem, randomState = 0, testSize = 0.2, target = 'y', model = 'RUG', use_binary=False):
     """
@@ -304,7 +307,23 @@ def cv(param_grid, X, y, pname, numSplits = 5, randomState = 0, model = 'RUG',
             accuracy.append(res.res['accuracy'])
             CG_EqOfOp.append(res.res['EqualOpportunity'])
             CG_HammingEqOdd.append(res.res['EqualizedOdds'])
+    if model == 'DT-heuristic':
+        print(f'{model} {numSplits}-fold cross validation with max_depth={param_grid["max_depth"]}')
+        # kf-fold cross-validation loop
+        foldnum = 0
+        for train_index, val_index in kf.split(X):
+            foldnum += 1
+            clf = None
+            print('Problem: {0} \t Fold: {1}'.format(pname, foldnum))
+            X_train, X_val = X[train_index], X[val_index]
+            y_train, y_val = y[train_index], y[val_index]
 
+            try: clf = run_DT_heuristic(X_train, y_train, experiment_max_depth = param_grid['max_depth'])
+            except: continue
+            y_pred = clf.predict(X_val)
+
+            # save accuracy of fold
+            accuracy.append(accuracy_score(y_val, y_pred))
     else:
         print("WARNING: please specify model type (either 'RUG' or 'FSDT' or 'binoct' or 'CG' or 'FairRUG')")
         return
@@ -416,6 +435,12 @@ def get_results(y_test, y_pred, clf, X_test, model):
         scores['Avg. Nr. Rules per Sample'].append(1)
         scores['Avg. Rule Length per Sample'].append(FSDT_helpers.get_avg_rule_length_per_sample(clf.tree_, X_test))
         scores['Fit Time'].append(clf.runtime_)
+    elif model == 'DT-heuristic':
+        scores['Nr of Rules'].append(len(clf.leaves))
+        scores['Avg. Rule Length'].append(DT_heuristic_avg_rule_length(clf))
+        scores['Avg. Nr. Rules per Sample'].append(1)
+        scores['Avg. Rule Length per Sample'].append(DT_heuristic_avg_rule_length_sample(clf,X_test))
+        scores['Fit Time'].append(clf.time_elapsed_)
 
     return scores
 
@@ -655,9 +680,6 @@ def run(problem, pgrid, save_path = None,
                     scores['Fairness DMC'] = [1 - RUG_unfairness]
                 else:
                     scores['Fairness ODM'] = [1 - RUG_unfairness]
-
-            
-
     elif model == 'FairCG':
         res, classif = run_CG(pname, X_train, X_test, y_train, y_test, best_params, fairness_metric=fairness_metric)
 
@@ -675,6 +697,10 @@ def run(problem, pgrid, save_path = None,
         scores['Fairness DMC'] = [1-value for value in res.res['EqualizedOdds']]
         scores['Fairness EqualOpportunity'] = [1-value for value in res.res['EqualOpportunity']]
         scores['Fairness ODM'] = [1-value for value in res.res['ODM']]
+    elif model == 'DT-heuristic':
+        clf_final = run_DT_heuristic(X_train, y_train, experiment_max_depth=best_params['max_depth'])
+        y_pred = clf_final.predict(X_test)
+        scores = get_results(y_test, y_pred, clf_final, X_test, model)
 
     else:
         return
