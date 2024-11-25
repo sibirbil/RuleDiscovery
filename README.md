@@ -8,7 +8,7 @@ You can find the details in [our manuscript](https://arxiv.org/abs/2104.10751).
 
 This [notebook](RuleDiscovery.ipynb) illustrates how to use RUX and RUG.
 
-This repository contains all script files necessary to reproduce the results reported in the manuscript. However, our method has recently been implemented in the python package [`ruleopt`](https://github.com/sametcopur/ruleopt). 
+**This repository contains all script files necessary to reproduce the results reported in the manuscript. However, our method has recently been implemented in the python package [`ruleopt`](https://github.com/sametcopur/ruleopt).**
 
 ## Installation
 
