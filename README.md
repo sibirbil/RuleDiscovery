@@ -4,7 +4,7 @@
 
 We introduce a new rule-based optimization method for classification with constraints. The proposed method leverages column generation for linear programming, and hence, is scalable to large datasets. The resulting pricing subproblem is shown to be NP-Hard. We recourse to a decision tree-based heuristic and solve a proxy pricing subproblem for acceleration. The method returns a set of rules along with their optimal weights indicating the importance of each rule for learning. We address interpretability and fairness by assigning cost coefficients to the rules and introducing additional constraints. In particular, we focus on local interpretability and generalize separation criterion in fairness to multiple sensitive attributes and classes. We test the performance of the proposed methodology on a collection of datasets and present a case study to elaborate on its different aspects. The proposed rule-based learning method exhibits a good compromise between local interpretability and fairness on the one side, and accuracy on the other side.
 
-You can find the details in [our journal paper](https://doi.org/10.1016/j.cor.2025.107163).
+You can find the details in our [journal paper](https://doi.org/10.1016/j.cor.2025.107163).
 
 This [notebook](RuleDiscovery.ipynb) illustrates how to use RUX and RUG.
 
